@@ -1,3 +1,23 @@
+auth:
+    resource: "@AuthBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+application:
+    resource: "@ApplicationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+security:
+    resource: "@SecurityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
