@@ -14,3 +14,87 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+
+
+
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Gist
+
+    @mserravalle92
+
+2,005
+48,087
+
+    20,210
+
+github/gitignore
+Code
+Pull requests 130
+Projects 0
+Pulse
+Graphs
+gitignore/Symfony.gitignore
+5b83681 20 days ago
+@Yousha Yousha Remove Composer's file and directory.
+@nicwortel
+@krzysiekpiasecki
+@bshaffer
+@Yousha
+@robinkanters
+@nunorafaelrocha
+@damienalexandre
+@JoshuaEstes
+@JacerOmri
+@izuzak
+@Hastegan
+@arcresu
+@shiftkey
+42 lines (33 sloc) 661 Bytes
+# Cache and logs (Symfony2)
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+
+# Email spool folder
+/app/spool/*
+
+# Cache, session files and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep
+
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# Build data
+/build/
+
+# Backup entities generated with doctrine:generate:entities command
+**/Entity/*~
+
+
