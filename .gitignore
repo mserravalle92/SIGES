@@ -97,4 +97,6 @@ gitignore/Symfony.gitignore
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
 
+# Composer
+composer.lock
 
