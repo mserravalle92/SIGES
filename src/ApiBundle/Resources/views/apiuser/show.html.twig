@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Apiuser</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ apiUser.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ apiUser.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ apiUser.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Dni</th>
+                <td>{{ apiUser.dni }}</td>
+            </tr>
+            <tr>
+                <th>Nombreapp</th>
+                <td>{{ apiUser.nombreApp }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ apiUser.usuario }}</td>
+            </tr>
+            <tr>
+                <th>Autorizacion</th>
+                <td>{% if apiUser.autorizacion %}Autorizado{% else %}Desautorizado{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('apiuser_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('apiuser_edit', { 'id': apiUser.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
