@@ -16,3 +16,6 @@ api:
     resource: "@ApiBundle/Controller/"
     type:     annotation
     prefix:   /api
+
+logout:
+    path: /logout

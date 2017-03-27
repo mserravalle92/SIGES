@@ -33,15 +33,19 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingrese sus datos para iniciar sesión</p>
 
-    <form action="../../index2.html" method="post">
+    <form action="{{path('login')}}" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}"
+         class="form-control" placeholder="Usuario">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" id="password" class="form-control" name="_password" class="form-control" placeholder="Contraseña">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      {% if error %}
+              <p class="text text-danger">Ha ingresado mal los datos, intente nuevamente</p>
+      {% endif %}
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
@@ -83,5 +87,3 @@
     });
   });
 </script>
-</body>
-</html>
