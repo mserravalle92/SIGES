@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Apiusers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dni</th>
+                <th>Nombreapp</th>
+                <th>Usuario</th>
+                <th>Autorizacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apiUser in apiUsers %}
+            <tr>
+                <td><a href="{{ path('apiuser_show', { 'id': apiUser.id }) }}">{{ apiUser.id }}</a></td>
+                <td>{{ apiUser.nombre }}</td>
+                <td>{{ apiUser.apellido }}</td>
+                <td>{{ apiUser.dni }}</td>
+                <td>{{ apiUser.nombreApp }}</td>
+                <td>{{ apiUser.usuario }}</td>
+                <td>{% if apiUser.autorizacion %}Autorizado{% else %}Desautorizado{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('apiuser_show', { 'id': apiUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('apiuser_edit', { 'id': apiUser.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('apiuser_new') }}">Create a new apiUser</a>
+        </li>
+    </ul>
+{% endblock %}
