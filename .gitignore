@@ -98,5 +98,5 @@ gitignore/Symfony.gitignore
 **/Entity/*~
 
 # Composer
-composer.lock
+/composer.lock
 
