@@ -73,9 +73,16 @@ class PersonalDocente
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_nacimiento", type="date")
+     * @ORM\Column(name="fechaNacimiento", type="date")
      */
     private $fechaNacimiento;
+	
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="sexo", type="integer")
+     */
+    private $sexo;
 
     /**
      * @var int
@@ -87,23 +94,28 @@ class PersonalDocente
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_alta", type="datetime")
+     * @ORM\Column(name="fechaAlta", type="datetime")
      */
     private $fechaAlta;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     * @ORM\Column(name="fechaModificacion", type="datetime", nullable=true)
      */
     private $fechaModificacion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_baja", type="datetime", nullable=true)
+     * @ORM\Column(name="fechaBaja", type="datetime", nullable=true)
      */
     private $fechaBaja;
+	
+	public function __construct(){
+		$this->$fechaAlta = new \DateTime();
+		$this->$fechaModificacion = new \DateTime();
+	}
 
 
     /**
@@ -115,6 +127,7 @@ class PersonalDocente
     {
         return $this->id;
     }
+
 
     /**
      * Set nombre
@@ -181,7 +194,7 @@ class PersonalDocente
     /**
      * Get dni
      *
-     * @return int
+     * @return integer
      */
     public function getDni()
     {
@@ -309,6 +322,30 @@ class PersonalDocente
     }
 
     /**
+     * Set sexo
+     *
+     * @param integer $sexo
+     *
+     * @return PersonalDocente
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+
+        return $this;
+    }
+
+    /**
+     * Get sexo
+     *
+     * @return integer
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
      * Set usuario
      *
      * @param integer $usuario
@@ -325,7 +362,7 @@ class PersonalDocente
     /**
      * Get usuario
      *
-     * @return int
+     * @return integer
      */
     public function getUsuario()
     {
@@ -404,4 +441,3 @@ class PersonalDocente
         return $this->fechaBaja;
     }
 }
-

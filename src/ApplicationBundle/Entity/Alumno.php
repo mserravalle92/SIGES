@@ -52,7 +52,7 @@ class Alumno
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_nacimiento", type="datetime")
+     * @ORM\Column(name="fechaNacimiento", type="datetime")
      */
     private $fechaNacimiento;
 
@@ -94,16 +94,23 @@ class Alumno
     /**
      * @var string
      *
-     * @ORM\Column(name="obra_social", type="string", length=255, nullable=true)
+     * @ORM\Column(name="obraSocial", type="string", length=255, nullable=true)
      */
     private $obraSocial;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ficha_medica", type="string", length=255, nullable=true)
+     * @ORM\Column(name="fichaMedica", type="string", length=255, nullable=true)
      */
     private $fichaMedica;
+	
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="sexo", type="integer")
+     */
+    private $sexo;
 	
 	/**
      * @var int
@@ -115,24 +122,28 @@ class Alumno
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_alta", type="datetime")
+     * @ORM\Column(name="fechaAlta", type="datetime")
      */
     private $fechaAlta;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     * @ORM\Column(name="fechaModificacion", type="datetime", nullable=true)
      */
     private $fechaModificacion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_baja", type="datetime", nullable=true)
+     * @ORM\Column(name="fechaBaja", type="datetime", nullable=true)
      */
     private $fechaBaja;
-
+	
+	public function __construct(){
+		$this->$fechaAlta = new \DateTime();
+		$this->$fechaModificacion = new \DateTime();
+	}
 
     /**
      * Get id
@@ -209,7 +220,7 @@ class Alumno
     /**
      * Get dni
      *
-     * @return int
+     * @return integer
      */
     public function getDni()
     {
@@ -433,6 +444,30 @@ class Alumno
     }
 
     /**
+     * Set usuario
+     *
+     * @param integer $usuario
+     *
+     * @return Alumno
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return integer
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
      * Set fechaAlta
      *
      * @param \DateTime $fechaAlta
@@ -502,29 +537,5 @@ class Alumno
     public function getFechaBaja()
     {
         return $this->fechaBaja;
-    }
-
-    /**
-     * Set usuario
-     *
-     * @param integer $usuario
-     *
-     * @return Alumno
-     */
-    public function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return integer
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
     }
 }
