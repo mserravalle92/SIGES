@@ -90,14 +90,14 @@ class Tutor
      * @ORM\Column(name="ocupacion", type="string", length=255)
      */
     private $ocupacion;
-	
+
 	/**
      * @var int
      *
      * @ORM\Column(name="sexo", type="integer")
      */
     private $sexo;
-	
+
 	/**
      * @var int
      *
@@ -126,7 +126,13 @@ class Tutor
      */
     private $fechaBaja;
 
-	
+    /**
+     * Many Groups have Many Users.
+     * @ORM\ManyToMany(targetEntity="Alumno", mappedBy="tutores")
+     */
+    private $alumnos;
+
+
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
 		$this->$fechaModificacion = new \DateTime();
@@ -500,5 +506,39 @@ class Tutor
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Add alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     *
+     * @return Tutor
+     */
+    public function addAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos[] = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     */
+    public function removeAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos->removeElement($alumno);
+    }
+
+    /**
+     * Get alumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlumnos()
+    {
+        return $this->alumnos;
     }
 }

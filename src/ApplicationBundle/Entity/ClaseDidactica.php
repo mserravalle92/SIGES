@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clase_en_vivo
  *
- * @ORM\Table(name="clase_en_vivo")
- * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\Clase_en_vivoRepository")
+ * @ORM\Table(name="ClaseDidactica")
+ * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\ClaseDidacticaRepository")
  */
-class ClaseEnVivo
+class ClaseDidactica
 {
     /**
      * @var int
@@ -192,4 +192,3 @@ class ClaseEnVivo
         $this->fechaModificacion = new DateTime();
     }
 }
-

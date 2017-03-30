@@ -104,14 +104,14 @@ class Alumno
      * @ORM\Column(name="fichaMedica", type="string", length=255, nullable=true)
      */
     private $fichaMedica;
-	
+
 	/**
      * @var int
      *
      * @ORM\Column(name="sexo", type="integer")
      */
     private $sexo;
-	
+
 	/**
      * @var int
      *
@@ -139,7 +139,14 @@ class Alumno
      * @ORM\Column(name="fechaBaja", type="datetime", nullable=true)
      */
     private $fechaBaja;
-	
+
+    /**
+       * Many Users have Many Groups.
+       * @ORM\ManyToMany(targetEntity="Tutor", inversedBy="alumnos")
+       * @ORM\JoinTable(name="alumnos_tutores")
+       */
+    private $tutores;
+
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
 		$this->$fechaModificacion = new \DateTime();
@@ -537,5 +544,63 @@ class Alumno
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Set sexo
+     *
+     * @param integer $sexo
+     *
+     * @return Alumno
+     */
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+
+        return $this;
+    }
+
+    /**
+     * Get sexo
+     *
+     * @return integer
+     */
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+
+    /**
+     * Add tutore
+     *
+     * @param \ApplicationBundle\Entity\Tutor $tutore
+     *
+     * @return Alumno
+     */
+    public function addTutore(\ApplicationBundle\Entity\Tutor $tutore)
+    {
+        $this->tutores[] = $tutore;
+
+        return $this;
+    }
+
+    /**
+     * Remove tutore
+     *
+     * @param \ApplicationBundle\Entity\Tutor $tutore
+     */
+    public function removeTutore(\ApplicationBundle\Entity\Tutor $tutore)
+    {
+        $this->tutores->removeElement($tutore);
+    }
+
+    /**
+     * Get tutores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTutores()
+    {
+        return $this->tutores;
     }
 }

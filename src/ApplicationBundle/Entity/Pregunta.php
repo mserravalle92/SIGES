@@ -26,12 +26,12 @@ class Pregunta
      *
      * @ORM\Column(name="claseEnVivo", type="integer")
      */
-    private $claseEnVivo;
+    private $claseDidactica;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pregunta", type="string", length=255)
+     * @ORM\Column(name="pregunta", type="text")
      */
     private $pregunta;
 
@@ -191,4 +191,3 @@ class Pregunta
         $this->fechaModificacion = new DateTime();
     }
 }
-
