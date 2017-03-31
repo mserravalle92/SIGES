@@ -63,6 +63,12 @@ class Curso
      */
     private $fechaModificacion;
 
+    /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="Materia", mappedBy="curso")
+     */
+     private $materias;
+
 
     /**
      * Get id
@@ -75,9 +81,9 @@ class Curso
     }
 
     /**
-     * Set a¤o
+     * Set aï¿½o
      *
-     * @param integer $a¤o
+     * @param integer $aï¿½o
      *
      * @return Curso
      */
@@ -89,7 +95,7 @@ class Curso
     }
 
     /**
-     * Get a¤o
+     * Get aï¿½o
      *
      * @return int
      */
@@ -222,5 +228,38 @@ class Curso
         $this->fechaAlta = new DateTime();
         $this->fechaModificacion = new DateTime();
     }
-}
 
+    /**
+     * Add materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     *
+     * @return Curso
+     */
+    public function addMateria(\ApplicationBundle\Entity\Materia $materia)
+    {
+        $this->materias[] = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Remove materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     */
+    public function removeMateria(\ApplicationBundle\Entity\Materia $materia)
+    {
+        $this->materias->removeElement($materia);
+    }
+
+    /**
+     * Get materias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMaterias()
+    {
+        return $this->materias;
+    }
+}

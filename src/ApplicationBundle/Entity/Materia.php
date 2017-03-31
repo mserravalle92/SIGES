@@ -28,7 +28,7 @@ class Materia
      */
     private $nombre;
 
-    
+
 
     /**
      * @var int
@@ -45,9 +45,9 @@ class Materia
     private $cicloLectivo;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="curso", type="integer")
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="materias")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
     private $curso;
 
@@ -107,7 +107,7 @@ class Materia
         return $this->nombre;
     }
 
-    
+
 
     /**
      * Set profesor
@@ -258,4 +258,3 @@ class Materia
         $this->fechaModificacion = new DateTime();
     }
 }
-

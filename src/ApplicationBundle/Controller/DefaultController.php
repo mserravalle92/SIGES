@@ -14,11 +14,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alumno = $em->getRepository('ApplicationBundle:Alumno')->findOneById(1);
+        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById(1);
 
-        $tutor =$alumno->getTutores()[0];
-
-        //die(dump($tutor->getNombre().", ".$tutor->getApellido()));
+        die(dump($materia->getCurso()->getSeccion()));
 
         return $this->render('ApplicationBundle:Default:index.html.twig');
     }
