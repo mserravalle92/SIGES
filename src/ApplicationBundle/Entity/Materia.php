@@ -28,15 +28,6 @@ class Materia
      */
     private $nombre;
 
-
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="profesor", type="integer")
-     */
-    private $profesor;
-
     /**
      * @var int
      *
@@ -50,6 +41,13 @@ class Materia
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
     private $curso;
+
+    /**
+     * Many Materias have Many PersonalDocentes.
+     * @ORM\ManyToMany(targetEntity="PersonalDocente", mappedBy="materias")
+     * @ORM\JoinTable(name="Profesor_Materia")
+     */
+     private $docentes;
 
     /**
      * @var \DateTime
@@ -256,5 +254,41 @@ class Materia
     public function __construct(){
         $this->fechaAlta = new DateTime();
         $this->fechaModificacion = new DateTime();
+        $this->docentes = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }
+
+    /**
+     * Add docente
+     *
+     * @param \ApplicationBundle\Entity\PersonalDocente $docente
+     *
+     * @return Materia
+     */
+    public function addDocente(\ApplicationBundle\Entity\PersonalDocente $docente)
+    {
+        $this->docentes[] = $docente;
+
+        return $this;
+    }
+
+    /**
+     * Remove docente
+     *
+     * @param \ApplicationBundle\Entity\PersonalDocente $docente
+     */
+    public function removeDocente(\ApplicationBundle\Entity\PersonalDocente $docente)
+    {
+        $this->docentes->removeElement($docente);
+    }
+
+    /**
+     * Get docentes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocentes()
+    {
+        return $this->docentes;
     }
 }

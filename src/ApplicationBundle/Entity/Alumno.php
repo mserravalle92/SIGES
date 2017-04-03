@@ -147,6 +147,13 @@ class Alumno
        */
     private $tutores;
 
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="alumnos")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
+     */
+    private $curso;
+
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
 		$this->$fechaModificacion = new \DateTime();
@@ -602,5 +609,29 @@ class Alumno
     public function getTutores()
     {
         return $this->tutores;
+    }
+
+    /**
+     * Set curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Alumno
+     */
+    public function setCurso(\ApplicationBundle\Entity\Curso $curso = null)
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \ApplicationBundle\Entity\Curso
+     */
+    public function getCurso()
+    {
+        return $this->curso;
     }
 }

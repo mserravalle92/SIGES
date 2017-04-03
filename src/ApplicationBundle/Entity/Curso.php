@@ -21,12 +21,7 @@ class Curso
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="anio", type="integer")
-     */
-    private $anio;
+ 
 
     /**
      * @var string
@@ -68,6 +63,19 @@ class Curso
      * @ORM\OneToMany(targetEntity="Materia", mappedBy="curso")
      */
      private $materias;
+
+      /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="Alumno", mappedBy="curso")
+     */
+     private $alumnos;
+
+     /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Anio", inversedBy="cursos")
+     * @ORM\JoinColumn(name="anio_id", referencedColumnName="id")
+     */
+    private $anio;
 
 
     /**
@@ -261,5 +269,39 @@ class Curso
     public function getMaterias()
     {
         return $this->materias;
+    }
+
+    /**
+     * Add alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     *
+     * @return Curso
+     */
+    public function addAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos[] = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     */
+    public function removeAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos->removeElement($alumno);
+    }
+
+    /**
+     * Get alumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlumnos()
+    {
+        return $this->alumnos;
     }
 }

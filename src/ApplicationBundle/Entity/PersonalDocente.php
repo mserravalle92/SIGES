@@ -111,10 +111,20 @@ class PersonalDocente
      * @ORM\Column(name="fechaBaja", type="datetime", nullable=true)
      */
     private $fechaBaja;
+
+    /**
+     * Many PersonalDocente have Many Materias.
+     * @ORM\ManyToMany(targetEntity="Materia", inversedBy="docentes")
+     * @ORM\JoinTable(name="Docente_Materia")
+     */
+     private $materias;
+
 	
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
 		$this->$fechaModificacion = new \DateTime();
+        $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
+
 	}
 
 
@@ -439,5 +449,40 @@ class PersonalDocente
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+
+    /**
+     * Add materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     *
+     * @return PersonalDocente
+     */
+    public function addMateria(\ApplicationBundle\Entity\Materia $materia)
+    {
+        $this->materias[] = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Remove materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     */
+    public function removeMateria(\ApplicationBundle\Entity\Materia $materia)
+    {
+        $this->materias->removeElement($materia);
+    }
+
+    /**
+     * Get materias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMaterias()
+    {
+        return $this->materias;
     }
 }
