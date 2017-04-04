@@ -13,11 +13,6 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById(1);
-
-        die(dump($materia->getCurso()->getSeccion()));
-
         return $this->render('ApplicationBundle:Default:index.html.twig');
     }
 }
