@@ -63,6 +63,12 @@ class Anio
      */
     private $fechaModificacion;
 
+    /**
+     * One Product has Many Features.
+     * @ORM\OneToMany(targetEntity="Curso", mappedBy="anio")
+     */
+     private $curso;
+
 
     /**
      * Get id
@@ -222,5 +228,48 @@ class Anio
         $this->fechaAlta = new DateTime();
         $this->fechaModificacion = new DateTime();
     }
-}
 
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Anio
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->cursos[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->cursos->removeElement($curso);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+}
