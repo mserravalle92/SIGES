@@ -5,6 +5,11 @@ application_curso:
 application_ciclo_lectivo:
     resource: "@ApplicationBundle/Controller/CicloLectivoController.php"
     type:     annotation
+    
+teaching_class:
+    resource: "@TeachingClassBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 api_api_user:
     resource: "@ApiBundle/Controller/ApiUserController.php"
@@ -27,3 +32,7 @@ api:
 
 logout:
     path: /logout
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

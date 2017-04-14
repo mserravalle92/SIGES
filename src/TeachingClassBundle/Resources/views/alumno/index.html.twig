@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Alumnos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dni</th>
+                <th>Legajo</th>
+                <th>Fechanacimiento</th>
+                <th>Localidad</th>
+                <th>Nacionalidad</th>
+                <th>Direccion</th>
+                <th>Mail</th>
+                <th>Telefono</th>
+                <th>Obrasocial</th>
+                <th>Fichamedica</th>
+                <th>Sexo</th>
+                <th>Usuario</th>
+                <th>Fechaalta</th>
+                <th>Fechamodificacion</th>
+                <th>Fechabaja</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alumno in alumnos %}
+            <tr>
+                <td><a href="{{ path('alumnos_show', { 'id': alumno.id }) }}">{{ alumno.id }}</a></td>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.apellido }}</td>
+                <td>{{ alumno.dni }}</td>
+                <td>{{ alumno.legajo }}</td>
+                <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ alumno.localidad }}</td>
+                <td>{{ alumno.nacionalidad }}</td>
+                <td>{{ alumno.direccion }}</td>
+                <td>{{ alumno.mail }}</td>
+                <td>{{ alumno.telefono }}</td>
+                <td>{{ alumno.obraSocial }}</td>
+                <td>{{ alumno.fichaMedica }}</td>
+                <td>{{ alumno.sexo }}</td>
+                <td>{{ alumno.usuario }}</td>
+                <td>{% if alumno.fechaAlta %}{{ alumno.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('alumnos_show', { 'id': alumno.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('alumnos_edit', { 'id': alumno.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('alumnos_new') }}">Create a new alumno</a>
+        </li>
+    </ul>
+{% endblock %}

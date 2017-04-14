@@ -1,0 +1,31 @@
+
+    {{ form_start(form, {'action': path('clase_didactica_new'), 'method': 'POST'}) }}
+        {{form_errors(form)}}
+        <div class="form-group  hidden-xs col-lg-12">
+          <div class="callout callout-success">
+            <h4>Comenzar</h4>
+
+            <p>  Puede comenzar ya mismo y generar una nueva clase didáctica agregando una descripción
+                 o puede realizar una precarga para utilizarla mas tarde.</p>
+          </div>
+
+        </div>
+        <div class="form-group col-md-12">
+          {{ form_widget(form.descripcion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la descripcion de la nueva clase'}}) }}
+          <span class="help-block">{{ form_errors(form.descripcion) }}</span>
+        </div>
+        <div class="form-group col-md-12 hidden-xs">
+          <div class="callout callout-success">
+            <p>  Puede deshabilitar la clase para que los alumnos no puedan acceder hasta que así lo decida.</p>
+          </div>
+
+        </div>
+        <div class="form-group col-md-6">
+          {{ form_widget(form.habilitada, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la descripcion de la nueva clase'}}) }}
+          <span class="help-block">{{ form_errors(form.habilitada) }}</span>
+        </div>
+        <input type="hidden" name="materia" value="{{materia}}">
+        <div class="form-group col-md-6">
+          <button type="submit" class="btn btn-app pull-right"><i class="fa fa-edit"></i>Generar Ahora</button>
+        </div>
+    {{ form_end(form) }}

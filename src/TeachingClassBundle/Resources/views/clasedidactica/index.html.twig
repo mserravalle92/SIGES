@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Clasedidacticas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Clase</th>
+                <th>Hora</th>
+                <th>Fechaalta</th>
+                <th>Fechabaja</th>
+                <th>Fechamodificacion</th>
+                <th>Estado</th>
+                <th>Usuarioid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for claseDidactica in claseDidacticas %}
+            <tr>
+                <td><a href="{{ path('clase_didactica_show', { 'id': claseDidactica.id }) }}">{{ claseDidactica.id }}</a></td>
+                <td>{{ claseDidactica.clase }}</td>
+                <td>{% if claseDidactica.hora %}{{ claseDidactica.hora|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if claseDidactica.fechaAlta %}{{ claseDidactica.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ claseDidactica.fechaBaja }}</td>
+                <td>{% if claseDidactica.fechaModificacion %}{{ claseDidactica.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if claseDidactica.estado %}Yes{% else %}No{% endif %}</td>
+                <td>{{ claseDidactica.usuarioId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('clase_didactica_show', { 'id': claseDidactica.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('clase_didactica_edit', { 'id': claseDidactica.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('clase_didactica_new') }}">Create a new claseDidactica</a>
+        </li>
+    </ul>
+{% endblock %}

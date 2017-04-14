@@ -71,6 +71,13 @@ class User implements UserInterface, \Serializable
      */
     private $salt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ApplicationBundle\Entity\PersonalDocente", mappedBy="usuario")
+     *
+     * */
+
+    private $personalDocente;
+
 
     /**
      * Get id
@@ -332,5 +339,29 @@ class User implements UserInterface, \Serializable
     public function getFechaModificacion()
     {
         return $this->fechaModificacion;
+    }
+
+    /**
+     * Set personalDocente
+     *
+     * @param \ApplicationBundle\PersonalDocente $personalDocente
+     *
+     * @return User
+     */
+    public function setPersonalDocente(\ApplicationBundle\PersonalDocente $personalDocente = null)
+    {
+        $this->personalDocente = $personalDocente;
+
+        return $this;
+    }
+
+    /**
+     * Get personalDocente
+     *
+     * @return \ApplicationBundle\PersonalDocente
+     */
+    public function getPersonalDocente()
+    {
+        return $this->personalDocente;
     }
 }
