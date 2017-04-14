@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block css %}
+    <link rel="stylesheet" href="{{asset('bundles/application/css/index.CicloLectivo.css')}}">
+{% endblock %}
+
+{% block pageTitle %}Bienvenido a la Administracion de Ciclos Lectivos
+{% endblock %}
+
+
+{% block content %}
+
+    {% for cicloLectivo in ultimoCiclo %}
+<div class="col-md-4 col-md-offset-4" >
+   {% if cicloLectivo.anio %}<h2>Ciclo Lectivo {{cicloLectivo["anio"] }}</h2>{% endif %}
+   {% if cicloLectivo.fechaInicio %}<b>Comienzo: </b>{{cicloLectivo["fechaInicio"]|date('d-m-Y') }}{% endif %}
+   </br>
+   {% if cicloLectivo.fechaFin %}<b>Cierre: </b>{{cicloLectivo["fechaFin"]|date('d-m-Y') }}{% endif %}
+   </br>
+   {% if cicloLectivo.fechaInicioVacaciones %}<b>Comienzo de Vacaciones: </b>{{cicloLectivo["fechaInicioVacaciones"]|date('d-m-Y') }}{% endif %}
+   </br>
+   {% if cicloLectivo.fechaFinVacaciones %}<b>Fin de Vacaciones: </b>{{cicloLectivo["fechaFinVacaciones"]|date('d-m-Y') }}{% endif %}
+   </br>
+   {% if cicloLectivo.fechaAlta %}<b>Fecha Creación: </b>{{cicloLectivo["fechaAlta"]|date('Y-m-d H:m') }}{% endif %}
+   </br>
+   {% if cicloLectivo.fechaModificacion %}<b>Ultima Modificación: </b>{{cicloLectivo["fechaModificacion"]|date('Y-m-d H:m') }}{% endif %}
+   </br>
+
+   </div>
+{% endfor %}
+
+  <div class="col-md-10">
+        <a id="opcionListarCiclos" class="btn btn-primary" href="#">Listar Ciclos Lectivos Anteriores</a>
+        </br>
+    </div>
+
+    <table id="listaCiclosLectivos" class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-1">Id</th>
+                <th class="col-md-1">Comienzo de Ciclo</th>
+                <th class="col-md-1">Fin de Ciclo</th>
+                <th class="col-md-1">Inicio de Vacaciones</th>
+                <th class="col-md-1">Fin de Vacaciones</th>
+                <th class="col-md-1">Fecha Baja</th>
+                <th class="col-md-1">Fecha Alta</th>
+                <th class="col-md-1">Ultima Modificacion</th>
+                <th class="col-md-2">Opciones</th>
+            </tr>
+            <hr>
+        </thead>
+         <tbody>
+        {% for cicloLectivo in cicloLectivos %}
+        
+            <tr>
+                
+                    <td><a href="{{ path('ciclolectivo_show', { 'id': cicloLectivo.id }) }}">{{ cicloLectivo.id }}</a></td>
+                
+                    <td>{% if cicloLectivo.fechaInicio %}{{ cicloLectivo.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaFin %}{{ cicloLectivo.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaInicioVacaciones %}{{ cicloLectivo.fechaInicioVacaciones|date('Y-m-d') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaFinVacaciones %}{{ cicloLectivo.fechaFinVacaciones|date('Y-m-d') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaBaja %}{{ cicloLectivo.fechaBaja|date('Y-m-d H:m:s') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaAlta %}{{ cicloLectivo.fechaAlta|date('Y-m-d H:m:s') }}{% endif %}</td>
+                
+                
+                    <td>{% if cicloLectivo.fechaModificacion %}{{ cicloLectivo.fechaModificacion|date('Y-m-d H:m:s') }}{% endif %}</td>
+  
+
+                <td>
+                    
+                            <a id="opc1" href="{{ path('ciclolectivo_show', { 'id': cicloLectivo.id }) }}">Ver</a>
+                      
+                            <a id="opc2" href="{{ path('ciclolectivo_edit', { 'id': cicloLectivo.id }) }}">Editar</a>
+                      
+                
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col-md-10">
+    </br>
+        <a class="btn btn-primary" href="{{ path('ciclolectivo_new') }}">Crear Ciclo Lectivo nuevo</a>
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+    <form id="formNuevoCicloLectivo" method="post" action="#">
+
+        <div class="form-group">
+            <label class="control-label">Año: </label>
+            <input name="anio" class="form-control" type="int" id="anio" placeholder="Año del Ciclo Lectivo" required>
+        </div>
+        <div class=" form-group">
+            <label>Comienzo:</label>
+            <input name="fechaInicio" class="form-control" type="date" id="fechaInicio" placeholder="Fecha de inicio" required>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Finaliza: </label>
+            <input name="fechaFin" class="form-control" type="date" id="fechaFin" placeholder="Fecha de finalizacion" required>
+        </div>
+        <div class="form-group">
+            <label>Inicio de Vacaciones</label>
+            <input class="form-control" name="fechaInicioVacaciones" type="date" placeholder="fecha de inicio de vacaciones" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Cierre de Vacaciones</label>
+            <input name="fechaFinVacaciones" class="form-control" type="date" placeholder="fecha finalizacion de vacaciones">
+        </div>
+        
+        <br />
+        <center>
+            <input type="submit" class="btn btn-primary" value="Crear" /> <a href="@Url.Action("Index","cicloLectivo")" class="btn btn-primary">Cancelar</a>
+        </center><br>
+            <br />
+    </form>
+
+    </div>
+
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="{{asset('bundles/application/js/index.CicloLectivo.js')}}"></script>    
+{% endblock %}

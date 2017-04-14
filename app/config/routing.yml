@@ -1,3 +1,11 @@
+application_curso:
+    resource: "@ApplicationBundle/Controller/CursoController.php"
+    type:     annotation
+
+application_ciclo_lectivo:
+    resource: "@ApplicationBundle/Controller/CicloLectivoController.php"
+    type:     annotation
+
 api_api_user:
     resource: "@ApiBundle/Controller/ApiUserController.php"
     type:     annotation

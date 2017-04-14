@@ -5,10 +5,10 @@ namespace ApplicationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A¤o
+ * Anio
  *
  * @ORM\Table(name="anio")
- * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\A¤oRepository")
+ * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\AnioRepository")
  */
 class Anio
 {
@@ -85,7 +85,7 @@ class Anio
      *
      * @param integer $numero
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setNumero($numero)
     {
@@ -109,7 +109,7 @@ class Anio
      *
      * @param string $nivel
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setNivel($nivel)
     {
@@ -133,7 +133,7 @@ class Anio
      *
      * @param string $descripcion
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setDescripcion($descripcion)
     {
@@ -157,7 +157,7 @@ class Anio
      *
      * @param \DateTime $fechaAlta
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setFechaAlta($fechaAlta)
     {
@@ -181,7 +181,7 @@ class Anio
      *
      * @param \DateTime $fechaBaja
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setFechaBaja($fechaBaja)
     {
@@ -205,7 +205,7 @@ class Anio
      *
      * @param \DateTime $fechaModificacion
      *
-     * @return A¤o
+     * @return Anio
      */
     public function setFechaModificacion($fechaModificacion)
     {
@@ -271,5 +271,9 @@ class Anio
     public function getCurso()
     {
         return $this->curso;
+    }
+    public function __toString(){
+        
+        return (string)$this->numero . ' - '. $this->nivel;
     }
 }
