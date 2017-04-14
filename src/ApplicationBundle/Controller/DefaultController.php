@@ -14,9 +14,6 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById(1);
-
-
         return $this->render('ApplicationBundle:Default:index.html.twig');
     }
 }
