@@ -4,9 +4,14 @@
 parameters:
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     siges
     database_user:     root
     database_password: ~
+    database_host2: 127.0.0.1
+    database_port2: null
+    database_name2: claseDidactica
+    database_user2: root
+    database_password2: null
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

@@ -1,0 +1,48 @@
+{% extends 'TeachingClassBundle:bases:base.html.twig' %}
+
+{% block content %}
+    <h1>Preguntum</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ preguntum.id }}</td>
+            </tr>
+            <tr>
+                <th>Pregunta</th>
+                <td>{{ preguntum.pregunta }}</td>
+            </tr>
+            <tr>
+                <th>Fechaalta</th>
+                <td>{% if preguntum.fechaAlta %}{{ preguntum.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechabaja</th>
+                <td>{% if preguntum.fechaBaja %}{{ preguntum.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechamodificacion</th>
+                <td>{% if preguntum.fechaModificacion %}{{ preguntum.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Envio</th>
+                <td>{% if preguntum.envio %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pregunta_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('pregunta_edit', { 'id': preguntum.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

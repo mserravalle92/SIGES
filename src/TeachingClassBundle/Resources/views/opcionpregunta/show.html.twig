@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Opcionpreguntum</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ opcionPreguntum.id }}</td>
+            </tr>
+            <tr>
+                <th>Opcion</th>
+                <td>{{ opcionPreguntum.opcion }}</td>
+            </tr>
+            <tr>
+                <th>Correcta</th>
+                <td>{% if opcionPreguntum.correcta %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaalta</th>
+                <td>{% if opcionPreguntum.fechaAlta %}{{ opcionPreguntum.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechabaja</th>
+                <td>{% if opcionPreguntum.fechaBaja %}{{ opcionPreguntum.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechamodificacion</th>
+                <td>{% if opcionPreguntum.fechaModificacion %}{{ opcionPreguntum.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('opciones_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('opciones_edit', { 'id': opcionPreguntum.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
@@ -16,7 +16,6 @@ class DefaultController extends Controller
 
         $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById(1);
 
-        die(dump($materia->getCurso()->getSeccion()));
 
         return $this->render('ApplicationBundle:Default:index.html.twig');
     }
