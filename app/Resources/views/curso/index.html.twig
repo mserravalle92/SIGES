@@ -24,12 +24,9 @@
     <table id="listaCursosPrimarios" width="100%" style="margin-bottom: 2em;" >
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Turno</th>
                 <th>Anio</th>
                 <th>Seccion</th>
-                <th>Fechaalta</th>
-                <th>Fechabaja</th>
                 <th>Fechamodificacion</th>
                 <th>Actions</th>
             </tr>
@@ -38,12 +35,9 @@
         {% for curso in cursos %}
             {% if curso.anio matches '/Primario/' %}
                 <tr>
-                    <td><a href="{{ path('curso_show', { 'id': curso.id }) }}">{{ curso.id }}</a></td>
                     <td>{{ curso.turno }}</td>
                     <td>{{curso.anio}}</td>
                     <td>{{ curso.seccion }}</td>
-                    <td>{% if curso.fechaAlta %}{{ curso.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if curso.fechaBaja %}{{ curso.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if curso.fechaModificacion %}{{ curso.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
                         <a href="{{ path('curso_show', { 'id': curso.id }) }}">
@@ -71,12 +65,9 @@
     <table id="listaCursosSecundarios" width="100%" >
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Turno</th>
                 <th>Anio</th>
                 <th>Seccion</th>
-                <th>Fechaalta</th>
-                <th>Fechabaja</th>
                 <th>Fechamodificacion</th>
                 <th>Actions</th>
             </tr>
@@ -85,12 +76,9 @@
         {% for curso in cursos %}
             {% if curso.anio matches '/Secundario/' %}
                 <tr>
-                    <td><a href="{{ path('curso_show', { 'id': curso.id }) }}">{{ curso.id }}</a></td>
                     <td>{{ curso.turno }}</td>
                     <td>{{curso.anio}}</td>
                     <td>{{ curso.seccion }}</td>
-                    <td>{% if curso.fechaAlta %}{{ curso.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if curso.fechaBaja %}{{ curso.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if curso.fechaModificacion %}{{ curso.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
                         <a href="{{ path('curso_show', { 'id': curso.id }) }}">
