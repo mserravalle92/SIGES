@@ -1,13 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Cursos list</h1>
+{% block css %}
+    <link rel="stylesheet" href="{{asset('bundles/application/dist/css/indexCurso.css')}}">
+{% endblock %}
 
-    <table>
+{% block pageTitle %}Bienvenido a la Administracion de Cursos
+{% endblock %}
+
+
+{% block content %}
+    <div id="contTitulo">
+        <h1>Lista de Cursos</h1>
+    </div>
+    <!-- Boton ciclos lectivos primarios -->
+    <div class="contBoton col-md-10">
+        <a id="botonCursosPrimarios" class="btn btn-primary" href="#">
+            Cursos Primarios
+        </a>
+    </div>
+    <br><br>
+
+    <!-- Tabla ciclos lectivos primarios -->
+    <table id="listaCursosPrimarios" width="100%" style="margin-bottom: 2em;" >
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Turno</th>
+                <th>Anio</th>
                 <th>Seccion</th>
                 <th>Fechaalta</th>
                 <th>Fechabaja</th>
@@ -17,31 +36,87 @@
         </thead>
         <tbody>
         {% for curso in cursos %}
-            <tr>
-                <td><a href="{{ path('curso_show', { 'id': curso.id }) }}">{{ curso.id }}</a></td>
-                <td>{{ curso.turno }}</td>
-                <td>{{ curso.seccion }}</td>
-                <td>{% if curso.fechaAlta %}{{ curso.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if curso.fechaBaja %}{{ curso.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if curso.fechaModificacion %}{{ curso.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('curso_show', { 'id': curso.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('curso_edit', { 'id': curso.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            {% if curso.anio matches '/Primario/' %}
+                <tr>
+                    <td><a href="{{ path('curso_show', { 'id': curso.id }) }}">{{ curso.id }}</a></td>
+                    <td>{{ curso.turno }}</td>
+                    <td>{{curso.anio}}</td>
+                    <td>{{ curso.seccion }}</td>
+                    <td>{% if curso.fechaAlta %}{{ curso.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if curso.fechaBaja %}{{ curso.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if curso.fechaModificacion %}{{ curso.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('curso_show', { 'id': curso.id }) }}">
+                            Agregar Materia / Ver
+                        </a>
+                        <br>
+                        <a href="{{ path('curso_edit', { 'id': curso.id }) }}">
+                            Agregar Alumnos / Editar
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>
 
+    <!-- boton ciclos lectivos secundaris -->
+    <div class="contBoton col-md-10">
+        <a id="botonCursosSecundarios" class="btn btn-primary" href="#">
+            Cursos Secundarios
+        </a>
+    </div>
+    <br><br>
+    <!-- tabla ciclos lectivos secundarios -->
+    <table id="listaCursosSecundarios" width="100%" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Turno</th>
+                <th>Anio</th>
+                <th>Seccion</th>
+                <th>Fechaalta</th>
+                <th>Fechabaja</th>
+                <th>Fechamodificacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for curso in cursos %}
+            {% if curso.anio matches '/Secundario/' %}
+                <tr>
+                    <td><a href="{{ path('curso_show', { 'id': curso.id }) }}">{{ curso.id }}</a></td>
+                    <td>{{ curso.turno }}</td>
+                    <td>{{curso.anio}}</td>
+                    <td>{{ curso.seccion }}</td>
+                    <td>{% if curso.fechaAlta %}{{ curso.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if curso.fechaBaja %}{{ curso.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if curso.fechaModificacion %}{{ curso.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('curso_show', { 'id': curso.id }) }}">
+                            Agregar Materias / Ver
+                        </a>
+                        <br>
+                        <a href="{{ path('curso_edit', { 'id': curso.id }) }}">
+                            Agregar Alumnos / Editar
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br><br>
+
     <ul>
         <li>
-            <a href="{{ path('curso_new') }}">Create a new curso</a>
+            <a href="{{ path('curso_new') }}">
+                Create a new curso
+            </a>
         </li>
     </ul>
+{% endblock %}
+
+{% block js %}
+    <script src="{{asset('bundles/application/dist/js/indexCurso.js')}}"></script>    
 {% endblock %}

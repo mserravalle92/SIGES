@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block css %}
-    <link rel="stylesheet" href="{{asset('bundles/application/css/index.CicloLectivo.css')}}">
+    <link rel="stylesheet" href="{{asset('bundles/application/dist/css/index.CicloLectivo.css')}}">
 {% endblock %}
 
 {% block pageTitle %}Bienvenido a la Administracion de Ciclos Lectivos
@@ -31,7 +30,7 @@
    </div>
 {% endfor %}
 
-  <div class="col-md-10">
+    <div class="col-md-10">
         <a id="opcionListarCiclos" class="btn btn-primary" href="#">Listar Ciclos Lectivos Anteriores</a>
         </br>
     </div>
@@ -135,5 +134,5 @@
 
 
 {% block js %}
-    <script src="{{asset('bundles/application/js/index.CicloLectivo.js')}}"></script>    
+    <script src="{{asset('bundles/application/dist/js/index.CicloLectivo.js')}}"></script>    
 {% endblock %}
