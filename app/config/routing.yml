@@ -5,6 +5,18 @@ application_alumno_examen:
 application_examen:
     resource: "@ApplicationBundle/Controller/ExamenController.php"
     type:     annotation
+application_curso:
+    resource: "@ApplicationBundle/Controller/CursoController.php"
+    type:     annotation
+
+application_ciclo_lectivo:
+    resource: "@ApplicationBundle/Controller/CicloLectivoController.php"
+    type:     annotation
+    
+teaching_class:
+    resource: "@TeachingClassBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 api_api_user:
     resource: "@ApiBundle/Controller/ApiUserController.php"
@@ -27,3 +39,7 @@ api:
 
 logout:
     path: /logout
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

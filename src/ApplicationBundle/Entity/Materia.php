@@ -29,13 +29,6 @@ class Materia
     private $nombre;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="cicloLectivo", type="integer")
-     */
-    private $cicloLectivo;
-
-    /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Curso", inversedBy="materias")
      * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")

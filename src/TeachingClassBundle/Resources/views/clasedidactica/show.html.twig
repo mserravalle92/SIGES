@@ -1,0 +1,57 @@
+{% extends 'TeachingClassBundle:Bases:base.html.twig' %}
+
+
+{% block content %}
+    <h1>Clasedidactica</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ claseDidactica.id }}</td>
+            </tr>
+            <tr>
+                <th>Clase</th>
+                <td>{{ claseDidactica.clase }}</td>
+            </tr>
+            <tr>
+                <th>Hora</th>
+                <td>{% if claseDidactica.hora %}{{ claseDidactica.hora|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaalta</th>
+                <td>{% if claseDidactica.fechaAlta %}{{ claseDidactica.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechabaja</th>
+                <td>{{ claseDidactica.fechaBaja }}</td>
+            </tr>
+            <tr>
+                <th>Fechamodificacion</th>
+                <td>{% if claseDidactica.fechaModificacion %}{{ claseDidactica.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{% if claseDidactica.estado %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Usuarioid</th>
+                <td>{{ claseDidactica.usuarioId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('clase_didactica_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('clase_didactica_edit', { 'id': claseDidactica.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

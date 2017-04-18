@@ -8,11 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+
         return $this->render('ApplicationBundle:Default:index.html.twig');
     }
 }

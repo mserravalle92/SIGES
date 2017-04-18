@@ -3,14 +3,15 @@
 namespace ApplicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+/*use Symfony\Component\Validator\Constraints\DateTime;*/
 
 /**
- * Ciclo_lectivo
+ * CicloLectivo
  *
- * @ORM\Table(name="ciclo_lectivo")
- * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\Ciclo_lectivoRepository")
+ * @ORM\Table(name="cicloLectivo")
+ * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\CicloLectivoRepository")
  */
-class Ciclo_lectivo
+class CicloLectivo
 {
     /**
      * @var int
@@ -49,6 +50,13 @@ class Ciclo_lectivo
      */
     private $fechaFinVacaciones;
 
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="anio", type="integer")
+     */
+    private $anio;
+
     /**
      * @var \DateTime
      *
@@ -70,6 +78,10 @@ class Ciclo_lectivo
      */
     private $fechaModificacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Curso", mappedBy="ciclolectivo")
+     */
+    private $cursos;
 
     /**
      * Get id
@@ -86,7 +98,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaInicio
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaInicio($fechaInicio)
     {
@@ -110,7 +122,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaFin
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaFin($fechaFin)
     {
@@ -134,7 +146,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaInicioVacaciones
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaInicioVacaciones($fechaInicioVacaciones)
     {
@@ -158,7 +170,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaFinVacaciones
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaFinVacaciones($fechaFinVacaciones)
     {
@@ -182,7 +194,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaBaja
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaBaja($fechaBaja)
     {
@@ -206,7 +218,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaAlta
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaAlta($fechaAlta)
     {
@@ -230,7 +242,7 @@ class Ciclo_lectivo
      *
      * @param \DateTime $fechaModificacion
      *
-     * @return Ciclo_lectivo
+     * @return CicloLectivo
      */
     public function setFechaModificacion($fechaModificacion)
     {
@@ -250,9 +262,70 @@ class Ciclo_lectivo
     }
 
     public function __construct(){
-        $this->fechaAlta = new DateTime();
-        $this->fechaModificacion = new DateTime();
+        $this->fechaAlta=new \DateTime();
+        $this->fechaModificacion=new \DateTime();
     }
 
-}
 
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return CicloLectivo
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->cursos[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->cursos->removeElement($curso);
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
+    }
+
+    /**
+     * Set anio
+     *
+     * 
+     *
+     * @return CicloLectivo
+     */
+    public function setAnio($anio)
+    {
+        $this->anio = $anio;
+
+        return $this;
+    }
+
+    /**
+     * Get anio
+     *
+     * @return \int
+     */
+    public function getAnio()
+    {
+        return $this->anio;
+    }
+
+    public function __toString(){
+        return (string)$this->anio;
+    }
+}

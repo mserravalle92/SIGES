@@ -3,6 +3,7 @@
 namespace ApplicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+/*use Symfony\Component\Validator\Constraints\DateTime;*/
 
 /**
  * Curso
@@ -58,6 +59,7 @@ class Curso
      */
     private $fechaModificacion;
 
+
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Materia", mappedBy="curso")
@@ -77,6 +79,12 @@ class Curso
      */
     private $anio;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="CicloLectivo", inversedBy="cursos")
+     * @ORM\JoinColumn(name="ciclolectivo_id", referencedColumnName="id")
+     */
+    private $ciclolectivo;
+
 
     /**
      * Get id
@@ -89,9 +97,9 @@ class Curso
     }
 
     /**
-     * Set a�o
+     * Set anio
      *
-     * @param integer $a�o
+     * @param integer $anio
      *
      * @return Curso
      */
@@ -103,7 +111,7 @@ class Curso
     }
 
     /**
-     * Get a�o
+     * Get anio
      *
      * @return int
      */
@@ -233,8 +241,8 @@ class Curso
     }
 
     public function __construct(){
-        $this->fechaAlta = new DateTime();
-        $this->fechaModificacion = new DateTime();
+        $this->fechaAlta = new \DateTime();
+        $this->fechaModificacion = new \DateTime();
     }
 
     /**
@@ -304,4 +312,30 @@ class Curso
     {
         return $this->alumnos;
     }
+
+    /**
+     * Set ciclolectivo
+     *
+     * @param \ApplicationBundle\Entity\CicloLectivo $ciclolectivo
+     *
+     * @return Curso
+     */
+    public function setCiclolectivo(\ApplicationBundle\Entity\CicloLectivo $ciclolectivo = null)
+    {
+        $this->ciclolectivo = $ciclolectivo;
+
+        return $this;
+    }
+
+    /**
+     * Get ciclolectivo
+     *
+     * @return \ApplicationBundle\Entity\CicloLectivo
+     */
+    public function getCiclolectivo()
+    {
+        return $this->ciclolectivo;
+    }
+
+
 }

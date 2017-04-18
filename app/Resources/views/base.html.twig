@@ -18,6 +18,11 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('bundles/application/dist/css/skins/_all-skins.min.css')}}">
 
+  {% block css %}
+    
+  {% endblock %}
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -34,7 +39,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>SGS</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>MMMMMMMMMMMMMMMMMMM</b> 1.0</span>
+      <span class="logo-lg"><b>SIGES</b> 1.0</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -367,7 +372,7 @@
     <section class="content-header">
       <h1>
         {% block pageTitle %}Título de Página (pageTitle){% endblock %}
-        <small>{% block smallPageTitle %}Titulo chico de página (smallPageTitle){% endblock %}</small>
+        <small>{% block titulo_chico %}  {% endblock %}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -599,5 +604,9 @@
 <script src="{{asset('bundles/application/dist/js/app.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('bundles/application/dist/js/demo.js')}}"></script>
+
+{% block js %}
+
+{% endblock %}
 </body>
 </html>

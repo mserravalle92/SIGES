@@ -1,5 +1,4 @@
 <?php
-
 namespace AuthBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

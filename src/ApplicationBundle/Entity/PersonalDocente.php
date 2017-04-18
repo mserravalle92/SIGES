@@ -76,7 +76,7 @@ class PersonalDocente
      * @ORM\Column(name="fechaNacimiento", type="date")
      */
     private $fechaNacimiento;
-	
+
 	/**
      * @var int
      *
@@ -85,10 +85,10 @@ class PersonalDocente
     private $sexo;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="usuario", type="integer", nullable=true)
-     */
+     * @ORM\OneToOne(targetEntity="AuthBundle\Entity\User", inversedBy="personalDocente")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * */
+
     private $usuario;
 
     /**
@@ -112,6 +112,7 @@ class PersonalDocente
      */
     private $fechaBaja;
 
+
     /**
      * Many PersonalDocente have Many Materias.
      * @ORM\ManyToMany(targetEntity="Materia", inversedBy="docentes")
@@ -119,7 +120,7 @@ class PersonalDocente
      */
      private $materias;
 
-	
+
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
 		$this->$fechaModificacion = new \DateTime();

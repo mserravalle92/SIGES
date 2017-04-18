@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new ApiBundle\ApiBundle(),
             new ApplicationBundle\ApplicationBundle(),
             new AuthBundle\AuthBundle(),
+            new TeachingClassBundle\TeachingClassBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

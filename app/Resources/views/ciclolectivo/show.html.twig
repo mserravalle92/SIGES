@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>Ciclolectivo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cicloLectivo.id }}</td>
+            </tr>
+            <tr>
+                <th>Fechainicio</th>
+                <td>{% if cicloLectivo.fechaInicio %}{{ cicloLectivo.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechafin</th>
+                <td>{% if cicloLectivo.fechaFin %}{{ cicloLectivo.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechainiciovacaciones</th>
+                <td>{% if cicloLectivo.fechaInicioVacaciones %}{{ cicloLectivo.fechaInicioVacaciones|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechafinvacaciones</th>
+                <td>{% if cicloLectivo.fechaFinVacaciones %}{{ cicloLectivo.fechaFinVacaciones|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechabaja</th>
+                <td>{% if cicloLectivo.fechaBaja %}{{ cicloLectivo.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaalta</th>
+                <td>{% if cicloLectivo.fechaAlta %}{{ cicloLectivo.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechamodificacion</th>
+                <td>{% if cicloLectivo.fechaModificacion %}{{ cicloLectivo.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ciclolectivo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('ciclolectivo_edit', { 'id': cicloLectivo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
