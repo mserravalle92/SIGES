@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tutors list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dni</th>
+                <th>Direccion</th>
+                <th>Localidad</th>
+                <th>Nacionalidad</th>
+                <th>Fechanacimiento</th>
+                <th>Telefono</th>
+                <th>Mail</th>
+                <th>Ocupacion</th>
+                <th>Sexo</th>
+                <th>Usuario</th>
+                <th>Fechaalta</th>
+                <th>Fechamodificacion</th>
+                <th>Fechabaja</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tutor in tutors %}
+            <tr>
+                <td><a href="{{ path('tutor_show', { 'id': tutor.id }) }}">{{ tutor.id }}</a></td>
+                <td>{{ tutor.nombre }}</td>
+                <td>{{ tutor.apellido }}</td>
+                <td>{{ tutor.dni }}</td>
+                <td>{{ tutor.direccion }}</td>
+                <td>{{ tutor.localidad }}</td>
+                <td>{{ tutor.nacionalidad }}</td>
+                <td>{% if tutor.fechaNacimiento %}{{ tutor.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ tutor.telefono }}</td>
+                <td>{{ tutor.mail }}</td>
+                <td>{{ tutor.ocupacion }}</td>
+                <td>{{ tutor.sexo }}</td>
+                <td>{{ tutor.usuario }}</td>
+                <td>{% if tutor.fechaAlta %}{{ tutor.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if tutor.fechaModificacion %}{{ tutor.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if tutor.fechaBaja %}{{ tutor.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tutor_show', { 'id': tutor.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tutor_edit', { 'id': tutor.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tutor_new') }}">Create a new tutor</a>
+        </li>
+    </ul>
+{% endblock %}

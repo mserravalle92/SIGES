@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tutor</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tutor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ tutor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ tutor.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Dni</th>
+                <td>{{ tutor.dni }}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ tutor.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Localidad</th>
+                <td>{{ tutor.localidad }}</td>
+            </tr>
+            <tr>
+                <th>Nacionalidad</th>
+                <td>{{ tutor.nacionalidad }}</td>
+            </tr>
+            <tr>
+                <th>Fechanacimiento</th>
+                <td>{% if tutor.fechaNacimiento %}{{ tutor.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ tutor.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ tutor.mail }}</td>
+            </tr>
+            <tr>
+                <th>Ocupacion</th>
+                <td>{{ tutor.ocupacion }}</td>
+            </tr>
+            <tr>
+                <th>Sexo</th>
+                <td>{{ tutor.sexo }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ tutor.usuario }}</td>
+            </tr>
+            <tr>
+                <th>Fechaalta</th>
+                <td>{% if tutor.fechaAlta %}{{ tutor.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechamodificacion</th>
+                <td>{% if tutor.fechaModificacion %}{{ tutor.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechabaja</th>
+                <td>{% if tutor.fechaBaja %}{{ tutor.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tutor_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('tutor_edit', { 'id': tutor.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
