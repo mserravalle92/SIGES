@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Examens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contenido</th>
+                <th>Horariodiamateria</th>
+                <th>Tipo</th>
+                <th>Promediable</th>
+                <th>Fechaalta</th>
+                <th>Fechamodificacion</th>
+                <th>Fechabaja</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for examan in examens %}
+            <tr>
+                <td><a href="{{ path('examen_show', { 'id': examan.id }) }}">{{ examan.id }}</a></td>
+                <td>{{ examan.contenido }}</td>
+                <td>{{ examan.horarioDiaMateria }}</td>
+                <td>{{ examan.tipo }}</td>
+                <td>{% if examan.promediable %}Yes{% else %}No{% endif %}</td>
+                <td>{% if examan.fechaAlta %}{{ examan.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examan.fechaModificacion %}{{ examan.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examan.fechaBaja %}{{ examan.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('examen_show', { 'id': examan.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('examen_edit', { 'id': examan.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('examen_new') }}">Create a new examan</a>
+        </li>
+    </ul>
+{% endblock %}
