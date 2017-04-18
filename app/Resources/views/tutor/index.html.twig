@@ -1,28 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Tutors list</h1>
+{% block content %}
+    
+    <a href="{{ path('tutor_new') }}"><button type="button" class="btn btn-primary btn-sm">Crear nuevo</button></a>
 
-    <table>
+    <table>    
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Dni</th>
-                <th>Direccion</th>
-                <th>Localidad</th>
-                <th>Nacionalidad</th>
-                <th>Fechanacimiento</th>
-                <th>Telefono</th>
-                <th>Mail</th>
-                <th>Ocupacion</th>
-                <th>Sexo</th>
-                <th>Usuario</th>
-                <th>Fechaalta</th>
-                <th>Fechamodificacion</th>
-                <th>Fechabaja</th>
-                <th>Actions</th>
+                <div class="row">
+                    <div class="col-sm-17"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">                           
+                    </div>
+                </div>
+                <th><P ALIGN=center>Id</p></th>
+                <th><P ALIGN=center>Nombre</p></th>
+                <th><P ALIGN=center>Apellido</p></th>
+                <th><P ALIGN=center>Dni</p></th>
+                <th><P ALIGN=center>Direccion</p></th>
+                <th><P ALIGN=center>Localidad</p></th>
+                <th><P ALIGN=center>Nacionalidad</p></th>
+                <th><P ALIGN=center>Fecha Nac</p></th>
+                <th><P ALIGN=center>Telefono</p></th>
+                <th><P ALIGN=center>Mail</p></th>
+                <th><P ALIGN=center>Ocupacion</p></th>
+                <th><P ALIGN=center>Sexo</p></th>
+                <th><P ALIGN=center>Acciones</p></th>
             </tr>
         </thead>
         <tbody>
@@ -40,28 +41,27 @@
                 <td>{{ tutor.mail }}</td>
                 <td>{{ tutor.ocupacion }}</td>
                 <td>{{ tutor.sexo }}</td>
-                <td>{{ tutor.usuario }}</td>
-                <td>{% if tutor.fechaAlta %}{{ tutor.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if tutor.fechaModificacion %}{{ tutor.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if tutor.fechaBaja %}{{ tutor.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {#<td>{{ tutor.usuario }}</td>#}
+                {#<td>{% if tutor.fechaAlta %}{{ tutor.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if tutor.fechaModificacion %}{{ tutor.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if tutor.fechaBaja %}{{ tutor.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>#}
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('tutor_show', { 'id': tutor.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('tutor_edit', { 'id': tutor.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-flat">Acción</button>
+                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('tutor_show', { 'id': tutor.id }) }}">Mostrar</a></li>
+                    <li><a href="{{ path('tutor_edit', { 'id': tutor.id }) }}">Editar</a></li>
+                  </ul>
+                </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('tutor_new') }}">Create a new tutor</a>
-        </li>
-    </ul>
+    
 {% endblock %}
