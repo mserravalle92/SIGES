@@ -75,13 +75,13 @@ class Curso
      /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Anio", inversedBy="cursos")
-     * @ORM\JoinColumn(name="anio_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="anio_id", referencedColumnName="id", nullable=true)
      */
     private $anio;
 
     /**
      * @ORM\ManyToOne(targetEntity="CicloLectivo", inversedBy="cursos")
-     * @ORM\JoinColumn(name="ciclolectivo_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="ciclolectivo", referencedColumnName="id")
      */
     private $ciclolectivo;
 
