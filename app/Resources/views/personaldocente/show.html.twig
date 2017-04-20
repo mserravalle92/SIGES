@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}
+	Personal docente
+{% endblock %}
+
+{% block titulo_chico %}
+	{{ personalDocente.nombre }} {{ personalDocente.apellido }}
+{% endblock %}
+
+{% block js %}
+	<script>
+		function confirmDelete(){
+			return confirm("¿Estás seguro que deseas borrar este docente?");
+		}
+	</script>
+{% endblock %}
+
+{% block content %}
+
+	<section class="content">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Datos del docente</h3>
+					</div><!-- /.box-header -->
+					<div class="box-body no-padding">
+						<table class="table table-condensed"><tbody>
+							<tr>
+								<th>Nombre</th>
+								<td>{{ personalDocente.nombre }}</td>
+							</tr>
+							<tr>
+								<th>Apellido</th>
+								<td>{{ personalDocente.apellido }}</td>
+							</tr>
+							<tr>
+								<th>Dni</th>
+								<td>{{ personalDocente.dni }}</td>
+							</tr>
+							<tr>
+								<th>Matricula</th>
+								<td>{{ personalDocente.matricula }}</td>
+							</tr>
+							<tr>
+								<th>Direccion</th>
+								<td>{{ personalDocente.direccion }}</td>
+							</tr>
+							<tr>
+								<th>Localidad</th>
+								<td>{{ personalDocente.localidad }}</td>
+							</tr>
+							<tr>
+								<th>Nacionalidad</th>
+								<td>{{ personalDocente.nacionalidad }}</td>
+							</tr>
+							<tr>
+								<th>Fecha de nacimiento</th>
+								<td>{% if personalDocente.fechaNacimiento %}{{ personalDocente.fechaNacimiento|date('d/m/Y') }}{% endif %}</td>
+							</tr>
+							<tr>
+								<th>Fech de alta</th>
+								<td>{% if personalDocente.fechaAlta %}{{ personalDocente.fechaAlta|date('d/m/Y H:i') }}{% endif %}</td>
+							</tr>
+							<tr>
+								<th>Fecha de modificación</th>
+								<td>{% if personalDocente.fechaModificacion %}{{ personalDocente.fechaModificacion|date('d/m/Y H:i') }}{% endif %}</td>
+							</tr>
+						</tbody></table>
+					</div><!-- /.box-body -->
+				</div><!-- /.box -->
+			</div><!-- /.col -->
+			<div class="col-md-3"></div>
+		</div><!-- /.row -->
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<center>
+					<a href="{{ path('personaldocente_index') }}"><button class="btn btn-primary">Volver</button></a>
+					&nbsp;&nbsp;
+					<a href="{{ path('personaldocente_edit', { 'id': personalDocente.id }) }}"><button class="btn btn-primary">Editar</button></a>
+					&nbsp;&nbsp;
+					{{ form_start(delete_form, {'attr':{'onsubmit':'return confirmDelete();','style':'display:inline;'} }) }}
+						<input class="btn btn-danger btn-borrar" type="submit" value="Borrar">
+					{{ form_end(delete_form) }}
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</section>
+	
+{% endblock %}
