@@ -1,3 +1,11 @@
+application_anio:
+    resource: "@ApplicationBundle/Controller/AnioController.php"
+    type:     annotation
+
+application_materia:
+    resource: "@ApplicationBundle/Controller/MateriaController.php"
+    type:     annotation
+
 application_curso:
     resource: "@ApplicationBundle/Controller/CursoController.php"
     type:     annotation
