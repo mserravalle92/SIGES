@@ -1,16 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Examan creation</h1>
+{% block pageTitle %}
+Nuevo Examen
+{% endblock %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('examen_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block content %}
+<div class="col-md-8 col-sm-10 col-xs-12">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Datos</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" method="POST">
+            <div class="box-body">
+            <div class="form-group">
+                
+                {{ form_label(form.contenido, 'Contenido', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                {{ form_widget(form.contenido, {'attr': { 'class': 'form-control', 'placeholder': 'Contenido' }}) }}
+                {{ form_errors(form.contenido)}}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.horarioDiaMateria, 'Horario', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                {{ form_widget(form.horarioDiaMateria, {'attr': { 'class': 'form-control', 'placeholder': 'Horario' }}) }}
+                {{ form_errors(form.horarioDiaMateria)}}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.tipo, 'Tipo', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                <div class="col-sm-10">
+                {{ form_widget(form.tipo, {'attr': { 'class': 'form-control', 'placeholder': 'Tipo' }}) }}
+                {{ form_errors(form.tipo)}}
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                        <input name="promediable" type="checkbox"> Es promediable
+                        {{ form_errors(form.promediable)}}
+                        </label>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+            <button type="submit" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-info pull-right">Sign in</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+</div>
+    
 {% endblock %}

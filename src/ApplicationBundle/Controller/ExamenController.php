@@ -8,14 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Examan controller.
+ * Examen controller.
  *
  * @Route("examen")
  */
 class ExamenController extends Controller
 {
     /**
-     * Lists all examan entities.
+     * Lists all examen entities.
      *
      * @Route("/", name="examen_index")
      * @Method("GET")
@@ -32,86 +32,86 @@ class ExamenController extends Controller
     }
 
     /**
-     * Creates a new examan entity.
+     * Creates a new examen entity.
      *
      * @Route("/new", name="examen_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
-        $examan = new Examan();
-        $form = $this->createForm('ApplicationBundle\Form\ExamenType', $examan);
+        $examen = new Examen();
+        $form = $this->createForm('ApplicationBundle\Form\ExamenType', $examen);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($examan);
+            $em->persist($examen);
             $em->flush();
 
-            return $this->redirectToRoute('examen_show', array('id' => $examan->getId()));
+            return $this->redirectToRoute('examen_show', array('id' => $examen->getId()));
         }
 
         return $this->render('examen/new.html.twig', array(
-            'examan' => $examan,
+            'examen' => $examen,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a examan entity.
+     * Finds and displays a examen entity.
      *
      * @Route("/{id}", name="examen_show")
      * @Method("GET")
      */
-    public function showAction(Examen $examan)
+    public function showAction(Examen $examen)
     {
-        $deleteForm = $this->createDeleteForm($examan);
+        $deleteForm = $this->createDeleteForm($examen);
 
         return $this->render('examen/show.html.twig', array(
-            'examan' => $examan,
+            'examen' => $examen,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing examan entity.
+     * Displays a form to edit an existing examen entity.
      *
      * @Route("/{id}/edit", name="examen_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Examen $examan)
+    public function editAction(Request $request, Examen $examen)
     {
-        $deleteForm = $this->createDeleteForm($examan);
-        $editForm = $this->createForm('ApplicationBundle\Form\ExamenType', $examan);
+        $deleteForm = $this->createDeleteForm($examen);
+        $editForm = $this->createForm('ApplicationBundle\Form\ExamenType', $examen);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('examen_edit', array('id' => $examan->getId()));
+            return $this->redirectToRoute('examen_edit', array('id' => $examen->getId()));
         }
 
         return $this->render('examen/edit.html.twig', array(
-            'examan' => $examan,
+            'examen' => $examen,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a examan entity.
+     * Deletes a examen entity.
      *
      * @Route("/{id}", name="examen_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Examen $examan)
+    public function deleteAction(Request $request, Examen $examen)
     {
-        $form = $this->createDeleteForm($examan);
+        $form = $this->createDeleteForm($examen);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($examan);
+            $em->remove($examen);
             $em->flush();
         }
 
@@ -119,16 +119,16 @@ class ExamenController extends Controller
     }
 
     /**
-     * Creates a form to delete a examan entity.
+     * Creates a form to delete a examen entity.
      *
-     * @param Examen $examan The examan entity
+     * @param Examen $examen The examen entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Examen $examan)
+    private function createDeleteForm(Examen $examen)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('examen_delete', array('id' => $examan->getId())))
+            ->setAction($this->generateUrl('examen_delete', array('id' => $examen->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
