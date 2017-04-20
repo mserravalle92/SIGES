@@ -25,36 +25,20 @@
   <![endif]-->
 </head>
 <body class="hold-transition login-page">
-  {% for flash_message in app.session.flashBag.get('ok') %}
-  <div class="col-md-6 col-md-offset-3">
-    <div class="callout callout-success ">
-      <h4><i class="fa fa-info">  Lea Atentamente</i></h4>
-      <p>Aquí se le proporciona el código de acceso anónimo único. Éste servirá para guardar progresos personales
-        y de la clase en general. Anótelo y guárdelo. No lo pierda. <br> Su codigo es :  <h4><strong>{{anonimo.codigo}}</strong></h4> Acceda con él y la contraseña ingresada.
-      </p>
-    </div>
-  </div>
-  {% endfor %}
 <div class="login-box">
   <div class="login-logo">
-    <b>SIGES</b><br><h4><span class="text-primary">S</span>istema de <span class="text-primary">G</span>estión de <span class="text-primary">ES</span>cuelas</h4>
+    <b>SIGES</b><br><h4><span class="text-primary">Si</span>stema de <span class="text-primary">G</span>estión de <span class="text-primary">ES</span>cuelas</h4>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <div class="callout callout-success">
-      <p>  BIENVENIDO! Ingrese el código de acceso proporcionado por el docente de la materia.</p>
+      <p>  Si nunca ingresó al sistema haga click en "Primer inicio", se le concederá un código para acceder al sistema</p>
     </div>
-    <p class="login-box-msg"></p>
+    <div class="col-md-offset-2">
 
-    <form action="{{path('ingreso_alumno', {'anonimo': anonimo.id})}}" method="post">
-          <div class="input-group input-group-sm">
-              <input type="text" name="codigoAcceso" class="form-control" placeholder="Ingrese el Código">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary btn-flat">Acceder <i class="fa  fa-arrow-circle-right "></i></button>
-              </span>
-            </div>
-    </form>
-
+      <a href="{{path('acceder')}}" class="btn btn-app"><i class="fa  fa-unlock"></i>Acceder</a>
+      <a href="{{path('acceso_generar')}}" class="btn btn-app"><i class="fa fa-user-plus"></i>Primer Inicio</a>
+    </div>
 
   <!-- /.login-box-body -->
 </div>

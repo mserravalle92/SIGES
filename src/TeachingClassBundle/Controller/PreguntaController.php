@@ -5,7 +5,8 @@ namespace TeachingClassBundle\Controller;
 use TeachingClassBundle\Entity\Pregunta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TeachingClassBundle\Entity\Sesion;
 use TeachingClassBundle\Entity\ClaseDidactica;
@@ -184,7 +185,7 @@ class PreguntaController extends Controller
 
         $pregunta = $em->getRepository('TeachingClassBundle:Pregunta')->findOneById($request->get('id'));
 
-        $sesion = $this->buscarUltimaSesion($pregunta,$pregunta->getClaseDidactica());
+        $sesion = $this->buscarUltimaSesionPregunta($pregunta,$pregunta->getClaseDidactica());
 
         $cantidadRespuestas = $em->getRepository('TeachingClassBundle:Respuesta')->findBy(['pregunta'=>$pregunta, 'sesion'=>$sesion]);
 
@@ -209,7 +210,7 @@ class PreguntaController extends Controller
 
           $clase = $pregunta->getClaseDidactica();
 
-          $sesion = $this->buscarUltimaSesion($pregunta,$clase);
+          $sesion = $this->buscarUltimaSesionPregunta($pregunta,$clase);
 
           $respuestas = $sesion->getRespuestas();
 
@@ -217,7 +218,7 @@ class PreguntaController extends Controller
 
           $countResp = $this->getRespuestasCorrectas($sesion);
 
-          //$sesion->setEstado(0);
+          $sesion->setEstado(0);
 
 
           $datos = ['pregunta'=>$pregunta->getPregunta(), 'respuestas' => $respTipos, 'cantRespuestas'=>$countResp];
@@ -270,7 +271,7 @@ class PreguntaController extends Controller
 
       }
 
-      public function buscarUltimaSesion($pregunta,$clase){
+      public function buscarUltimaSesionPregunta($pregunta,$clase){
 
         $em = $this->getDoctrine()->getManager('claseDidactica');
 
@@ -284,9 +285,12 @@ class PreguntaController extends Controller
       }
 
 
+
+
       public function getTiposRespuestas($sesion){
 
         $respuestas = $sesion->getRespuestas();
+
 
 
         $pregunta = $sesion->getPregunta();
