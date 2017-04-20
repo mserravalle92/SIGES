@@ -134,8 +134,8 @@ class Tutor
 
 
 	public function __construct(){
-		$this->$fechaAlta = new \DateTime();
-		$this->$fechaModificacion = new \DateTime();
+		$this->fechaAlta = new \DateTime();
+		$this->fechaModificacion = new \DateTime();
 	}
 
     /**

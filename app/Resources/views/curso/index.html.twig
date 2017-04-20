@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-
 {% block pageTitle %}Bienvenido a la Administracion de Cursos
 {% endblock %}
 
 
 {% block content %}
+
 
     <div class="col-md-10 col-md-offset-1" >
 <div class="box box-primary">
@@ -33,6 +33,7 @@
                 <th>Sección</th>
                 <th>Última Modificación</th>
                 <th>Opciones</th>
+
             </tr>
         </thead>
         <tbody>
@@ -92,6 +93,7 @@
                         <br>
                           <a href="{{ path('curso_edit', { 'id': curso.id }) }}">
                             Editar
+
                         </a>
                     </td>
                 </tr>
@@ -114,4 +116,5 @@
 
 {% block js %}
     <script src="{{asset('bundles/application/dist/js/indexCurso.js')}}"></script>    
+
 {% endblock %}
