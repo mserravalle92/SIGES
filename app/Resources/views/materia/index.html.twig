@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Materias list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fechaalta</th>
+                <th>Fechabaja</th>
+                <th>Fechamodificacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for materium in materias %}
+            <tr>
+                <td><a href="{{ path('materia_show', { 'id': materium.id }) }}">{{ materium.id }}</a></td>
+                <td>{{ materium.nombre }}</td>
+                <td>{% if materium.fechaAlta %}{{ materium.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if materium.fechaBaja %}{{ materium.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if materium.fechaModificacion %}{{ materium.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('materia_show', { 'id': materium.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('materia_edit', { 'id': materium.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('materia_new') }}">Create a new materium</a>
+        </li>
+    </ul>
+{% endblock %}
