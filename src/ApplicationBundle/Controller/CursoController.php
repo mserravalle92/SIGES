@@ -3,6 +3,7 @@
 namespace ApplicationBundle\Controller;
 
 use ApplicationBundle\Entity\Curso;
+use ApplicationBundle\Entity\Materia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -90,7 +91,7 @@ class CursoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('curso_edit', array('id' => $curso->getId()));
+            return $this->redirectToRoute('curso_show', array('id' => $curso->getId()));
         }
 
         return $this->render('curso/edit.html.twig', array(
@@ -135,4 +136,129 @@ class CursoController extends Controller
             ->getForm()
         ;
     }
+
+     /**
+¿+     * Finds and displays a curso entity.
+     *
+     * @Route("/{id}/agregar", name="curso_agregar")
+     * @Method("GET")
+     */ 
+    public function agregarAction(Curso $curso)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $materias = $em->getRepository('ApplicationBundle:Materia')->findAll();
+        $alumnos = $em->getRepository('ApplicationBundle:Alumno')->findAll();
+
+        $db = $em -> getConnection();
+
+        $query = "select * from materia where materia.curso_id =" . $curso->getId(); 
+        $stmt = $db -> prepare($query);
+        $params = array();
+        $stmt -> execute($params);
+        $materiasAsignadas = $stmt -> fetchAll();
+
+
+        $query2 = "select * from alumno where alumno.curso_id =" . $curso->getId(); 
+        $stmt = $db -> prepare($query2);
+        $params = array();
+        $stmt -> execute($params);
+
+        $alumnosAsignados = $stmt -> fetchAll();
+
+
+        return $this->render('curso/agregarMateria.html.twig', array(
+            'curso' => $curso,
+            'materias' => $materias,
+            'alumnos' => $alumnos,
+            'materiasAsignadas' => $materiasAsignadas,
+            'alumnosAsignados' => $alumnosAsignados
+ 
+        ));
+    }
+
+      /**
+     * Finds and displays a curso entity.
+     *
+     * @Route("/{id}/agregar/{idMateria}", name="curso_agregarMateria")
+     * @Method("GET")
+     */
+    public function agregarMateriaAction(Curso $curso, $idMateria)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $db = $em -> getConnection();
+
+        $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria; 
+        $stmt = $db -> prepare($query);
+        $params = array();
+        $stmt -> execute($params);
+
+
+/** $materia = $em->getRepository('ApplicationBundle:Materia')->find($idMateria);
+        $materia -> setCurso($curso->getId());
+        */
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
+        return $response;
+    }
+
+       /**
+     *
+     *
+     * @Route("/{id}/agregarAlumno/{idAlumno}", name="curso_agregarAlumno")
+     * @Method("GET")
+     */
+    public function agregarAlumnoAction(Curso $curso, $idAlumno)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $db = $em -> getConnection();
+
+        $query = "update alumno set curso_id =" . $curso->getId() . " where alumno.id =" . $idAlumno; 
+        $stmt = $db -> prepare($query);
+        $params = array();
+        $stmt -> execute($params);
+
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
+        return $response;
+    }
+
+     /**
+     *
+     *
+     * @Route("/{id}/{opc}/{id2}", name="curso_deshacer")
+     * @Method("GET")
+     */
+    public function deshacerAction(Curso $curso, $id2, $opc)
+    {
+        
+
+        if ($opc == 'true'){
+            $em = $this->getDoctrine()->getManager();
+            $db = $em -> getConnection();
+            $query = "update alumno set curso_id = NULL where alumno.id =" . $id2; 
+            $stmt = $db -> prepare($query);
+            $params = array();
+            $stmt -> execute($params);
+        }
+
+        else if($opc == 'false'){
+            $em = $this->getDoctrine()->getManager();
+            $db = $em -> getConnection();
+            $query = "update materia set curso_id = NULL where materia.id =" . $id2; 
+            $stmt = $db -> prepare($query);
+            $params = array();
+            $stmt -> execute($params);
+        };
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
+        return $response;
+    }
+
+
+
 }
+

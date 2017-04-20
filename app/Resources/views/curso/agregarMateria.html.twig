@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+{% block pageTitle %}Asignacion de Materias y Alumnos a Curso
+{% endblock %}
+
+
+{% block css %}
+   <!-- <link rel="stylesheet" href="{{asset('bundles/application/dist/css/cicloLectivo.css')}}"> -->
+{% endblock %}
+
+{% block content %}
+   
+
+   <ul>
+        <li>
+            <a href="{{ path('curso_index') }}">Volver a Listado de Cursos</a>
+        </li>
+        <li>
+            <a href="{{ path('curso_edit', { 'id': curso.id }) }}">Edit</a>
+        </li>
+         <br><br>
+    </ul>
+
+    <div class="col-md-7 " >
+        <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Curso {{ curso.anio.numero }}° {{curso.seccion}}</h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body" >
+
+      <div class="row">
+        <div class="col-md-2">
+        {% if curso.anio %}<p>{{curso.anio.descripcion }} {{curso.seccion}}</p>{% endif %}
+      </div>
+      <div class="col-md-2">
+        {% if curso.anio %}<p>Nivel {{curso.anio.nivel }}</p>{% endif %}
+      </div>
+      <div class="col-md-2">
+        {% if curso.turno %}<p>Turno {{ curso.turno}}</p>{% endif %}
+      </div>
+
+      </div>
+        </br>
+        <div class=" ">
+             <table  class="table table-bordered table-striped table-condensed" >
+             <thead>
+                    <tr>
+                       <th><center>Materias Asignadas</center></th>
+                        <th>Opcion</th>
+                    </tr>
+              </thead>
+              <tbody>
+            {% for materia in materiasAsignadas %}
+                <tr>
+                  <td style="padding: 5px;">{% if materia.id %}{{ materia["nombre"]}}{% endif %}</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': materia.id, 'opc': 'false' }) }}">deshacer</a> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+
+             <table  class="table table-bordered table-striped table-condensed" >
+             <thead>
+                    <tr>
+                        <th><center>Alumnos Asignadas</center>
+</th>                        <th>Opcion</th>
+                    </tr>
+              </thead>
+              <tbody>
+            {% for alumno in alumnosAsignados %}
+                <tr>
+                  <td style="padding: 5px;">{% if alumno.id %}{{ alumno["nombre"]}} {{ alumno["apellido"]}}{% endif %}</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': alumno.id, 'opc': 'true' }) }}">deshacer</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+      </div>
+  </div>
+       
+    <div class="col-md-4">
+           <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Listado de <a id="opcionMaterias" href="#">materias</a>/<a id="opcionAlumnos"href="#">alumnos</a></h3></h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body" >
+
+        <table  class="table table-bordered table-striped table-condensed"  id="listadoDeMaterias">
+        <thead>
+                    <tr>
+                    <th>Id</th>
+                       <th><center>Materias</center></th>
+                        <th>Opcion</th>
+                    </tr>
+              </thead>
+              <tbody>
+        {% for materia in materias %}
+            <tr>
+            {% if materia.curso != curso %}
+              <td>{% if materia.id %} {{materia.id }} {% endif %}</td>
+              <td>{% if materia.nombre %}{{materia.nombre}} {% endif %} </td>
+              <td><a href="{{ path('curso_agregarMateria', { 'id': curso.id , 'idMateria': materia.id }) }}"> agregar</a> </td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+         <table  class="table table-bordered table-striped table-condensed"  id="listadoDeAlumnos">
+          <tr>
+                <th>Id</th>
+                <th><center>Alumno</center></th>
+                <th><center>Curso</center></th>
+                <th>Opcion</th>
+          </tr>
+        {% for alumno in alumnos %}
+            <tr>
+              {% if alumno.curso != curso %}
+                <td >{% if alumno.id %}{{alumno.id }} {% endif %}</td>
+                <td >{% if alumno.nombre %}{{alumno.nombre}}{% endif %} </td>
+                <td >{% if alumno.curso %}{{alumno.curso.anio.numero}}° {{alumno.curso.seccion}} {{alumno.curso.turno}} {% endif %} </td>
+                <td ><a href="{{ path('curso_agregarAlumno', { 'id': curso.id , 'idAlumno': alumno.id }) }}" >agregar</a> </td>
+             {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+
+
+   </div>
+   </div>
+   </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{asset('bundles/application/dist/js/cicloLectivo.js')}}"></script>    
+{% endblock %}
