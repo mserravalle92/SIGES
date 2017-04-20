@@ -28,7 +28,7 @@ class CicloLectivoController extends Controller
 
           $db = $em -> getConnection();
 
-        $query = "select * from cicloLectivo having id = max(id);";
+        $query = "select * from cicloLectivo where anio = (select max(anio) from cicloLectivo) limit 1;";
         
         $stmt = $db -> prepare($query);
         
@@ -49,9 +49,6 @@ class CicloLectivoController extends Controller
 
         ));
 
-        return $this->render('ciclolectivo/index.html.twig', array(
-            'cicloLectivos' => $cicloLectivos,
-        ));
     }
 
     /**
@@ -111,7 +108,7 @@ class CicloLectivoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ciclolectivo_edit', array('id' => $cicloLectivo->getId()));
+            return $this->redirectToRoute('ciclolectivo_show', array('id' => $cicloLectivo->getId()));
         }
 
         return $this->render('ciclolectivo/edit.html.twig', array(

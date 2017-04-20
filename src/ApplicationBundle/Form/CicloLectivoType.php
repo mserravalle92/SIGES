@@ -13,7 +13,7 @@ class CicloLectivoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fechaInicio')->add('fechaFin')->add('fechaInicioVacaciones')->add('fechaFinVacaciones')->add('fechaBaja')->add('fechaAlta')->add('fechaModificacion');
+        $builder->add('anio')->add('fechaInicio')->add('fechaFin')->add('fechaInicioVacaciones')->add('fechaFinVacaciones')/**->add('fechaBaja')->add('fechaAlta')->add('fechaModificacion')**/;
     }
     
     /**
