@@ -18,23 +18,23 @@
             </tr>
         </thead>
         <tbody>
-        {% for examan in examens %}
+        {% for examen in examens %}
             <tr>
-                <td><a href="{{ path('examen_show', { 'id': examan.id }) }}">{{ examan.id }}</a></td>
-                <td>{{ examan.contenido }}</td>
-                <td>{{ examan.horarioDiaMateria }}</td>
-                <td>{{ examan.tipo }}</td>
-                <td>{% if examan.promediable %}Yes{% else %}No{% endif %}</td>
-                <td>{% if examan.fechaAlta %}{{ examan.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if examan.fechaModificacion %}{{ examan.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if examan.fechaBaja %}{{ examan.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('examen_show', { 'id': examen.id }) }}">{{ examen.id }}</a></td>
+                <td>{{ examen.contenido }}</td>
+                <td>{{ examen.horarioDiaMateria }}</td>
+                <td>{{ examen.tipo }}</td>
+                <td>{% if examen.promediable %}Yes{% else %}No{% endif %}</td>
+                <td>{% if examen.fechaAlta %}{{ examen.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examen.fechaModificacion %}{{ examen.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examen.fechaBaja %}{{ examen.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('examen_show', { 'id': examan.id }) }}">show</a>
+                            <a href="{{ path('examen_show', { 'id': examen.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('examen_edit', { 'id': examan.id }) }}">edit</a>
+                            <a href="{{ path('examen_edit', { 'id': examen.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -45,7 +45,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('examen_new') }}">Create a new examan</a>
+            <a href="{{ path('examen_new') }}">Create a new examen</a>
         </li>
     </ul>
 {% endblock %}
