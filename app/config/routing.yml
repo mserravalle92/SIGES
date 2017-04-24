@@ -1,3 +1,7 @@
+application_alumno:
+    resource: "@ApplicationBundle/Controller/alumnoController.php"
+    type:     annotation
+
 application_personal_docente:
     resource: "@ApplicationBundle/Controller/PersonalDocenteController.php"
     type:     annotation
