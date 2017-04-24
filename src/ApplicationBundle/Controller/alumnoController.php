@@ -2,7 +2,7 @@
 
 namespace ApplicationBundle\Controller;
 
-use ApplicationBundle\Entity\alumno;
+use ApplicationBundle\Entity\Alumno;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("alumno")
  */
-class alumnoController extends Controller
+class AlumnoController extends Controller
 {
     /**
      * Lists all alumno entities.
@@ -24,7 +24,7 @@ class alumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alumnos = $em->getRepository('ApplicationBundle:alumno')->findAll();
+        $alumnos = $em->getRepository('ApplicationBundle:Alumno')->findAll();
 
         return $this->render('alumno/index.html.twig', array(
             'alumnos' => $alumnos,
