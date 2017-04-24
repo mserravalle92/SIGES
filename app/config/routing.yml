@@ -1,3 +1,35 @@
+application_personal_docente:
+    resource: "@ApplicationBundle/Controller/PersonalDocenteController.php"
+    type:     annotation
+
+application_anio:
+    resource: "@ApplicationBundle/Controller/AnioController.php"
+    type:     annotation
+
+application_materia:
+    resource: "@ApplicationBundle/Controller/MateriaController.php"
+    type:     annotation
+
+application_tutor:
+    resource: "@ApplicationBundle/Controller/TutorController.php"
+    type:     annotation
+
+application_alumno_examen:
+    resource: "@ApplicationBundle/Controller/AlumnoExamenController.php"
+    type:     annotation
+
+application_examen:
+    resource: "@ApplicationBundle/Controller/ExamenController.php"
+    type:     annotation
+
+application_curso:
+    resource: "@ApplicationBundle/Controller/CursoController.php"
+    type:     annotation
+
+application_ciclo_lectivo:
+    resource: "@ApplicationBundle/Controller/CicloLectivoController.php"
+    type:     annotation
+    
 teaching_class:
     resource: "@TeachingClassBundle/Controller/"
     type:     annotation

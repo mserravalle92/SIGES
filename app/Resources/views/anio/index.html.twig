@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Anios list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Nivel</th>
+                <th>Descripcion</th>
+                <th>Fechaalta</th>
+                <th>Fechabaja</th>
+                <th>Fechamodificacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for anio in anios %}
+            <tr>
+                <td><a href="{{ path('anio_show', { 'id': anio.id }) }}">{{ anio.id }}</a></td>
+                <td>{{ anio.numero }}</td>
+                <td>{{ anio.nivel }}</td>
+                <td>{{ anio.descripcion }}</td>
+                <td>{% if anio.fechaAlta %}{{ anio.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if anio.fechaBaja %}{{ anio.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if anio.fechaModificacion %}{{ anio.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('anio_show', { 'id': anio.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('anio_edit', { 'id': anio.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('anio_new') }}">Create a new anio</a>
+        </li>
+    </ul>
+{% endblock %}

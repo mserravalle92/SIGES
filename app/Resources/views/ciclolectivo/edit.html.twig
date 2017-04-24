@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}
+{% endblock %}
+
+{% block content %}
+ <ul>
+        <li>
+            <a href="{{ path('ciclolectivo_index') }}">Volver</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        <br><br>
+    </ul>
+    <div class="col-md-8 col-md-offset-2">
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Editor de Ciclo Lectivo</h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body" >
+
+    {{ form_start(edit_form) }}
+
+        <div class="form-group col-md-8 col-md-offset-2">
+        <label class="control-label">Año: </label>
+          {{ form_widget(edit_form.anio, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'int', }}) }}
+        </div>
+         <div class="form-group col-md-8 col-md-offset-2 ">
+        <label class="control-label">Comienzo de Ciclo: </label>
+          {{ form_widget(edit_form.fechaInicio, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'date', }}) }}
+        </div>
+         <div class="form-group col-md-8 col-md-offset-2">
+        <label class="control-label">Cierre de Ciclo: </label>
+          {{ form_widget(edit_form.fechaFin, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'date', }}) }}
+        </div>
+         <div class="form-group col-md-8 col-md-offset-2">
+        <label class="control-label">Comienzo de Vacaciones: </label>
+          {{ form_widget(edit_form.fechaInicioVacaciones, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'date', }}) }}
+        </div>
+         <div class="form-group col-md-8 col-md-offset-2">
+        <label class="control-label">Final de Vacaciones: </label>
+          {{ form_widget(edit_form.fechaFinVacaciones, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'date', }}) }}
+        </div>
+        <div class="col-md-4">
+        <input class="btn-primary" type="submit" value="Editar" />
+        </div>
+    {{ form_end(edit_form) }}
+
+   
+
+
+    </div>
+
+  </div>
+  </div>
+{% endblock %}

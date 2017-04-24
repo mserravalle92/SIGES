@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Alumnoexaman creation</h1>
+
+    <div class="box box-primary">
+        <form class="form-horizontal">
+            <div class="box box-body">
+                {{ form_label(form.nota) }}
+                {{ form_widget(form.nota, {'attr':{'class':'form-control' }}) }}
+                {{ form_errors(form.nota)}}
+
+                {{ form_label(form.observaciones) }}
+                {{ form_widget(form.observaciones, {'attr':{'class':'form-control' }}) }}
+                {{ form_errors(form.observaciones)}}
+            </div>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('alumnoexamen_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

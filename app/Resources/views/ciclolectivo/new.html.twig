@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <ul>
+        <li>
+            <a href="{{ path('ciclolectivo_index') }}">Volver</a>
+        </li>
+    </ul>
+
+<div class="col-md-6 col-md-offset-3">
+
+  <div class="box box-succes">
+    <div class="box-header with-border">
+      <h3 class="box-title">Crear nuevo Ciclo Lectivo</h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body" >
+
+      {{ form_start(form, {'action': path('ciclolectivo_new'), 'method': 'POST'}) }}
+
+        <div class="form-group ">
+        <label class="control-label">Año: </label>
+          {{ form_widget(form.anio, {'attr': {'class': 'form-control', 'placeholder': 'Año del Ciclo Lectivo', 'type' : 'int', }}) }}
+        </div>
+        
+         <div class="form-group ">
+         <label class="control-label">Comienzo de Ciclo: </label>
+          {{ form_widget(form.fechaInicio, {'attr': {'class': 'form-control', 'placeholder': 'dd-mm-YY', 'type' : 'date'}}) }}
+        </div>
+        <div class="form-group ">
+        <label class="control-label">Cierre de Ciclo: </label>
+          {{ form_widget(form.fechaFin, {'attr': {'class': 'form-control', 'placeholder': 'dd-mm-YY', 'type' : 'date'}}) }}
+        </div>
+        <div class="form-group ">
+          <label class="control-label">Comienzo de Vacaciones: </label>
+          {{ form_widget(form.fechaInicioVacaciones, {'attr': {'class': 'form-control',  'type' : 'date', 'placeholder': 'dd-mm-YY'}}) }}
+        </div>
+        <div class="form-group ">
+        <label class="control-label">Final de vacaciones</label>
+          {{ form_widget(form.fechaFinVacaciones, {'attr': {'class': 'form-control', 'placeholder': 'dd-mm-YY', 'type' : 'date'}}) }}
+        </div>
+        
+        
+        <input class="btn-primary" type="submit" value="Create" />
+    {{ form_end(form) }}
+    <br>
+
+    </div>
+
+  </div>
+  </div>
+
+
+    
+{% endblock %}

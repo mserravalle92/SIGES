@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Alumnoexaman</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nota</th>
+                <td>{{ alumnoExaman.nota }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ alumnoExaman.observaciones }}</td>
+            </tr>
+            <tr>
+                <th>Tiponota</th>
+                <td>{{ alumnoExaman.tipoNota }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('alumnoexamen_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('alumnoexamen_edit', { 'id': alumnoExaman.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

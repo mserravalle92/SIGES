@@ -150,7 +150,7 @@ class Alumno
     /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Curso", inversedBy="alumnos")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
      */
     private $curso;
 

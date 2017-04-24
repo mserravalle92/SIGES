@@ -86,7 +86,7 @@ class PersonalDocente
 
     /**
      * @ORM\OneToOne(targetEntity="AuthBundle\Entity\User", inversedBy="personalDocente")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      * */
 
     private $usuario;

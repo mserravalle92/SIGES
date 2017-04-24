@@ -1,0 +1,28 @@
+th{
+	vertical-align: middle !important;
+	text-align: center;
+	 border: 1px solid black !important; 
+}
+.table-bordered{
+	  border: 1px solid black !important; 
+}
+
+
+
+td{
+	    border: 1px solid black !important; 
+	    text-align: center;
+	    padding: 5px !important;
+	 
+
+}
+
+#opc2{
+	margin-left: 10px;
+}
+
+/*
+thead{
+	border-bottom: 1px double;
+
+}*/
