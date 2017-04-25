@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+<<<<<<< HEAD
     <h1>Alumnos list</h1>
 
     <table>
@@ -25,6 +26,37 @@
                 <th>Fechamodificacion</th>
                 <th>Fechabaja</th>
                 <th>Actions</th>
+=======
+    
+    <a href="{{ path('alumno_new') }}"><button type="button" class="btn btn-primary btn-sm">Crear nuevo</button></a>
+
+    <table>    
+        <thead>
+            <tr>
+                <div class="row">
+                    <div class="col-sm-17"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">                           
+                    </div>
+                </div>
+                <th><P ALIGN=center>Id</p></th>
+                <th><P ALIGN=center>Nombre</p></th>
+                <th><P ALIGN=center>Apellido</p></th>
+                <th><P ALIGN=center>Dni</p></th>
+                <th><P ALIGN=center>Legajo</p></th>
+                <th><P ALIGN=center>Fechanacimiento</p></th>
+                <th><P ALIGN=center>Localidad</p></th>
+                <th><P ALIGN=center>Nacionalidad</p></th>
+                <th><P ALIGN=center>Direccion</p></th>
+                <th><P ALIGN=center>Mail</p></th>
+                <th><P ALIGN=center>Telefono</p></th>
+                <th><P ALIGN=center>Obrasocial</p></th>
+                <th><P ALIGN=center>Fichamedica</p></th>
+                <th><P ALIGN=center>Sexo</p></th>
+                <th><P ALIGN=center>Usuario</p></th>
+                <th><P ALIGN=center>Fechaalta</p></th>
+                <th><P ALIGN=center>Fechamodificacion</p></th>
+                <th><P ALIGN=center>Fechabaja</p></th>
+                <th><P ALIGN=center>Actions</p></th>
+>>>>>>> c3aed1956330474c52ee503e84b5f5c7e86a07ce
             </tr>
         </thead>
         <tbody>
@@ -49,6 +81,7 @@
                 <td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
+<<<<<<< HEAD
                     <ul>
                         <li>
                             <a href="{{ path('alumno_show', { 'id': alumno.id }) }}">show</a>
@@ -57,15 +90,32 @@
                             <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">edit</a>
                         </li>
                     </ul>
+=======
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-flat">Acción</button>
+                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Mostrar</a></li>
+                    <li><a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">Editar</a></li>
+                  </ul>
+                </div>
+>>>>>>> c3aed1956330474c52ee503e84b5f5c7e86a07ce
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+<<<<<<< HEAD
     <ul>
         <li>
             <a href="{{ path('alumno_new') }}">Create a new alumno</a>
         </li>
     </ul>
+=======
+    
+>>>>>>> c3aed1956330474c52ee503e84b5f5c7e86a07ce
 {% endblock %}

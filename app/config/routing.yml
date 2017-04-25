@@ -1,5 +1,9 @@
 application_alumno:
+<<<<<<< HEAD
     resource: "@ApplicationBundle/Controller/AlumnoController.php"
+=======
+    resource: "@ApplicationBundle/Controller/alumnoController.php"
+>>>>>>> c3aed1956330474c52ee503e84b5f5c7e86a07ce
     type:     annotation
 
 application_personal_docente:
