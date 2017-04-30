@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Alumno controller.
- *
+ * 
  * @Route("alumno")
  */
 class AlumnoController extends Controller
