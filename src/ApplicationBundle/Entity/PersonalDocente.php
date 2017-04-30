@@ -80,7 +80,7 @@ class PersonalDocente
 	/**
      * @var int
      *
-     * @ORM\Column(name="sexo", type="integer")
+     * @ORM\Column(name="sexo", type="integer", nullable=true)
      */
     private $sexo;
 
@@ -122,8 +122,8 @@ class PersonalDocente
 
 
 	public function __construct(){
-		$this->$fechaAlta = new \DateTime();
-		$this->$fechaModificacion = new \DateTime();
+		$this->fechaAlta = new \DateTime();
+		$this->fechaModificacion = new \DateTime();
         $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
 
 	}

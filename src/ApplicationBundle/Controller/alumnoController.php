@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Alumno controller.
- * 
+ *
  * @Route("alumno")
  */
 class AlumnoController extends Controller
@@ -40,7 +40,7 @@ class AlumnoController extends Controller
     public function newAction(Request $request)
     {
         $alumno = new Alumno();
-        $form = $this->createForm('ApplicationBundle\Form\alumnoType', $alumno);
+        $form = $this->createForm('ApplicationBundle\Form\AlumnoType', $alumno);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AlumnoController extends Controller
      * @Route("/{id}", name="alumno_show")
      * @Method("GET")
      */
-    public function showAction(alumno $alumno)
+    public function showAction(Alumno $alumno)
     {
         $deleteForm = $this->createDeleteForm($alumno);
 
@@ -79,10 +79,10 @@ class AlumnoController extends Controller
      * @Route("/{id}/edit", name="alumno_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, alumno $alumno)
+    public function editAction(Request $request, Alumno $alumno)
     {
         $deleteForm = $this->createDeleteForm($alumno);
-        $editForm = $this->createForm('ApplicationBundle\Form\alumnoType', $alumno);
+        $editForm = $this->createForm('ApplicationBundle\Form\AlumnoType', $alumno);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -104,7 +104,7 @@ class AlumnoController extends Controller
      * @Route("/{id}", name="alumno_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, alumno $alumno)
+    public function deleteAction(Request $request, Alumno $alumno)
     {
         $form = $this->createDeleteForm($alumno);
         $form->handleRequest($request);
@@ -121,11 +121,11 @@ class AlumnoController extends Controller
     /**
      * Creates a form to delete a alumno entity.
      *
-     * @param alumno $alumno The alumno entity
+     * @param Alumno $alumno The alumno entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(alumno $alumno)
+    private function createDeleteForm(Alumno $alumno)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('alumno_delete', array('id' => $alumno->getId())))
