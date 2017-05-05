@@ -2,7 +2,8 @@
 
 namespace ApplicationBundle\Controller;
 
-use ApplicationBundle\Entity\alumno;
+use ApplicationBundle\Entity\Alumno;
+use ApplicationBundle\Entity\Tutor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("alumno")
  */
-class alumnoController extends Controller
+class AlumnoController extends Controller
 {
     /**
      * Lists all alumno entities.
@@ -24,7 +25,7 @@ class alumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alumnos = $em->getRepository('ApplicationBundle:alumno')->findAll();
+        $alumnos = $em->getRepository('ApplicationBundle:Alumno')->findAll();
 
         return $this->render('alumno/index.html.twig', array(
             'alumnos' => $alumnos,
@@ -40,7 +41,7 @@ class alumnoController extends Controller
     public function newAction(Request $request)
     {
         $alumno = new Alumno();
-        $form = $this->createForm('ApplicationBundle\Form\alumnoType', $alumno);
+        $form = $this->createForm('ApplicationBundle\Form\AlumnoType', $alumno);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +64,7 @@ class alumnoController extends Controller
      * @Route("/{id}", name="alumno_show")
      * @Method("GET")
      */
-    public function showAction(alumno $alumno)
+    public function showAction(Alumno $alumno)
     {
         $deleteForm = $this->createDeleteForm($alumno);
 
@@ -79,10 +80,10 @@ class alumnoController extends Controller
      * @Route("/{id}/edit", name="alumno_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, alumno $alumno)
+    public function editAction(Request $request, Alumno $alumno)
     {
         $deleteForm = $this->createDeleteForm($alumno);
-        $editForm = $this->createForm('ApplicationBundle\Form\alumnoType', $alumno);
+        $editForm = $this->createForm('ApplicationBundle\Form\AlumnoType', $alumno);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -104,7 +105,7 @@ class alumnoController extends Controller
      * @Route("/{id}", name="alumno_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, alumno $alumno)
+    public function deleteAction(Request $request, Alumno $alumno)
     {
         $form = $this->createDeleteForm($alumno);
         $form->handleRequest($request);
@@ -121,11 +122,11 @@ class alumnoController extends Controller
     /**
      * Creates a form to delete a alumno entity.
      *
-     * @param alumno $alumno The alumno entity
+     * @param Alumno $alumno The alumno entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(alumno $alumno)
+    private function createDeleteForm(Alumno $alumno)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('alumno_delete', array('id' => $alumno->getId())))
@@ -133,4 +134,75 @@ class alumnoController extends Controller
             ->getForm()
         ;
     }
+
+     /**
+      * Finds and displays a alumno entity.
+      *
+      * @Route("/{id}/agregar", name="alumno_agregar")
+      * @Method("GET")
+      */ 
+    public function agregarAction(Alumno $alumno)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+          $tutores = $alumno->getTutores();
+        
+        $db = $em -> getConnection();
+
+        /* $query = "select * from alumnos_tutores where alumno_id =" . $alumno->getId(); 
+        $stmt = $db -> prepare($query);
+        $params = array();
+        $stmt -> execute($params);
+        $tutoresAsignados = $stmt -> fetchAll(); */
+
+
+        return $this->render('alumno/agregarTutor.html.twig', array(
+            'alumno' => $alumno,
+            'tutores' => $tutores,
+ 
+        ));
+    }
+
+   /**
+     * Finds and displays a alumno entity.
+     *
+     * @Route("/{id}/agregar", name="alumno_agregarTutor")
+     * @Method("GET")
+     */
+    public function agregarTutorAction(Alumno $alumno)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $db = $em -> getConnection();
+
+        $query = "insert into alumnos_tutores set alumno_id =" . $alumno->getId() . " where tutor_id =" . $idTutor; 
+        $stmt = $db -> prepare($query);
+        $params = array();
+        $stmt -> execute($params);
+
+        $response = $this -> forward('ApplicationBundle:Alumno:agregar' , array('alumno' => $alumno,));
+        return $response;
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/{opc}/{id2}", name="alumno_deshacer")
+     * @Method("GET")
+     */
+    public function deshacerAction(Alumno $alumno, $id2, $opc)
+    {
+         if($opc == 'true'){
+            $em = $this->getDoctrine()->getManager();
+            $db = $em -> getConnection();
+            $query = "update alumnos_tutores set alumno.id = NULL where tutor.id =" . $id2; 
+            $stmt = $db -> prepare($query);
+            $params = array();
+            $stmt -> execute($params);
+        };
+
+        $response = $this -> forward('ApplicationBundle:Alumno:agregar' , array('alumno' => $alumno,));
+        return $response;
+    }
+
 }
