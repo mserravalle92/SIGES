@@ -1,3 +1,11 @@
+application_archivo:
+    resource: "@ApplicationBundle/Controller/ArchivoController.php"
+    type:     annotation
+
+application_biblioteca_alumno:
+    resource: "@ApplicationBundle/Controller/BibliotecaAlumnoController.php"
+    type:     annotation
+
 application_alumno:
     resource: "@ApplicationBundle/Controller/alumnoController.php"
     type:     annotation

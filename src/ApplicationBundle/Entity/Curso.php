@@ -22,7 +22,7 @@ class Curso
      */
     private $id;
 
- 
+
 
     /**
      * @var string
@@ -84,6 +84,12 @@ class Curso
      * @ORM\JoinColumn(name="ciclolectivo", referencedColumnName="id")
      */
     private $ciclolectivo;
+
+    /**
+     * Un Curso puede tener muchas Bibliotecas
+     * @ORM\OneToMany(targetEntity="BibliotecaAlumno", mappedBy="curso")
+     */
+    private $bibliotecasAlumnos;
 
 
     /**
@@ -338,4 +344,38 @@ class Curso
     }
 
 
+
+    /**
+     * Add bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     *
+     * @return Curso
+     */
+    public function addBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos[] = $bibliotecasAlumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     */
+    public function removeBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos->removeElement($bibliotecasAlumno);
+    }
+
+    /**
+     * Get bibliotecasAlumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBibliotecasAlumnos()
+    {
+        return $this->bibliotecasAlumnos;
+    }
 }

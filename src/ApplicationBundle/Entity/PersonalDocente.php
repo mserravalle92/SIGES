@@ -120,6 +120,12 @@ class PersonalDocente
      */
      private $materias;
 
+     /**
+      * un profesor puede crear muchas bibliotecas
+      * @ORM\OneToMany(targetEntity="BibliotecaAlumno", mappedBy="personalDocente")
+      */
+     private $bibliotecasAlumnos;
+
 
 	public function __construct(){
 		$this->$fechaAlta = new \DateTime();
@@ -127,6 +133,7 @@ class PersonalDocente
         $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
 
 	}
+
 
 
     /**
@@ -485,5 +492,39 @@ class PersonalDocente
     public function getMaterias()
     {
         return $this->materias;
+    }
+
+    /**
+     * Add bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     *
+     * @return PersonalDocente
+     */
+    public function addBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos[] = $bibliotecasAlumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     */
+    public function removeBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos->removeElement($bibliotecasAlumno);
+    }
+
+    /**
+     * Get bibliotecasAlumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBibliotecasAlumnos()
+    {
+        return $this->bibliotecasAlumnos;
     }
 }
