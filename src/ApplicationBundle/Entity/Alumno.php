@@ -596,7 +596,7 @@ class Alumno
      *
      * @param \ApplicationBundle\Entity\Tutor $tutore
      */
-    public function removeTutore(\ApplicationBundle\Entity\Tutor $tutore)
+    public function removeTutore(\ApplicationBundle\Entity\Tutor $tutore = null)
     {
         $this->tutores->removeElement($tutore);
     }
