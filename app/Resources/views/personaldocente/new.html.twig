@@ -1,16 +1,95 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block content %}
     <h1>Personaldocente creation</h1>
+=======
+{% block pageTitle %}
+	Personal docente
+{% endblock %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+{% block titulo_chico %}
+	Creación
+{% endblock %}
 
-    <ul>
-        <li>
-            <a href="{{ path('personaldocente_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block js %}
+	<script>
+		function confirmCreate(){
+			return confirm("¿Estás seguro que deseas crear este docente?");
+		}
+		$('#createSubmit').on('click',function(){
+			console.log('called');
+			$('#form').submit();
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+>>>>>>> f5b407c0858715f05073bc0959af4dc74fe7adee
+
+    <section class="content">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Datos del docente</h3>
+					</div><!-- /.box-header -->
+					<div class="box-body no-padding">
+						{{ form_start(form, {'attr': {'id':'form','onsubmit':'return confirmCreate();'}}) }}
+							{{form_errors(form)}}
+							<table class="table table-condensed"><tbody>
+								<tr>
+									<th>Nombre</th>
+									<td>{{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Apellido</th>
+									<td>{{ form_widget(form.apellido, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Dni</th>
+									<td>{{ form_widget(form.dni, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Matricula</th>
+									<td>{{ form_widget(form.matricula, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Direccion</th>
+									<td>{{ form_widget(form.direccion, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Localidad</th>
+									<td>{{ form_widget(form.localidad, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Nacionalidad</th>
+									<td>{{ form_widget(form.nacionalidad, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+								<tr>
+									<th>Fecha de nacimiento</th>
+									<!--<td>{% if personalDocente.fechaNacimiento %}{{ personalDocente.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>-->
+									<td>{{ form_widget(form.fechaNacimiento, {'attr': {'class': 'form-control'}}) }}</td>
+								</tr>
+							</tbody></table>
+						{{ form_end(form) }}
+					</div><!-- /.box-body -->
+				</div><!-- /.box -->
+			</div><!-- /.col -->
+			<div class="col-md-3"></div>
+		</div><!-- /.row -->
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<center>
+					<a href="{{ path('personaldocente_index') }}"><button class="btn btn-primary">Volver</button></a>
+					&nbsp;&nbsp;
+					<button class="btn btn-primary" id='createSubmit'/>Crear</button>
+				</center>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</section>
+
 {% endblock %}
