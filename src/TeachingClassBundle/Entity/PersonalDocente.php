@@ -108,8 +108,8 @@ class PersonalDocente
     private $fechaBaja;
 
     /**
-     * Muchos docentes pueden dar muchas materias
-     * @ORM\ManyToMany(targetEntity="Materia", mappedBy="docentes")
+     *
+     * @ORM\OneToMany(targetEntity="Materia", mappedBy="profesor")
      */
     private $materias;
 
@@ -121,9 +121,13 @@ class PersonalDocente
     private $hashId;
 
 	public function __construct(){
-		$this->$fechaAlta = new \DateTime();
-		$this->$fechaModificacion = new \DateTime();
+		$this->fechaAlta = new \DateTime();
+		$this->fechaModificacion = new \DateTime();
 	}
+
+  public function __toString(){
+    return $this->nombre." ".$this->apellido;
+  }
 
 
     /**

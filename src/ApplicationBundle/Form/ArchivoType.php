@@ -6,14 +6,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AlumnoType extends AbstractType
+
+class ArchivoType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('apellido')->add('dni')->add('legajo')->add('fechaNacimiento')->add('localidad')->add('nacionalidad')->add('direccion')->add('mail')->add('telefono')->add('obraSocial')->add('fichaMedica')->add('sexo')->add('usuario')->add('fechaAlta')->add('fechaModificacion')->add('fechaBaja')->add('tutores')->add('curso');
+        $builder->add('descripcion')->add('observaciones')->add('bibliotecaAlumno');
     }
     
     /**
@@ -22,7 +23,8 @@ class AlumnoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ApplicationBundle\Entity\Alumno'
+
+            'data_class' => 'ApplicationBundle\Entity\Archivo'
         ));
     }
 
@@ -31,7 +33,7 @@ class AlumnoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'applicationbundle_alumno';
+        return 'applicationbundle_archivo';
     }
 
 

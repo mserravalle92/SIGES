@@ -31,9 +31,9 @@ class Materia
 
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="profesor", type="integer")
+     * @ORM\ManyToOne(targetEntity="PersonalDocente", inversedBy="materias")
+     * @ORM\JoinColumn(name="profesor_id", referencedColumnName="id")
      */
     private $profesor;
 
@@ -78,12 +78,7 @@ class Materia
      */
     private $clasesDidacticas;
 
-    /**
-    * Muchas materias pueden tener muchos docentes
-    * @ORM\ManyToMany(targetEntity="PersonalDocente", inversedBy="materias")
-    * @ORM\JoinTable(name="materia_docente")
-    */
-    private $docentes;
+
 
 
     /**

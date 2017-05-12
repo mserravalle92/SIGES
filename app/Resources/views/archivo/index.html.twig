@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Archivos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Observaciones</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for archivo in archivos %}
+            <tr>
+                <td><a href="{{ path('archivo_show', { 'id': archivo.id }) }}">{{ archivo.id }}</a></td>
+                <td>{{ archivo.descripcion }}</td>
+                <td>{{ archivo.observaciones }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('archivo_show', { 'id': archivo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('archivo_edit', { 'id': archivo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('archivo_new') }}">Create a new archivo</a>
+        </li>
+    </ul>
+{% endblock %}

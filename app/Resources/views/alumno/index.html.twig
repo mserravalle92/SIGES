@@ -1,71 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Alumnos list</h1>
+<h1>Alumnos</h1>
 
-    <table>
+<a href="{{ path('alumno_new') }}"><button type="button" class="btn btn-primary btn-sm">Crear nuevo</button></a>
+
+    <table>    
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Dni</th>
-                <th>Legajo</th>
-                <th>Fechanacimiento</th>
-                <th>Localidad</th>
-                <th>Nacionalidad</th>
-                <th>Direccion</th>
-                <th>Mail</th>
-                <th>Telefono</th>
-                <th>Obrasocial</th>
-                <th>Fichamedica</th>
-                <th>Sexo</th>
-                <th>Usuario</th>
-                <th>Fechaalta</th>
-                <th>Fechamodificacion</th>
-                <th>Fechabaja</th>
-                <th>Actions</th>
+                <div class="row">
+                    <div class="col-sm-17"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">                           
+                    </div>
+                </div>
+                <th><P ALIGN=center>Legajo</p></th>
+                <th><P ALIGN=center>Nombre</p></th>
+                <th><P ALIGN=center>Apellido</p></th>
+                <th><P ALIGN=center>Dni</p></th>
+                <th><P ALIGN=center>Fecha Nac</p></th>
+                <th><P ALIGN=center>Nacionalidad</p></th>                    
+                <th><P ALIGN=center>Direccion</p></th>
+                <th><P ALIGN=center>Mail</p></th>
+                <th><P ALIGN=center>Tel</p></th>
+                <th><P ALIGN=center>Acciones</p></th>
             </tr>
         </thead>
         <tbody>
         {% for alumno in alumnos %}
             <tr>
-                <td><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">{{ alumno.id }}</a></td>
+                {#<td>{{ alumno.id }}</td>#}
+                <td>{{ alumno.legajo }}</td>
                 <td>{{ alumno.nombre }}</td>
                 <td>{{ alumno.apellido }}</td>
                 <td>{{ alumno.dni }}</td>
-                <td>{{ alumno.legajo }}</td>
                 <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ alumno.localidad }}</td>
-                <td>{{ alumno.nacionalidad }}</td>
+                {#<td>{{ alumno.nacionalidad }}</td>#}
                 <td>{{ alumno.direccion }}</td>
                 <td>{{ alumno.mail }}</td>
                 <td>{{ alumno.telefono }}</td>
-                <td>{{ alumno.obraSocial }}</td>
-                <td>{{ alumno.fichaMedica }}</td>
-                <td>{{ alumno.sexo }}</td>
-                <td>{{ alumno.usuario }}</td>
-                <td>{% if alumno.fechaAlta %}{{ alumno.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {#<td>{{ alumno.obraSocial }}</td>#}
+                {#<td>{{ alumno.fichaMedica }}</td>#}
+                {#<td>{{ alumno.sexo }}</td>#}
+                {#<td>{{ alumno.usuario }}</td>#}
+                {#<td>{% if alumno.fechaAlta %}{{ alumno.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                {#<td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>#}
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('alumno_show', { 'id': alumno.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-flat">Acción</button>
+                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Mostrar</a></li>
+                    <li><a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">Editar</a></li>
+                  </ul>
+                </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('alumno_new') }}">Create a new alumno</a>
-        </li>
-    </ul>
 {% endblock %}
