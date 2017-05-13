@@ -20,7 +20,6 @@
         </div>
       </div>
       <div class="box-body" >
-
        {% for cicloLectivo in ultimoCiclo %}
                {% if cicloLectivo.anio %}<h2>{{cicloLectivo["anio"] }}</h2>{% endif %}
                {% if cicloLectivo.fechaInicio %}<b>Comienzo: </b>{{cicloLectivo["fechaInicio"]|date('d-m-Y') }}{% endif %}
@@ -57,9 +56,7 @@
         </div>
       </div>
       <div class="box-body" >
-      
-    </div>
-             <table id="listaCiclosLectivos" class="table table-bordered table-striped table-condensed" id="listaCursosPrimarios" width="100%" style="margin-bottom: 2em;" >
+        <table id="listaCiclosLectivos" class="table table-bordered table-striped table-condensed" id="listaCursosPrimarios" width="100%" style="margin-bottom: 2em;" >
         <thead>
             <tr>
                 <th>Año</th>
@@ -111,6 +108,8 @@
                 {% endfor %}
                 </tbody>
             </table>
+    </div>
+             
 
       </div>
 

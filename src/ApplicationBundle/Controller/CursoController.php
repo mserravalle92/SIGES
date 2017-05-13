@@ -2,6 +2,7 @@
 
 namespace ApplicationBundle\Controller;
 
+use ApplicationBundle\Entity\CicloLectivo;
 use ApplicationBundle\Entity\Curso;
 use ApplicationBundle\Entity\Materia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -138,7 +139,7 @@ class CursoController extends Controller
     }
 
      /**
-¿+     * Finds and displays a curso entity.
+     * Finds and displays a curso entity.
      *
      * @Route("/{id}/agregar", name="curso_agregar")
      * @Method("GET")
@@ -256,6 +257,64 @@ class CursoController extends Controller
 
         $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
         return $response;
+    }
+
+    /**
+     *
+     *
+     * @Route("auto-generar/{id}", name="curso_autogenerar")
+     * @Method("GET")
+     */
+
+    
+    public function autogenerarAction(CicloLectivo $cicloLectivo)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        $nuevoCicloLectivo = $cicloLectivo;
+        $cicloLectivoActivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
+        $cursosAnteriores = $cicloLectivoActivo->getCursos();
+
+
+        foreach ($cursosAnteriores as $cursoAnterior) {
+
+            $curso = New Curso();
+            $curso->setTurno($cursoAnterior->getTurno());
+            $curso->setAnio($cursoAnterior->getAnio());
+            $curso->setSeccion($cursoAnterior->getSeccion());
+            $curso->setCicloLectivo($nuevoCicloLectivo);
+            $em->persist($curso);
+            $em->flush();
+            foreach ($cursoAnterior->getMaterias() as $materia){
+                $materiaNueva = new Materia();
+                $materiaNueva->setNombre($materia->getNombre());
+                $materiaNueva->setCurso($curso);
+                $em->persist($materiaNueva);
+                $em->flush();
+                $curso->addMateria($materiaNueva);   
+            }
+            $em->persist($curso);
+            $em->flush();
+            
+            //die(dump($curso));
+            
+
+            /*$materiasDeCurso = $curso->getMaterias();
+            foreach ($materiasDeCurso as $m){
+                $m->setCurso($curso);
+                $em->flush();
+                $curso->addMateria($materiaNueva);
+            }*/
+
+        }
+        
+        #$cursosNuevoCiclo = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($nuevoCicloLectivo);
+
+        $response = $this -> forward('ApplicationBundle:CicloLectivo:show' , array('cicloLectivo'=> $nuevoCicloLectivo,));
+        return $response;
+            #'cursosNuevoCiclo' => $cursosNuevoCiclo,
+            
     }
 
 
