@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Materium controller.
  *
- * @Route("materia")
+ * @Route("materias")
  */
 class MateriaController extends Controller
 {

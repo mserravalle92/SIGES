@@ -155,8 +155,8 @@ class Alumno
     private $curso;
 
 	public function __construct(){
-		$this->$fechaAlta = new \DateTime();
-		$this->$fechaModificacion = new \DateTime();
+		$this->fechaAlta = new \DateTime();
+		$this->fechaModificacion = new \DateTime();
 	}
 
     /**
@@ -596,7 +596,7 @@ class Alumno
      *
      * @param \ApplicationBundle\Entity\Tutor $tutore
      */
-    public function removeTutore(\ApplicationBundle\Entity\Tutor $tutore)
+    public function removeTutore(\ApplicationBundle\Entity\Tutor $tutore = null)
     {
         $this->tutores->removeElement($tutore);
     }

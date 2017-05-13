@@ -197,9 +197,9 @@ class CursoController extends Controller
         $stmt -> execute($params);
 
 
-/** $materia = $em->getRepository('ApplicationBundle:Materia')->find($idMateria);
+    /** $materia = $em->getRepository('ApplicationBundle:Materia')->find($idMateria);
         $materia -> setCurso($curso->getId());
-        */
+    */
 
         $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
         return $response;

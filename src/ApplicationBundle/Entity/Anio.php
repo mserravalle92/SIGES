@@ -273,7 +273,7 @@ class Anio
         return $this->curso;
     }
     public function __toString(){
-        
-        return (string)$this->numero . ' - '. $this->nivel;
+
+        return (string)$this->numero . '° año de '. $this->nivel;
     }
 }

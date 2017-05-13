@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block js %}
+	<script src="{{asset('bundles/application/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+	
+	<script>
+	$("#personalDocente").DataTable({"ordering": true});
+	</script>
+{% endblock %}
+
+{% block css %}
+	<link href="{{asset('bundles/application/plugins/datatables/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block pageTitle %}
+	Personal docente
+{% endblock %}
+
+{% block titulo_chico %}
+	Listado
+{% endblock %}
+
+{% block content %}
+
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Personal docente</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+							<div class="row">
+								<div class="col-sm-6"></div>
+								<div class="col-sm-6"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<table id="personalDocente" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>Id</th>
+												<th>Nombre</th>
+												<th>Apellido</th>
+												<th>DNI</th>
+												<th>Matricula</th>
+												<th>Fecha alta</th>
+											</tr>
+										</thead>
+										<tbody>
+										{% for personalDocente in personalDocentes %}
+											<tr>
+												<td><a href="{{ path('personaldocente_show', { 'id': personalDocente.id }) }}">{{ personalDocente.id }}</a></td>
+												<td>{{ personalDocente.nombre }}</td>
+												<td>{{ personalDocente.apellido }}</td>
+												<td>{{ personalDocente.dni }}</td>
+												<td>{{ personalDocente.matricula }}</td>
+												<td>{% if personalDocente.fechaAlta %}{{ personalDocente.fechaAlta|date('d/m/Y H:i') }}{% endif %}</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<center>
+					<a href="{{ path('personaldocente_new') }}"><button class="btn btn-primary">Crear nuevo</button></a>
+				</center>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

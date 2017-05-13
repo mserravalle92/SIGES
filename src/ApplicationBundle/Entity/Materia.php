@@ -63,6 +63,13 @@ class Materia
      */
     private $fechaModificacion;
 
+    /**
+     * Una Materia puede tener muchas Bibliotecas
+     * @ORM\OneToMany(targetEntity="BibliotecaAlumno", mappedBy="materia")
+     */
+
+     private $bibliotecasAlumnos;
+
 
     /**
      * Get id
@@ -283,5 +290,39 @@ class Materia
     public function getDocentes()
     {
         return $this->docentes;
+    }
+
+    /**
+     * Add bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     *
+     * @return Materia
+     */
+    public function addBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos[] = $bibliotecasAlumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     */
+    public function removeBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos->removeElement($bibliotecasAlumno);
+    }
+
+    /**
+     * Get bibliotecasAlumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBibliotecasAlumnos()
+    {
+        return $this->bibliotecasAlumnos;
     }
 }

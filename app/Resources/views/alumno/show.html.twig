@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    
+<div class="box">
+<div class="box-header with-border"><h3 class="box-title">Datos del alumno</h3></div>
+<div class="box-body">
+<td>
+    <a href="{{ path('alumno_index') }}">
+        <button type="button" class="btn btn-default">Volver</button>
+    </a>
+    
+    <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">
+        <button type="button" class="btn btn-default">Editar</button>
+    </a>
+    <a href="{{ path('alumno_agregar', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Mostrar tutores del alumno</button>
+    </a>
+</td>
+
+ <table class="table table-bordered">
+    <tbody>
+        <tr>
+              <th style="width: 170px"></th>
+              <th></th>
+            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ alumno.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ alumno.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Apellido</th>
+            <td>{{ alumno.apellido }}</td>
+        </tr>
+        <tr>
+            <th>Dni</th>
+            <td>{{ alumno.dni }}</td>
+        </tr>
+        <tr>
+            <th>Legajo</th>
+            <td>{{ alumno.legajo }}</td>
+        </tr>
+        <tr>
+            <th>Fechanacimiento</th>
+            <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Localidad</th>
+            <td>{{ alumno.localidad }}</td>
+        </tr>
+        <tr>
+            <th>Nacionalidad</th>
+            <td>{{ alumno.nacionalidad }}</td>
+        </tr>
+        <tr>
+            <th>Direccion</th>
+            <td>{{ alumno.direccion }}</td>
+        </tr>
+        <tr>
+            <th>Mail</th>
+            <td>{{ alumno.mail }}</td>
+        </tr>
+        <tr>
+            <th>Telefono</th>
+            <td>{{ alumno.telefono }}</td>
+        </tr>
+        <tr>
+            <th>Obrasocial</th>
+            <td>{{ alumno.obraSocial }}</td>
+        </tr>
+        <tr>
+            <th>Fichamedica</th>
+            <td>{{ alumno.fichaMedica }}</td>
+        </tr>
+        <tr>
+            <th>Sexo</th>
+            <td>{{ alumno.sexo }}</td>
+        </tr>
+        <tr>
+            <th>Usuario</th>
+            <td>{{ alumno.usuario }}</td>
+        </tr>
+        <tr>
+            <th>Fechaalta</th>
+            <td>{% if alumno.fechaAlta %}{{ alumno.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Fechamodificacion</th>
+            <td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Fechabaja</th>
+            <td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+</table>
+
+<td>
+    
+    <a href="{{ path('alumno_index') }}">
+        <button type="button" class="btn btn-default">Volver</button>
+    </a>
+    
+    <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">
+        <button type="button" class="btn btn-default">Editar</button>
+    </a>
+    <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Ver/agregar tutores</button>
+    </a>    
+
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Eliminar">
+    {{ form_end(delete_form) }}
+
+</td>
+
+{% endblock %}

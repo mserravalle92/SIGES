@@ -50,6 +50,19 @@ class Respuesta
      */
     private $sesion;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="anonimo", type="string", nullable=true)
+     */
+
+     /**
+      *
+      * @ORM\ManyToOne(targetEntity="Anonimo", inversedBy="respuestas")
+      * @ORM\JoinColumn(name="anonimo_id", referencedColumnName="id", nullable=true)
+      */
+    private $anonimo;
+
 
     /**
      * Get id
@@ -179,5 +192,29 @@ class Respuesta
     public function getSesion()
     {
         return $this->sesion;
+    }
+
+    /**
+     * Set anonimo
+     *
+     * @param \TeachingClassBundle\Entity\Anonimo $anonimo
+     *
+     * @return Respuesta
+     */
+    public function setAnonimo(\TeachingClassBundle\Entity\Anonimo $anonimo = null)
+    {
+        $this->anonimo = $anonimo;
+
+        return $this;
+    }
+
+    /**
+     * Get anonimo
+     *
+     * @return \TeachingClassBundle\Entity\Anonimo
+     */
+    public function getAnonimo()
+    {
+        return $this->anonimo;
     }
 }
