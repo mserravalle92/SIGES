@@ -80,13 +80,13 @@ class PersonalDocente
 	/**
      * @var int
      *
-     * @ORM\Column(name="sexo", type="integer")
+     * @ORM\Column(name="sexo", type="integer", nullable=true)
      */
     private $sexo;
 
     /**
      * @ORM\OneToOne(targetEntity="AuthBundle\Entity\User", inversedBy="personalDocente")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      * */
 
     private $usuario;
@@ -120,13 +120,20 @@ class PersonalDocente
      */
      private $materias;
 
+     /**
+      * un profesor puede crear muchas bibliotecas
+      * @ORM\OneToMany(targetEntity="BibliotecaAlumno", mappedBy="personalDocente")
+      */
+     private $bibliotecasAlumnos;
+
 
 	public function __construct(){
-		$this->$fechaAlta = new \DateTime();
-		$this->$fechaModificacion = new \DateTime();
+		$this->fechaAlta = new \DateTime();
+		$this->fechaModificacion = new \DateTime();
         $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
 
 	}
+
 
 
     /**
@@ -485,5 +492,39 @@ class PersonalDocente
     public function getMaterias()
     {
         return $this->materias;
+    }
+
+    /**
+     * Add bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     *
+     * @return PersonalDocente
+     */
+    public function addBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos[] = $bibliotecasAlumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove bibliotecasAlumno
+     *
+     * @param \ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno
+     */
+    public function removeBibliotecasAlumno(\ApplicationBundle\Entity\BibliotecaAlumno $bibliotecasAlumno)
+    {
+        $this->bibliotecasAlumnos->removeElement($bibliotecasAlumno);
+    }
+
+    /**
+     * Get bibliotecasAlumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBibliotecasAlumnos()
+    {
+        return $this->bibliotecasAlumnos;
     }
 }

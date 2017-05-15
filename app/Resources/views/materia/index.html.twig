@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block content %}
     <h1>Materias list</h1>
 
     <table>
@@ -29,6 +29,9 @@
                         </li>
                         <li>
                             <a href="{{ path('materia_edit', { 'id': materium.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('biblioteca_new', { 'id': materium.id }) }}">biblioteca virtual</a>
                         </li>
                     </ul>
                 </td>
