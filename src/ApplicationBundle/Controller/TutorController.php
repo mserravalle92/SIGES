@@ -3,6 +3,7 @@
 namespace ApplicationBundle\Controller;
 
 use ApplicationBundle\Entity\Tutor;
+use ApplicationBundle\Entity\Alumno;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +35,7 @@ class TutorController extends Controller
     /**
      * Creates a new tutor entity.
      *
-     * @Route("/new", name="tutor_new")
+     * @Route("/newAction", name="tutor_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -132,5 +133,36 @@ class TutorController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+     /**
+     * Creates a new tutor entity.
+     *
+     * @Route("/new/{id}", name="tutor_newAlumnoTutor")
+     * @Method({"GET", "POST"})
+     */
+    public function newAlumnoTutorAction(Request $request, Alumno $alumno)
+    {
+        $tutor = new Tutor();
+        $form = $this->createForm('ApplicationBundle\Form\TutorType', $tutor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $alumno->addTutore($tutor);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tutor);
+            $em->persist($alumno);
+
+            $em->flush();
+            
+            return $this->redirectToRoute('tutor_show', array('id' => $tutor->getId()));
+        }
+
+        return $this->render('tutor/new.html.twig', array(
+            'tutor' => $tutor,
+            'form' => $form->createView(),
+        ));
     }
 }

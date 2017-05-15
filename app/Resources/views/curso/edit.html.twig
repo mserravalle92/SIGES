@@ -2,13 +2,14 @@
 
 
 {% block content %}
- <ul>
+
+  <ul>
         <li>
-            <a href="{{ path('curso_index') }}">Volver</a>
+            <a href="{{ path('curso_index') }}">Volver a Lista de Ciclos Lectivos</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn-danger" type="submit" value="Borrar Curso">
+                <input class="btn-danger" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>

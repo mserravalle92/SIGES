@@ -84,6 +84,13 @@ class CicloLectivo
     private $cursos;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean")
+     */
+    private $activo = false;
+
+    /**
      * Get id
      *
      * @return int
@@ -327,5 +334,29 @@ class CicloLectivo
 
     public function __toString(){
         return (string)$this->anio;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     *
+     * @return CicloLectivo
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean
+     */
+    public function getActivo()
+    {
+        return $this->activo;
     }
 }
