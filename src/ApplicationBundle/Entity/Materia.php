@@ -36,6 +36,12 @@ class Materia
     private $curso;
 
     /**
+     * Un materia esta en muchos Examenes
+     * @ORM\OneToMany(targetEntity="Examen", mappedBy="materias")
+     */
+    private $examenes;
+
+    /**
      * Many Materias have Many PersonalDocentes.
      * @ORM\ManyToMany(targetEntity="PersonalDocente", mappedBy="materias")
      * @ORM\JoinTable(name="Profesor_Materia")

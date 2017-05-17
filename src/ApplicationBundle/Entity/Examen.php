@@ -70,7 +70,19 @@ class Examen
      */
     private $fechaBaja;
 
+    /**
+     * muchos examenes tienen un curso.
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="examenes")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     */
+    private $curso;
 
+    /**
+     * muchos examenes tienen una materia.
+     * @ORM\ManyToOne(targetEntity="Materia", inversedBy="examenes")
+     * @ORM\JoinColumn(name="materia_id", referencedColumnName="id", nullable=true)
+     */
+    private $materia;
 
     public function __construct(){
         $this->fechaAlta = new \DateTime();
