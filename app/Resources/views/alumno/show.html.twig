@@ -13,7 +13,7 @@
     <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">
         <button type="button" class="btn btn-default">Editar</button>
     </a>
-    <a href="{{ path('alumno_agregar', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Agregar Tutor</button>
+    <a href="{{ path('alumno_agregar', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Mostrar tutores del alumno</button>
     </a>
 </td>
 
@@ -26,10 +26,11 @@
         <tr>
             <th>Id</th>
             <td>{{ alumno.id }}</td>
+
         </tr>
         <tr>
             <th>Nombre</th>
-            <td>{{ alumno.nombre }}</td>
+            <td>{% if alumno.nombre %}Yes{% else %}No{% endif %}</td>
         </tr>
         <tr>
             <th>Apellido</th>
@@ -108,7 +109,7 @@
     <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">
         <button type="button" class="btn btn-default">Editar</button>
     </a>
-    <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Agregar Tutor</button>
+    <a href="{{ path('alumno_edit', { 'id': alumno.id }) }}"><button type="button" class="btn btn-primary btn-sm">Ver/agregar tutores</button>
     </a>    
 
     {{ form_start(delete_form) }}

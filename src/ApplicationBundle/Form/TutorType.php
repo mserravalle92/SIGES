@@ -13,7 +13,7 @@ class TutorType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('apellido')->add('dni')->add('direccion')->add('localidad')->add('nacionalidad')->add('fechaNacimiento')->add('telefono')->add('mail')->add('ocupacion')->add('sexo')->add('usuario')->add('fechaAlta')->add('fechaModificacion')->add('fechaBaja')/**->add('alumnos')**/;
+        $builder->add('nombre')->add('apellido')->add('dni')->add('direccion')->add('localidad')->add('nacionalidad')->add('fechaNacimiento')->add('telefono')->add('mail')->add('ocupacion')->add('sexo')->add('usuario')/**->add('alumnos')**/;
     }
     
     /**
