@@ -17,7 +17,7 @@
                 <th><P ALIGN=center>Nombre</p></th>
                 <th><P ALIGN=center>Apellido</p></th>
                 <th><P ALIGN=center>Dni</p></th>
-                <th><P ALIGN=center>Fecha Nac</p></th>
+                <th><P ALIGN=center>Fecha Nacimiento</p></th>
                 <th><P ALIGN=center>Nacionalidad</p></th>                    
                 <th><P ALIGN=center>Direccion</p></th>
                 <th><P ALIGN=center>Mail</p></th>
@@ -33,7 +33,7 @@
                 <td>{{ alumno.nombre }}</td>
                 <td>{{ alumno.apellido }}</td>
                 <td>{{ alumno.dni }}</td>
-                <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ alumno.localidad }}</td>
                 {#<td>{{ alumno.nacionalidad }}</td>#}
                 <td>{{ alumno.direccion }}</td>
