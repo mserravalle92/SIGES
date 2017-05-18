@@ -187,7 +187,7 @@ class CursoController extends Controller
      */
     public function agregarMateriaAction(Curso $curso, $idMateria)
     {
-        
+       
         $em = $this->getDoctrine()->getManager();
         $db = $em -> getConnection();
 
@@ -195,6 +195,10 @@ class CursoController extends Controller
         $stmt = $db -> prepare($query);
         $params = array();
         $stmt -> execute($params);
+
+      /**  $m= $em->getRepository('ApplicationBundle:Materia')->findById($idMateria); 
+
+        die(dump($m));*/
 
 
     /** $materia = $em->getRepository('ApplicationBundle:Materia')->find($idMateria);
