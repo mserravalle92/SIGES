@@ -1,6 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block js %}
+
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+            $('#example2').DataTable();
+        });
+    </script>
+    
+{% endblock %}
+
 {% block content %}
+    
+
+    <h1>Tutores</h1>
     
     <a href="{{ path('tutor_new') }}"><button type="button" class="btn btn-primary btn-sm">Crear nuevo</button></a>
     <a href="{{ path('alumno_index') }}"><button type="button" class="btn btn-primary btn-sm">Ir a Alumnos</button></a>

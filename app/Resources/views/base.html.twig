@@ -18,6 +18,8 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('bundles/application/dist/css/skins/_all-skins.min.css')}}">
 
+  <link rel="stylesheet" href="{{asset('bundles/application/plugins/datatables/jquery.dataTables.min.css')}}">
+
   {% block css %}
 
   {% endblock %}
@@ -620,6 +622,8 @@
 <script src="{{asset('bundles/application/dist/js/app.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('bundles/application/dist/js/demo.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('bundles/application/plugins/datatables/jquery.dataTables.js')}}"></script>
 
 {% block js %}
 
