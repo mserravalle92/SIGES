@@ -1,65 +1,103 @@
 {% extends 'base.html.twig' %}
 
+{% block js %}
+
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+            $('#example2').DataTable();
+        });
+    </script>
+    
+{% endblock %}
+
 {% block content %}
 <h1>Alumnos</h1>
 
 <a href="{{ path('alumno_new') }}"><button type="button" class="btn btn-primary btn-sm">Crear nuevo</button></a>
+<a href="{{ path('tutor_index') }}"><button type="button" class="btn btn-primary btn-sm">Ir a tutores</button></a>
 
-    <table>    
-        <thead>
-            <tr>
+    <div class="col-xs-13">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Listado de Alumnos</h3>
+            </div>
+            <div class="box-body">
+              <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
-                    <div class="col-sm-17"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">                           
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-7">
                     </div>
                 </div>
-                <th><P ALIGN=center>Legajo</p></th>
-                <th><P ALIGN=center>Nombre</p></th>
-                <th><P ALIGN=center>Apellido</p></th>
-                <th><P ALIGN=center>Dni</p></th>
-                <th><P ALIGN=center>Fecha Nac</p></th>
-                <th><P ALIGN=center>Nacionalidad</p></th>                    
-                <th><P ALIGN=center>Direccion</p></th>
-                <th><P ALIGN=center>Mail</p></th>
-                <th><P ALIGN=center>Tel</p></th>
-                <th><P ALIGN=center>Acciones</p></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for alumno in alumnos %}
-            <tr>
-                {#<td>{{ alumno.id }}</td>#}
-                <td>{{ alumno.legajo }}</td>
-                <td>{{ alumno.nombre }}</td>
-                <td>{{ alumno.apellido }}</td>
-                <td>{{ alumno.dni }}</td>
-                <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ alumno.localidad }}</td>
-                {#<td>{{ alumno.nacionalidad }}</td>#}
-                <td>{{ alumno.direccion }}</td>
-                <td>{{ alumno.mail }}</td>
-                <td>{{ alumno.telefono }}</td>
-                {#<td>{{ alumno.obraSocial }}</td>#}
-                {#<td>{{ alumno.fichaMedica }}</td>#}
-                {#<td>{{ alumno.sexo }}</td>#}
-                {#<td>{{ alumno.usuario }}</td>#}
-                {#<td>{% if alumno.fechaAlta %}{{ alumno.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if alumno.fechaModificacion %}{{ alumno.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                {#<td>{% if alumno.fechaBaja %}{{ alumno.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                <td>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-flat">Acción</button>
-                  <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Mostrar</a></li>
-                    <li><a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">Editar</a></li>
-                  </ul>
-                </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+                <div class="row">
+                    <div class="col-sm-12">
+            <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Nombre: activate to sort column ascending">
+                            Legajo               
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Nombre: activate to sort column ascending">
+                            Nombre               
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Apellido: activate to sort column ascending">
+                            Apellido
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="DNI: activate to sort column ascending">
+                            DNI
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Direccion: activate to sort column ascending">
+                            Direccion
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Localidad: activate to sort column ascending">
+                            Localidad
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Telefono: activate to sort column ascending">
+                            Telefono
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Mail: activate to sort column ascending">
+                            Mail
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Acciones: activate to sort column ascending">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for alumno in alumnos %}
+                <tr role="row" class="odd">
+                    <td>{{ alumno.legajo }}</td>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.apellido }}</td>
+                    <td>{{ alumno.dni }}</td>
+                    <td>{{ alumno.direccion }}</td>
+                    <td>{{ alumno.localidad }}</td>
+                    <td>{{ alumno.telefono }}</td>
+                    <td>{{ alumno.mail }}</td>
+                    <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-default btn-flat">Mas</button>
+                          <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Mostrar</a></li>
+                            <li><a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">Editar</a></li>
+                            <li><a href="{{ path('tutor_newAlumnoTutor', { 'id': alumno.id  }) }}">Agregar tutor</a></li>  
+                          </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}   
+                </tbody>
+            </table>
+          </div>
+      </div>
+      
+>>>>>>> 9cc23b8dc422bd2b4b352e9acd0abcbf7d4f2f47
 {% endblock %}
+
+    

@@ -52,7 +52,7 @@ class Alumno
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaNacimiento", type="datetime")
+     * @ORM\Column(name="fechaNacimiento", type="date")
      */
     private $fechaNacimiento;
 

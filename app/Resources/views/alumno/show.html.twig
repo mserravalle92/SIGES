@@ -26,10 +26,11 @@
         <tr>
             <th>Id</th>
             <td>{{ alumno.id }}</td>
+
         </tr>
         <tr>
             <th>Nombre</th>
-            <td>{{ alumno.nombre }}</td>
+            <td>{% if alumno.nombre %}Yes{% else %}No{% endif %}</td>
         </tr>
         <tr>
             <th>Apellido</th>
@@ -45,7 +46,7 @@
         </tr>
         <tr>
             <th>Fechanacimiento</th>
-            <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d ') }}{% endif %}</td>
         </tr>
         <tr>
             <th>Localidad</th>
