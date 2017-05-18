@@ -2,12 +2,7 @@
 
 {% block js %}
 
-    <script type="text/javascript">
-        
-        $(document).ready(function() {
-            $('#example2').DataTable();
-        });
-    </script>
+    <script src="{{asset('bundles/application/dist/js/dataTableScript.js')}}"></script>
     
 {% endblock %}
 
