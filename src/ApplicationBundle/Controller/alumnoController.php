@@ -3,6 +3,7 @@
 namespace ApplicationBundle\Controller;
 
 use ApplicationBundle\Entity\Alumno;
+use ApplicationBundle\Entity\Tutor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -133,4 +134,26 @@ class AlumnoController extends Controller
             ->getForm()
         ;
     }
+
+     /**
+      * Finds and displays a alumno entity.
+      *
+      * @Route("/{id}/agregar", name="alumno_agregar")
+      * @Method("GET")
+      */ 
+    public function agregarAction(Alumno $alumno)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tutores = $alumno->getTutores();
+        
+        $db = $em -> getConnection();
+
+        return $this->render('alumno/agregarTutor.html.twig', array(
+            'alumno' => $alumno,
+            'tutores' => $tutores,
+ 
+        ));
+    }
+
 }
