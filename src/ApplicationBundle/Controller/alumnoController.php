@@ -31,6 +31,7 @@ class AlumnoController extends Controller
             'alumnos' => $alumnos,
         ));
     }
+    
 
     /**
      * Creates a new alumno entity.
