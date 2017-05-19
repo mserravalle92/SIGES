@@ -44,10 +44,10 @@ class BibliotecaAlumno
     private $curso;
 
     /**
-     * Una Biblioteca puede tener muchos Archivos
-     * @ORM\OneToMany(targetEntity="BibliotecaAlumno", mappedBy="materia")
+     * Una Biblioteca puede tener muchos Posts
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="biblioteca")
      */
-    private $archivos;
+    private $posts;
 
 
     /**
@@ -257,5 +257,39 @@ class BibliotecaAlumno
     public function removeArchivo(\ApplicationBundle\Entity\BibliotecaAlumno $archivo)
     {
         $this->archivos->removeElement($archivo);
+    }
+
+    /**
+     * Add post
+     *
+     * @param \ApplicationBundle\Entity\Post $post
+     *
+     * @return BibliotecaAlumno
+     */
+    public function addPost(\ApplicationBundle\Entity\Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \ApplicationBundle\Entity\Post $post
+     */
+    public function removePost(\ApplicationBundle\Entity\Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

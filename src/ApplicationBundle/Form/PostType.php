@@ -5,20 +5,15 @@ namespace ApplicationBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class ArchivoType extends AbstractType
+class PostType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-        ->add('descripcion')
-        ->add('observaciones')
-        ->add('adjunto', FileType::class, array('label' => 'Adjunto'))
-        ->add('post');
+        $builder->add('titulo')->add('texto')->add('archivos')->add('fechaCarga')->add('estado')->add('biblioteca');
     }
     
     /**
@@ -27,7 +22,7 @@ class ArchivoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ApplicationBundle\Entity\Archivo'
+            'data_class' => 'ApplicationBundle\Entity\Post'
         ));
     }
 
@@ -36,7 +31,7 @@ class ArchivoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'applicationbundle_archivo';
+        return 'applicationbundle_post';
     }
 
 

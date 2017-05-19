@@ -12,7 +12,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-
+    archivos_directory: '%kernel.root_dir%/../web/uploads/archivos'
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
