@@ -1,6 +1,9 @@
+
 var visible= false;
 
 $(document).ready(function(){
+
+	/** VISTA INDEX CICLO**/
 	$('#listaCiclosLectivos').hide();
 	$('#opcionListarCiclos').click(function(){
 		if(visible){
@@ -12,6 +15,17 @@ $(document).ready(function(){
 			visible = true;
 
 		}
+		});
 
-	});
+/** VISTA AGREGAR DE CURSO**/
+	
+	$('#listadoDeAlumnos').hide();
+	$('#opcionAlumnos').click(function(){
+			$('#listadoDeMaterias').hide();
+			$('#listadoDeAlumnos').show();
+		});
+	$('#opcionMaterias').click(function(){
+			$('#listadoDeAlumnos').hide();
+			$('#listadoDeMaterias').show();
+		});
 })

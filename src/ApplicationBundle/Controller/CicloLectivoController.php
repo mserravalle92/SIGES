@@ -28,7 +28,7 @@ class CicloLectivoController extends Controller
 
           $db = $em -> getConnection();
 
-        $query = "select * from cicloLectivo where anio = (select max(anio) from cicloLectivo) limit 1;";
+        $query = "select * from cicloLectivo where activo = 1;";
         
         $stmt = $db -> prepare($query);
         
@@ -152,5 +152,40 @@ class CicloLectivoController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     *  a cicloLectivo entity.
+     *
+     * @Route("/{id}/{activo}", name="ciclolectivo_activar")
+     *
+     */
+    public function activarAction(CicloLectivo $cicloLectivo, $activo)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ciclosActivos = $em->getRepository('ApplicationBundle:CicloLectivo')->findByActivo(true);
+        if ($activo == 'activar') {
+            if (count($ciclosActivos) == 0){
+               //$cicloLectivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findBy($cicloLectivo);
+               $cicloLectivo->setActivo(1);
+               $em->persist($cicloLectivo);
+                $em->flush();
+            }
+            else{ 
+                return $this->redirectToRoute('ciclolectivo_index');
+            }
+        }
+
+        if ($activo == 'desactivar'){
+            //print_r($cicloLectivo);
+            //$cicloLectivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneBy($cicloLectivo);
+            $cicloLectivo->setActivo(0);
+
+            $em->persist($cicloLectivo);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('ciclolectivo_show', array('id' => $cicloLectivo->getId()));
+     
     }
 }

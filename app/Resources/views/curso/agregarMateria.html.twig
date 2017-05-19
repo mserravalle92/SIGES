@@ -58,7 +58,7 @@
               <tbody>
             {% for materia in materiasAsignadas %}
                 <tr>
-                  <td style="padding: 5px;">{% if materia.id %}{{ materia["nombre"]}}{% endif %}</td>
+                  <td style="padding: 5px;">{% if materia.id %}{{ materia["Nombre"]}}{% endif %}</td>
                   <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': materia.id, 'opc': 'false' }) }}">deshacer</a> </td>
                 </tr>
             {% endfor %}
@@ -96,6 +96,10 @@
         <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button>
       </div>
+    </div>
+    <div class="form-1-2">
+      <label for="caja_busqueda">Buscar:</label>
+      <input type="text" name="caja_busqueda" id="caja_busqueda"></input>
     </div>
     <div class="box-body" >
 
