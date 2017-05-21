@@ -1,41 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Examan</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ examan.id }}</td>
+                <td>{{ examen.id }}</td>
             </tr>
             <tr>
                 <th>Contenido</th>
-                <td>{{ examan.contenido }}</td>
+                <td>{{ examen.contenido }}</td>
             </tr>
             <tr>
                 <th>Horariodiamateria</th>
-                <td>{{ examan.horarioDiaMateria }}</td>
-            </tr>
-            <tr>
-                <th>Tipo</th>
-                <td>{{ examan.tipo }}</td>
+                <td>{{ examen.horarioDiaMateria }}</td>
             </tr>
             <tr>
                 <th>Promediable</th>
-                <td>{% if examan.promediable %}Yes{% else %}No{% endif %}</td>
+                <td>{% if examen.promediable %}Yes{% else %}No{% endif %}</td>
             </tr>
             <tr>
                 <th>Fechaalta</th>
-                <td>{% if examan.fechaAlta %}{{ examan.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examen.fechaAlta %}{{ examen.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Fechamodificacion</th>
-                <td>{% if examan.fechaModificacion %}{{ examan.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examen.fechaModificacion %}{{ examen.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Fechabaja</th>
-                <td>{% if examan.fechaBaja %}{{ examan.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if examen.fechaBaja %}{{ examen.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
@@ -45,7 +40,7 @@
             <a href="{{ path('examen_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('examen_edit', { 'id': examan.id }) }}">Edit</a>
+            <a href="{{ path('examen_edit', { 'id': examen.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

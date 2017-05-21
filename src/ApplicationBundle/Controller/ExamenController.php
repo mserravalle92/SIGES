@@ -3,9 +3,14 @@
 namespace ApplicationBundle\Controller;
 
 use ApplicationBundle\Entity\Examen;
+use ApplicationBundle\Entity\Curso;
+use ApplicationBundle\Entity\Materia;
+use ApplicationBundle\Entity\TipoNota;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  * Examen controller.
@@ -39,21 +44,61 @@ class ExamenController extends Controller
      */
     public function newAction(Request $request)
     {
-        $examen = new Examen();
-        $form = $this->createForm('ApplicationBundle\Form\ExamenType', $examen);
-        $form->handleRequest($request);
+        $materias = [];
+        $tipoNota = [];
+        $idCurso = 0;
+        $idMateria = 0;
+        $em = $this->getDoctrine()->getManager();        
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($examen);
-            $em->flush();
+        /* Si es get recien entra, devuelvo solo lista de cursos */
+        if ($request->getMethod() == 'POST') {            
+            $idCurso = $request->get("idCurso");     
+            $idMateria = $request->get("idMateria");
+            $idTipoNota = $request->get("idTipoNota");
+            dump($idTipoNota);
 
-            return $this->redirectToRoute('examen_show', array('id' => $examen->getId()));
+            /* Si no seleccionó tipo de nota */
+            if (empty($idTipoNota)) {
+                dump("fase anterior");
+                /* Si es el primer caso no trae materia, devuelvo una lista para que elija */
+                if (empty($idMateria)) {
+                    $materias = $em->getRepository('ApplicationBundle:Materia')->findByCurso($idCurso);
+                }
+                /* Si ya selecciono materia queda el paso final, le devuelvo una lista de tipo de notas disponibles */
+                else {
+                    $tipoNota = $em->getRepository('ApplicationBundle:TipoNota')->findAll(); 
+                }
+            }
+            /* Si seleccionó tipo de nota, ya finalizó, guardo examen  */
+            else {
+                /* Guardo el examen */
+                $examen = new Examen();
+                $curso = $em->getRepository('ApplicationBundle:Curso')->findById($idCurso)[0];
+                $materia = $em->getRepository('ApplicationBundle:Materia')->findById($idMateria)[0];
+                $tipoNota = $em->getRepository('ApplicationBundle:TipoNota')->findById($idTipoNota)[0];
+
+                $examen->setContenido($request->get("contenido"));
+                $examen->setHorarioDiaMateria($request->get("horarioDiaMateria"));
+                $examen->setPromediable($request->get("promediable"));
+                $examen->setCurso($curso);
+                $examen->setMateria($materia);
+                $examen->setTipoNota($tipoNota);
+                $em->persist($examen);
+                $em->flush();
+
+                return $this->redirectToRoute('examen_show', array('id' => $examen->getId()));
+            }
         }
 
+        $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
+        
         return $this->render('examen/new.html.twig', array(
-            'examen' => $examen,
-            'form' => $form->createView(),
+            'cursos' => $cursos,
+            'idCurso' => $idCurso,
+            'materias' => $materias,
+            'idMateria' => $idMateria,            
+            'tipoNotas' => $tipoNota,
+
         ));
     }
 
@@ -62,7 +107,7 @@ class ExamenController extends Controller
      *
      * @Route("/{id}", name="examen_show")
      * @Method("GET")
-     */
+     */ 
     public function showAction(Examen $examen)
     {
         $deleteForm = $this->createDeleteForm($examen);
@@ -133,4 +178,24 @@ class ExamenController extends Controller
             ->getForm()
         ;
     }
-}
+     /**
+     * 
+     *
+     * @Route("/examentMateria", name="examen_materia")
+     * @Method({"GET", "POST"})
+     */
+    public function step2(Request $request)
+    {
+       return new Response('<html> <body> hola mundo'.$request->get('idMateria').'  </body></html>');
+    } 
+    /**
+     * 
+     *
+     * @Route("/materiaCurso", name="materia_curso")
+     * @Method({"GET", "POST"})
+     */
+    public function step3(Request $request)
+    {
+       return new Response('<html> <body> hola mundo'.$request->get('idMateria').'  </body></html>');
+    } 
+} 

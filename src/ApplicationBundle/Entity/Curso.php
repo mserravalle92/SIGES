@@ -98,6 +98,7 @@ class Curso
      */
     private $examenes;
 
+ 
     
     /**
      * Get id
