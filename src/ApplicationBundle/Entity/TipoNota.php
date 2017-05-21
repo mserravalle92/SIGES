@@ -56,10 +56,29 @@ class TipoNota
      */
     private $fechaBaja;
 
+     /**
+     * Un tipoNota esta en muchos Examenes
+     * @ORM\OneToMany(targetEntity="Examen", mappedBy="tipoNota")
+     */
+    private $examenes;
+
+
  
     public function __construct(){
-        $this->$fechaAlta = new \DateTime();
-        $this->$fechaModificacion = new \DateTime();
+        $this->fechaAlta = new \DateTime();
+        $this->fechaModificacion = new \DateTime();
+    }
+
+    /**
+     * Set id
+     *
+     * @return TipoNota
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

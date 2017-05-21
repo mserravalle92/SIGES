@@ -36,6 +36,12 @@ class Materia
     private $curso;
 
     /**
+     * Un materia esta en muchos Examenes
+     * @ORM\OneToMany(targetEntity="Examen", mappedBy="materias")
+     */
+    private $examenes;
+
+    /**
      * Many Materias have Many PersonalDocentes.
      * @ORM\ManyToMany(targetEntity="PersonalDocente", mappedBy="materias")
      * @ORM\JoinTable(name="Profesor_Materia")
@@ -70,6 +76,17 @@ class Materia
 
      private $bibliotecasAlumnos;
 
+/**
+     * Set id
+     *
+     * @return Materia
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
