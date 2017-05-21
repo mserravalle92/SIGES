@@ -78,9 +78,9 @@
                             <span class="sr-only">Toggle Dropdown</span>
                           </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Mostrar</a></li>
+                            <li><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">Ver</a></li>
                             <li><a href="{{ path('alumno_edit', { 'id': alumno.id }) }}">Editar</a></li>
-                            <li><a href="{{ path('tutor_newAlumnoTutor', { 'id': alumno.id  }) }}">Agregar tutor</a></li>  
+                            <li><a href="{{ path('alumno_agregar', { 'id': alumno.id }) }}">Tutores del alumno</a></li>
                           </ul>
                         </div>
                     </td>

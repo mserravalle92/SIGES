@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Alumno creation</h1>
+    <h1>Creacion de nuevo Alumno</h1>
 
     {{ form_start(form) }}
         <div class="row">
@@ -32,15 +32,12 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <div class="form-group col-md-4">
               {{ form_widget(form.localidad, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Localidad'}}) }}
               <span class="help-block">{{ form_errors(form.localidad) }}</span>
             </div>
         </div>
-
 
         <div class="row">
             <div class="form-group col-md-4">
@@ -49,14 +46,12 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="form-group col-md-4">
               {{ form_widget(form.direccion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Dirección'}}) }}
               <span class="help-block">{{ form_errors(form.direccion) }}</span>
             </div>
         </div>
-
 
         <div class="row">
             <div class="form-group col-md-4">
@@ -73,14 +68,12 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="form-group col-md-4">
               {{ form_widget(form.obraSocial, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Obra Social'}}) }}
               <span class="help-block">{{ form_errors(form.obraSocial) }}</span>
             </div>
         </div>
-
 
         <div class="row">
             <div class="form-group col-md-4">

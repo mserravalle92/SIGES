@@ -1,21 +1,104 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Tutor edit</h1>
+    
+    <h1>Edicion de Tutor</h1>
 
     {{ form_start(edit_form) }}
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Nombre</label>
+          {{ form_widget(edit_form.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Nombre'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.nombre) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Apellido</label>
+          {{ form_widget(edit_form.apellido, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Apellido'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.apellido) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">DNI</label>
+          {{ form_widget(edit_form.dni, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese DNI'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.apellido) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Direccion</label>
+          {{ form_widget(edit_form.direccion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Dirección'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.direccion) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Localidad</label>
+          {{ form_widget(edit_form.localidad, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Localidad'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.localidad) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Nacionalidad</label>
+          {{ form_widget(edit_form.nacionalidad, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Nacionalidad'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.nacionalidad) }}</span>
+        </div>
+    </div>
+     <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Mail</label>
+          {{ form_widget(edit_form.mail, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Mail'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.mail) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Telefono</label>
+          {{ form_widget(edit_form.telefono, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Telefono'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.telefono) }}</span>
+        </div>
+    </div>
+     <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Ocupacion</label>
+          {{ form_widget(edit_form.ocupacion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Ocupación'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.ocupacion) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Sexo</label>
+          {{ form_widget(edit_form.sexo, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Sexo'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.sexo) }}</span>
+        </div>
+    </div>
+     <div class="row">
+        <div class="form-group col-md-4">
+            <label for="f">Usuario</label>
+          {{ form_widget(edit_form.usuario, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Usuario'}}) }}
+          <span class="help-block">{{ form_errors(edit_form.usuario) }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+          {{ form_widget(edit_form.fechaNacimiento, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+          <span class="help-block">{{ form_errors(edit_form.fechaNacimiento) }}</span>
+        </div>
+    </div>
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('tutor_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+    <td>
+        <a href="{{ path('alumno_index') }}">
+            <button type="button" class="btn btn-default">Volver</button>
+        </a>
+    </td>
 {% endblock %}
