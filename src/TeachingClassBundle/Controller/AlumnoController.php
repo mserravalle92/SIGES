@@ -84,71 +84,14 @@ class AlumnoController extends Controller
         return $this->render('TeachingClassBundle:alumno:acceso.html.twig',['anonimo'=>$anonimo]);
     }
 
+
     /**
-    * @ApiDoc(
-     *   section="Pregunta",
-     *   description = "Busca y devuelve la pregunta actual enviada y sus opciones. También verifica si el alumno ya respondió",
-      *
-     *   parameters={
-     *      {"name"="idClase", "dataType"="integer", "required"=true, "description"="Id de la Clase"},
-     *      {"name"="anonimo", "dataType"="integer", "required"=true, "description"="Id de la sesión anónima del alumno"},
-     *   },
-       *  output={"class"="TeachingClassBundle\Entity\Pregunta",
-       *     "name"="Pregunta",
-       *     "groups"={"sesion"}
-       *
-       *
-  *
-  *   })
      * Lists all alumno entities.
      *
-     * @Route("/buscar/pregunta", name="buscar_preguntas")
+     * @Route("/proceso/respuestas", name="proceso_respuestas")
      * @Method("POST")
      */
-
-    public function buscarPreguntasAction(Request $request)
-    {
-      $em = $this->getDoctrine()->getManager('claseDidactica');
-
-      $clase = $request->get('idClase');
-
-      $sesion = $this->buscarUltimaSesion($clase);
-
-      $pregunta = $sesion->getPregunta();
-
-      $respuestas = $em->getRepository('TeachingClassBundle:Respuesta')->findBy(['pregunta'=>$pregunta,'sesion'=>$sesion]);
-
-      $anonimo = $em->getRepository('TeachingClassBundle:Anonimo')->findOneById($request->get('anonimo'));
-
-      $opciones = $this->obtenerOpcionesPregunta($pregunta);
-
-
-      if ($this->verificarSiRespondio($respuestas,$anonimo,$sesion)) {
-        $arregloDatos = [];
-      }else{
-        $arregloDatos = [
-                          'pregunta' => ['id'=>$pregunta->getId(), 'pregunta'=>$pregunta->getPregunta(), 'tipo' => $pregunta->getTipoPregunta()->getId()],
-                          'opciones' => $opciones,
-                        ];
-      }
-
-
-
-      $response = new Response(json_encode(json_encode($arregloDatos)));
-      $response->headers->set('Content-Type', 'application/json');
-
-      return $response;
-
-    }
-
-/*
-     * Lists all alumno entities.
-     *
-     * @Route("/procesar", name="procesar_respuestas")
-     * @Method({"POST","GET"})
-     */
-
-     public function procesarRespuestasAction(Request $request)
+     public function procesoRespuestasAction(Request $request)
      {
 
        $em = $this->getDoctrine()->getManager('claseDidactica');
@@ -210,6 +153,70 @@ class AlumnoController extends Controller
 
      }
 
+
+
+
+
+
+    /**
+    * @ApiDoc(
+     *   section="Pregunta",
+     *   description = "Busca y devuelve la pregunta actual enviada y sus opciones. También verifica si el alumno ya respondió",
+      *
+     *   parameters={
+     *      {"name"="idClase", "dataType"="integer", "required"=true, "description"="Id de la Clase"},
+     *      {"name"="anonimo", "dataType"="integer", "required"=true, "description"="Id de la sesión anónima del alumno"},
+     *   },
+       *  output={"class"="TeachingClassBundle\Entity\Pregunta",
+       *     "name"="Pregunta",
+       *     "groups"={"sesion"}
+       *
+       *
+  *
+  *   })
+     * Lists all alumno entities.
+     *
+     * @Route("/buscar/pregunta", name="buscar_preguntas")
+     * @Method("POST")
+     */
+
+    public function buscarPreguntasAction(Request $request)
+    {
+      $em = $this->getDoctrine()->getManager('claseDidactica');
+
+      $clase = $request->get('idClase');
+
+      $sesion = $this->buscarUltimaSesion($clase);
+
+      $pregunta = $sesion->getPregunta();
+
+      $respuestas = $em->getRepository('TeachingClassBundle:Respuesta')->findBy(['pregunta'=>$pregunta,'sesion'=>$sesion]);
+
+      $anonimo = $em->getRepository('TeachingClassBundle:Anonimo')->findOneById($request->get('anonimo'));
+
+      $opciones = $this->obtenerOpcionesPregunta($pregunta);
+
+
+      if ($this->verificarSiRespondio($respuestas,$anonimo,$sesion)) {
+        $arregloDatos = [];
+      }else{
+        $arregloDatos = [
+                          'pregunta' => ['id'=>$pregunta->getId(), 'pregunta'=>$pregunta->getPregunta(), 'tipo' => $pregunta->getTipoPregunta()->getId()],
+                          'opciones' => $opciones,
+                        ];
+      }
+
+
+
+      $response = new Response(json_encode(json_encode($arregloDatos)));
+      $response->headers->set('Content-Type', 'application/json');
+
+      return $response;
+
+    }
+
+    
+
      /**
      * @ApiDoc(
       *   section="Respuesta",
@@ -229,7 +236,7 @@ class AlumnoController extends Controller
    *   })
       * Lists all alumno entities.
       *
-      * @Route("/procesar/respuesta", name="procesar_respuestas")
+      * @Route("/procesar/respuesta", name="procesar_respuestas_api")
       * @Method({"POST","GET"})
       */
 

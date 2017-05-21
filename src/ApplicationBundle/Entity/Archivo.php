@@ -3,6 +3,8 @@
 namespace ApplicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Archivo
@@ -36,11 +38,19 @@ class Archivo
     private $observaciones;
 
     /**
-     * Muchos Archivos pertenecen a una Biblioteca
-     * @ORM\ManyToOne(targetEntity="BibliotecaAlumno", inversedBy="archivos")
-     * @ORM\JoinColumn(name="bibliotecaAlumno_id", referencedColumnName="id")
+     * Muchos Archivos pertenecen a un Post
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="archivos")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
-    private $bibliotecaAlumno;
+    private $post;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * 
+     * @Assert\File(mimeTypes={ "application/pdf","image/jpeg","image/png","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/xls","application/octet-stream","application/vnd.oasis.opendocument.text" })
+     */
+    private $adjunto;
 
 
     /**
@@ -101,27 +111,52 @@ class Archivo
         return $this->observaciones;
     }
 
+
     /**
-     * Set bibliotecaAlumno
+     * Set post
      *
-     * @param integer $bibliotecaAlumno
+     * @param \ApplicationBundle\Entity\Post $post
      *
      * @return Archivo
      */
-    public function setBibliotecaAlumno($bibliotecaAlumno)
+    public function setPost(\ApplicationBundle\Entity\Post $post = null)
     {
-        $this->bibliotecaAlumno = $bibliotecaAlumno;
+        $this->post = $post;
 
         return $this;
     }
 
     /**
-     * Get bibliotecaAlumno
+     * Get post
      *
-     * @return int
+     * @return \ApplicationBundle\Entity\Post
      */
-    public function getBibliotecaAlumno()
+    public function getPost()
     {
-        return $this->bibliotecaAlumno;
+        return $this->post;
+    }
+
+    /**
+     * Set adjunto
+     *
+     * @param string $adjunto
+     *
+     * @return Archivo
+     */
+    public function setAdjunto($adjunto)
+    {
+        $this->adjunto = $adjunto;
+
+        return $this;
+    }
+
+    /**
+     * Get adjunto
+     *
+     * @return string
+     */
+    public function getAdjunto()
+    {
+        return $this->adjunto;
     }
 }

@@ -26,11 +26,19 @@ class BibliotecaAlumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $bibliotecaAlumnos = $em->getRepository('ApplicationBundle:BibliotecaAlumno')->findByMateria($materia);
+        $bibliotecaAlumno= $em->getRepository('ApplicationBundle:BibliotecaAlumno')->findOneByMateria($materia);
+
+        if (!empty($bibliotecaAlumno)) {
+            $posts = $bibliotecaAlumno->getPosts();
+        }else{
+            $posts = [];
+        }
+
 
         return $this->render('bibliotecaalumno/index.html.twig', array(
-            'bibliotecaAlumnos' => $bibliotecaAlumnos,
+            'bibliotecaAlumno' => $bibliotecaAlumno,
             'materia' => $materia,
+            'posts' => $posts
         ));
     }
 
