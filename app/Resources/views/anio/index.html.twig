@@ -1,39 +1,106 @@
 {% extends 'base.html.twig' %}
 
+
+{% block pageTitle %}
+<div>
+        <br>
+        <br>
+        <br>
+</div>
+<center>Bienvenido! </center>
+
+{% endblock %}
+
+ {% block titulo_chico %}  
+        <br>
+        <br>
+   <div class="col-md-10 col-md-offset-1"> En esta primer instancia es necesario cargar los años escolares para poder guardarlos y reutilizarlos nuevamente por cada nuevo ciclo lectivo. Es de suma importancia informarte que estos datos solo deben cargarse una unica vez. 
+   </div>
+
+{% endblock %}
+
+
 {% block content %}
-    <h1>Anios list</h1>
+
+
+    <div class="col-md-6 col-md-offset-3" >
+<div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Crear Nuevo Año Escolar</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body " >
+      <div class=" col-md-8 col-md-offset-2">
+
+      {{ form_start(form, {'action': path('anio_new'), 'method': 'POST'}) }}
+        {{ form_widget(form) }}
+
+        <div class="form-group ">
+              {{ form_widget(form.numero, {'attr': {'class': 'form-control', 'placeholder': 'Año Escolar', 'type' : 'int', }}) }}
+            </div>
+            
+             <div class="form-group ">
+              {{ form_widget(form.nivel, {'attr': {'class': 'form-control', 'placeholder': 'Primario/Secundario', 'type' : 'text'}}) }}
+            </div>
+            <div class="form-group ">
+              {{ form_widget(form.descripcion, {'attr': {'class': 'form-control', 'placeholder': 'descripcion', 'type' : 'text'}}) }}
+        </div>
+        </div>
+        
+
+        <input class="btn-primary  col-md-6 col-md-offset-3" type="submit" value="Crear" />
+    {{ form_end(form) }}
+
+
+    </div>
+    </div>
+    </div>
+
+
+    <div class="col-md-6 col-md-offset-3" >
+<div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Listado de Años Cargados</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body " >
 
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Numero</th>
+                <th>Año</th>
                 <th>Nivel</th>
                 <th>Descripcion</th>
-                <th>Fechaalta</th>
-                <th>Fechabaja</th>
-                <th>Fechamodificacion</th>
-                <th>Actions</th>
+                <th>Ultima Modificacion</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
         {% for anio in anios %}
             <tr>
-                <td><a href="{{ path('anio_show', { 'id': anio.id }) }}">{{ anio.id }}</a></td>
                 <td>{{ anio.numero }}</td>
-                <td>{{ anio.nivel }}</td>
-                <td>{{ anio.descripcion }}</td>
-                <td>{% if anio.fechaAlta %}{{ anio.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if anio.fechaBaja %}{{ anio.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if anio.nivel %}{{ anio.nivel }}{% endif %}</td>
+                <td>{% if anio.descripcion %}{{ anio.descripcion }}{% endif %}</td>
                 <td>{% if anio.fechaModificacion %}{{ anio.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('anio_show', { 'id': anio.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('anio_edit', { 'id': anio.id }) }}">edit</a>
-                        </li>
+                     
+                             <li>
+                             borrar
+                            
+                             </li>
+                      
+                        
                     </ul>
                 </td>
             </tr>
@@ -41,9 +108,8 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('anio_new') }}">Create a new anio</a>
-        </li>
-    </ul>
+
+
+   
 {% endblock %}
+
