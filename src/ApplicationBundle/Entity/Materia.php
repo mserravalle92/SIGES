@@ -131,6 +131,7 @@ class Materia
         return $this->profesor;
     }
 
+
     /**
      * Set cicloLectivo
      *
@@ -155,7 +156,7 @@ class Materia
         return $this->cicloLectivo;
     }
 
-    /**
+      /**
      * Set curso
      *
      * @param integer $curso
@@ -178,6 +179,7 @@ class Materia
     {
         return $this->curso;
     }
+
 
     /**
      * Set fechaAlta
@@ -325,4 +327,6 @@ class Materia
     {
         return $this->bibliotecasAlumnos;
     }
+
+
 }

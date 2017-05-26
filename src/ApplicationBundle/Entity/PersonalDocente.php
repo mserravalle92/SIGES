@@ -527,4 +527,11 @@ class PersonalDocente
     {
         return $this->bibliotecasAlumnos;
     }
+
+    public function __toString(){
+
+        return (string)$this->nombre . ' '. $this->apellido;
+    }
+
+
 }

@@ -378,4 +378,10 @@ class Curso
     {
         return $this->bibliotecasAlumnos;
     }
+
+    public function __toString(){
+
+        return (string)$this->anio . ' Turno '. $this->turno . ' Sección '. $this->seccion;
+    }
+
 }
