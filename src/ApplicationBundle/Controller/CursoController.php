@@ -24,17 +24,22 @@ class CursoController extends Controller
      * @Route("/", name="curso_index")
      * @Method("GET")
      */
+<<<<<<< HEAD
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
         $cicloActivo= $em-> getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
 
         $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
+=======
+        public function indexAction()
+        {
+            $em = $this->getDoctrine()->getManager();
 
-        return $this->render('curso/index.html.twig', array(
-            'cursos' => $cursos,
-        ));
-    }
+            $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
+
+            return $this->render('curso/index.html.twig', array('cursos' => $cursos));       }
 
     /**
      * Creates a new curso entity.
@@ -223,6 +228,10 @@ class CursoController extends Controller
      */
     public function agregarMateriaAction(Curso $curso, Materia $idMateria)
     {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
         $em = $this->getDoctrine()->getManager();
         $db = $em -> getConnection();
 
@@ -235,6 +244,7 @@ class CursoController extends Controller
         return $response;
     }
 
+<<<<<<< HEAD
      /**
      *
      *
@@ -245,6 +255,12 @@ class CursoController extends Controller
     {
        
         $em = $this->getDoctrine()->getManager();
+=======
+      /**  $m= $em->getRepository('ApplicationBundle:Materia')->findById($idMateria); 
+
+        die(dump($m));*/
+
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
 
         $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
         $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);        

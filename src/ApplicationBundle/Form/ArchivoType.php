@@ -5,6 +5,7 @@ namespace ApplicationBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class ArchivoType extends AbstractType
@@ -14,7 +15,11 @@ class ArchivoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('descripcion')->add('observaciones')->add('bibliotecaAlumno');
+        $builder
+        ->add('descripcion')
+        ->add('observaciones')
+        ->add('adjunto', FileType::class, array('label' => 'Adjunto'))
+        ->add('post');
     }
     
     /**

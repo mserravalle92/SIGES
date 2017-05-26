@@ -67,7 +67,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
 
@@ -348,7 +348,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setPersonalDocente(\ApplicationBundle\PersonalDocente $personalDocente = null)
+    public function setPersonalDocente( $personalDocente )
     {
         $this->personalDocente = $personalDocente;
 

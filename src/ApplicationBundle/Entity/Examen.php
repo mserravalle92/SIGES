@@ -35,12 +35,7 @@ class Examen
      */
     private $horarioDiaMateria;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="tipo", type="integer")
-     */
-    private $tipo;
+  
 
     /**
      * @var bool
@@ -70,7 +65,26 @@ class Examen
      */
     private $fechaBaja;
 
+    /**
+     * muchos examenes tienen un curso.
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="examenes")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     */
+    private $curso;
 
+    /**
+     * muchos examenes tienen una materia.
+     * @ORM\ManyToOne(targetEntity="Materia", inversedBy="examenes")
+     * @ORM\JoinColumn(name="materia_id", referencedColumnName="id", nullable=true)
+     */
+    private $materia;
+
+    /**
+     * un examen tienen un tipoNota.
+     * @ORM\ManyToOne(targetEntity="TipoNota", inversedBy="examenes")
+     * @ORM\JoinColumn(name="tipoNota_id", referencedColumnName="id", nullable=true)
+     */
+    private $tipoNota;
 
     public function __construct(){
         $this->fechaAlta = new \DateTime();
@@ -133,30 +147,6 @@ class Examen
     public function getHorarioDiaMateria()
     {
         return $this->horarioDiaMateria;
-    }
-
-    /**
-     * Set tipo
-     *
-     * @param integer $tipo
-     *
-     * @return Examen
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    /**
-     * Get tipo
-     *
-     * @return integer
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
     }
 
     /**
@@ -253,5 +243,77 @@ class Examen
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Set curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Examen
+     */
+    public function setCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \ApplicationBundle\Entity\Curso
+     */
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+
+    /**
+     * Set materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     *
+     * @return Examen
+     */
+    public function setMateria(\ApplicationBundle\Entity\Materia $materia)
+    {
+        $this->materia = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Get materia
+     *
+     * @return \ApplicationBundle\Entity\Materia
+     */
+    public function getMateria()
+    {
+        return $this->materia;
+    }
+
+    /**
+     * Set tipoNota
+     *
+     * @param \ApplicationBundle\Entity\TipoNota $tipoNota
+     *
+     * @return Examen
+     */
+    public function setTipoNota(\ApplicationBundle\Entity\TipoNota $tipoNota)
+    {
+        $this->tipoNota = $tipoNota;
+
+        return $this;
+    }
+
+    /**
+     * Get TipoNota
+     *
+     * @return \ApplicationBundle\Entity\TipoNota
+     */
+    public function getTipoNota()
+    {
+        return $this->tipoNota;
     }
 }

@@ -17,8 +17,30 @@
       </div>
     </div>
     <div class="box-body" >
-
-
+    {% if posts is empty %}
+     <strong> Todavía no se ha subido contenidos en esta biblioteca...</strong>
+    {% else %}
+      <table class="table table-hover table-condensed table-stripped">
+        <thead>
+          <th>Título</th>
+          <th>Fecha de Creación</th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+              <tr>
+                <td>
+                  {{post.titulo}}
+                </td>
+                <td>{{post.fechaCarga | date('d-m-Y H:i')}}</td>
+                <td><a href="{{path('post_show',{id:post.id})}}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></a></td>
+              </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+    {% endif %}
 
     </div>
   </div>

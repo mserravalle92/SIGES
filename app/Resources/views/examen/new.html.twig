@@ -4,57 +4,116 @@
 Nuevo Examen
 {% endblock %}
 
-{% block content %}
+{% block content %} 
 <div class="col-md-8 col-sm-10 col-xs-12">
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">Datos</h3>
+    <form method="POST" class="form-horizontal">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Datos</h3>
+            </div>
+            <!-- /.box-header -->
+            {% if materias|length > 0 %} 
+                  <input type="hidden" name="idCurso" value="{{idCurso}}">
+                  <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr> 
+                            <th style="width: 5px"></th>
+                            <th style="width: 10px">id</th>                            
+                            <th>Nombre</th>                         
+                        </tr>
+                        {% for materia in materias %}
+                            <tr>
+                                <td>
+                                    <input type="radio"  value="{{ materia.id }}" name="idMateria" />
+                                </td>
+                                <td>{{ materia.id }}</td>                                
+                                <td>{{ materia.nombre }}</td>                  
+                            </tr>           
+                            </tr>
+                        {% endfor %}        
+
+                    </tbody>
+                </table>
+            {% elseif tipoNotas|length > 0 %}  
+
+                <input type="hidden" name="idCurso" value="{{idCurso}}">
+                <input type="hidden" name="idMateria" value="{{idMateria}}">
+                <div class="box-body">
+                    <div class="form-group">
+                      <label for="txtDesc" class="col-sm-2 control-label">Descripcion</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="txtDesc" name="contenido" placeholder="Ingrese una descripcion">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="txtDia" class="col-sm-2 control-label">HorarioDiaMateria</label>
+
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control" id="txtDia" name="horarioDiaMateria" placeholder="Ingrese dia del examen">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Promediable</label>
+
+                        <div class="col-sm-10">
+                            <select name="promediable" class="form-control">
+                                <option selected="true" value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Tipo de nota</label>
+
+                        <div class="col-sm-10">
+                            <select name="idTipoNota" class="form-control" >
+                                {% for tipoNota in tipoNotas %}
+                                    <option value="{{ tipoNota.id }}">{{ tipoNota.descripcion }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            {% else %}  
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr> 
+                            <th style="width: 5px"></th>
+                            <th style="width: 10px">id</th>
+                            
+                            <th>Turno</th>
+                            <th>Seccion</th>
+                        </tr>
+
+                        {% for curso in cursos %}
+                            <tr>
+                                <td>
+                                    <input type="radio"  value="{{ curso.id }}" name="idCurso" />
+                                </td>
+                                <td>{{ curso.id }}</td>
+                                
+                                <td>{{ curso.turno }}</td>
+                                <td>{{ curso.seccion }}</td>
+                            </tr>
+           
+                            </tr>
+                        {% endfor %}                        
+
+                    </tbody>
+                </table>
+              
+            {% endif %}
+
+           
         </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form class="form-horizontal" method="POST">
-            <div class="box-body">
-            <div class="form-group">
-                
-                {{ form_label(form.contenido, 'Contenido', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                <div class="col-sm-10">
-                {{ form_widget(form.contenido, {'attr': { 'class': 'form-control', 'placeholder': 'Contenido' }}) }}
-                {{ form_errors(form.contenido)}}
-                </div>
+        <div class="row">
+           <div class="col-md-10">
+                <input class="btn btn-primary" type="submit" name="btnAceptar" value="Aceptar">
             </div>
-            <div class="form-group">
-                {{ form_label(form.horarioDiaMateria, 'Horario', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                <div class="col-sm-10">
-                {{ form_widget(form.horarioDiaMateria, {'attr': { 'class': 'form-control', 'placeholder': 'Horario' }}) }}
-                {{ form_errors(form.horarioDiaMateria)}}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.tipo, 'Tipo', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                <div class="col-sm-10">
-                {{ form_widget(form.tipo, {'attr': { 'class': 'form-control', 'placeholder': 'Tipo' }}) }}
-                {{ form_errors(form.tipo)}}
-                </div>
-            </div>
-            <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                        <input name="promediable" type="checkbox"> Es promediable
-                        {{ form_errors(form.promediable)}}
-                        </label>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-            <button type="submit" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-info pull-right">Sign in</button>
-            </div>
-            <!-- /.box-footer -->
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
     
 {% endblock %}
