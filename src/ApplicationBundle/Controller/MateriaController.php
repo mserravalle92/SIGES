@@ -8,14 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Materium controller.
+ * materia controller.
  *
  * @Route("materias")
  */
 class MateriaController extends Controller
 {
     /**
-     * Lists all materium entities.
+     * Lists all materia entities.
      *
      * @Route("/", name="materia_index")
      * @Method("GET")
@@ -32,86 +32,86 @@ class MateriaController extends Controller
     }
 
     /**
-     * Creates a new materium entity.
+     * Creates a new materia entity.
      *
      * @Route("/new", name="materia_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
-        $materium = new Materium();
-        $form = $this->createForm('ApplicationBundle\Form\MateriaType', $materium);
+        $materia = new Materia();
+        $form = $this->createForm('ApplicationBundle\Form\MateriaType', $materia);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($materium);
+            $em->persist($materia);
             $em->flush();
 
-            return $this->redirectToRoute('materia_show', array('id' => $materium->getId()));
+            return $this->redirectToRoute('materia_show', array('id' => $materia->getId()));
         }
 
         return $this->render('materia/new.html.twig', array(
-            'materium' => $materium,
+            'materia' => $materia,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a materium entity.
+     * Finds and displays a materia entity.
      *
      * @Route("/{id}", name="materia_show")
      * @Method("GET")
      */
-    public function showAction(Materia $materium)
+    public function showAction(Materia $materia)
     {
-        $deleteForm = $this->createDeleteForm($materium);
+        $deleteForm = $this->createDeleteForm($materia);
 
         return $this->render('materia/show.html.twig', array(
-            'materium' => $materium,
+            'materia' => $materia,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing materium entity.
+     * Displays a form to edit an existing materia entity.
      *
      * @Route("/{id}/edit", name="materia_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Materia $materium)
+    public function editAction(Request $request, Materia $materia)
     {
-        $deleteForm = $this->createDeleteForm($materium);
-        $editForm = $this->createForm('ApplicationBundle\Form\MateriaType', $materium);
+        $deleteForm = $this->createDeleteForm($materia);
+        $editForm = $this->createForm('ApplicationBundle\Form\MateriaType', $materia);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('materia_edit', array('id' => $materium->getId()));
+            return $this->redirectToRoute('materia_edit', array('id' => $materia->getId()));
         }
 
         return $this->render('materia/edit.html.twig', array(
-            'materium' => $materium,
+            'materia' => $materia,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a materium entity.
+     * Deletes a materia entity.
      *
      * @Route("/{id}", name="materia_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Materia $materium)
+    public function deleteAction(Request $request, Materia $materia)
     {
-        $form = $this->createDeleteForm($materium);
+        $form = $this->createDeleteForm($materia);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($materium);
+            $em->remove($materia);
             $em->flush();
         }
 
@@ -119,16 +119,16 @@ class MateriaController extends Controller
     }
 
     /**
-     * Creates a form to delete a materium entity.
+     * Creates a form to delete a materia entity.
      *
-     * @param Materia $materium The materium entity
+     * @param Materia $materia The materia entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Materia $materium)
+    private function createDeleteForm(Materia $materia)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('materia_delete', array('id' => $materium->getId())))
+            ->setAction($this->generateUrl('materia_delete', array('id' => $materia->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
