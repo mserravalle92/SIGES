@@ -11,7 +11,7 @@
 <div class="col-md-6 col-md-offset-3" >
 <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Ciclo Lectivo Actual</h3>
+        <h3 ALING=CENTER class="box-title">Ciclo Lectivo Actual</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
             <i class="fa fa-minus"></i></button>
@@ -20,6 +20,12 @@
         </div>
       </div>
       <div class="box-body" >
+
+      {% if ultimoCiclo == NULL  %}
+          <B>NO SE ENCUENTRA ACTIVADO NINGUN CICLO LECTIVO</B>
+
+      {% else %}
+        
        {% for cicloLectivo in ultimoCiclo %}
                {% if cicloLectivo.anio %}<h2>{{cicloLectivo["anio"] }}</h2>{% endif %}
                {% if cicloLectivo.fechaInicio %}<b>Comienzo: </b>{{cicloLectivo["fechaInicio"]|date('d-m-Y') }}{% endif %}
@@ -32,11 +38,12 @@
 
               <!-- {% if cicloLectivo.fechaAlta %}<b>Fecha Creación: </b>{{cicloLectivo["fechaAlta"]|date('Y-m-d H:m') }}{% endif %}-->
                </br>
-               {% if cicloLectivo.fechaModificacion %}<b>Ultima Modificación: </b>{{cicloLectivo["fechaModificacion"]|date('Y-m-d H:m') }}{% endif %}
+               {% if cicloLectivo.fechaModificacion %}<b>Ultima Modificación: </b>{{cicloLectivo["fechaModificacion"]|date('d-m-Y H:m') }}{% endif %}
          </br>
           </br>
            </br>
          {% endfor %}
+         {% endif %}
 
         </div>
 
@@ -56,6 +63,17 @@
         </div>
       </div>
       <div class="box-body" >
+
+      {% if cicloLectivos == []  %}
+                      <B>NO HAY NINGUN CICLO LECTIVO REGISTRADO</B>
+                      </BR>
+                       <div class="col-md-10">
+                            </br>
+                            <a class="btn btn-primary" href="{{ path('ciclolectivo_new') }}">Crear Ciclo Lectivo nuevo</a>
+                       </div>
+
+      {% else %}
+
         <table id="listaCiclosLectivos" class="table table-bordered table-striped table-condensed" id="listaCursosPrimarios" width="100%" style="margin-bottom: 2em;" >
         <thead>
             <tr>
@@ -108,20 +126,17 @@
                 {% endfor %}
                 </tbody>
             </table>
-    </div>
-             
-
+            <br>
+            <br>
+             <div class="col-md-10">
+                        </br>
+                        <a class="btn btn-primary" href="{{ path('ciclolectivo_new') }}">Crear Ciclo Lectivo nuevo</a>
+             </div>
+       </div>
       </div>
-
     </div>
+{% endif %}
 
-
-  
-
-    <div class="col-md-10">
-    </br>
-        <a class="btn btn-primary" href="{{ path('ciclolectivo_new') }}">Crear Ciclo Lectivo nuevo</a>
-    </div>
    
 {% endblock %}
 
