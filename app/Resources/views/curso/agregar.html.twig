@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+{% block pageTitle %}<br>
+<center>Asignacion de Materias y Alumnos a Curso</center>
+{% endblock %}
+
+
+{% block css %}
+   <!-- <link rel="stylesheet" href="{{asset('bundles/application/dist/css/cicloLectivo.css')}}"> -->
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-offset-1" >
+   <ul>
+        <li>
+            <a href="{{ path('curso_index') }}">Ir a Listado de Cursos</a>
+        </li>
+        <li>
+            <a href="{{ path('curso_edit', { 'id': curso.id }) }}">Edit</a>
+        </li>
+         <br><br>
+    </ul>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 " >
+        <div class="box box-success">
+    <div class="box-header with-border">
+      <center><h2 class="box-title"><h2>Curso {{ curso.anio.numero }}° {{curso.seccion}}</h2></center>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body" >
+
+      <div class="">
+      <br>
+        <div class="form-group col-md-3 col-md-offset-2">
+        <label>Descripción:</label>
+        {% if curso.anio %}<p>{{curso.anio.descripcion }} {{curso.seccion}}</p>{% endif %}
+      </div>
+      <div class="form-group col-md-4">
+      <label>Nivel Educativo:</label>
+        {% if curso.anio %}<p>{{curso.anio.nivel }}</p>{% endif %}
+      </div>
+      <div class="form-group col-md-3">
+          <label>Turno:</label>
+        {% if curso.turno %}<p>{{ curso.turno}}</p>{% endif %}
+      </div>
+      <br>
+      <br>
+      <br>
+      </div>
+        
+        <div class="col-md-6">
+             <table  class="table table-bordered table-striped table-condensed" >
+             <thead>
+                    <tr>
+                       <th><center>Materias Asignadas</center></th>
+                        <th>Opcion</th>
+                    </tr>
+              </thead>
+              <tbody>
+
+              {% if materiasAsignadas == [] %}
+                  <td style="padding: 5px;">Aun no posee</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_agregar', { 'id': curso.id}) }}">agregar</a></td>
+              {% endif %}
+
+            {% for materia in materiasAsignadas %}
+                <tr>
+                  <td style="padding: 5px;">{% if materia.id %}{{ materia["nombre"]}}{% endif %}</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': materia.id, 'opc': 'false' }) }}">deshacer</a> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+             <a class="col-md-10 col-md-offset-1 btn btn-primary" href="{{path('curso_buscarMat',{ 'id': curso.id})}}">Agregar materia</a>
+            </div>
+
+
+            <div class="col-md-6">
+             <table  class="table table-bordered table-striped table-condensed" >
+             <thead>
+                    <tr>
+                        <th><center>Alumnos Asignados</center></th>
+                        <th>Opcion</th>
+                    </tr>
+              </thead>
+              <tbody>
+
+              {% if alumnosAsignados == [] %}
+                  <td style="padding: 5px;">Aun no posee</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_agregar', { 'id': curso.id}) }}">agregar</a></td>
+              {% endif %}
+
+
+            {% for alumno in alumnosAsignados %}
+                <tr>
+                 <td style="padding: 5px;">{% if alumno.id %}{{ alumno["nombre"]}}{{ alumno["apellido"]}} - DNI:{{alumno["dni"]}} - Legajo:{{alumno["legajo"]}}{% endif %}</td>
+                  <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': alumno.id, 'opc': 'true' }) }}">deshacer</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+
+                        <a class="col-md-10 col-md-offset-1 btn btn-primary" href="{{path('curso_buscar',{ 'id': curso.id})}}">Agregar alumno</a>
+
+        </div>
+    </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{asset('bundles/application/dist/js/cicloLectivo.js')}}"></script>    
+{% endblock %}

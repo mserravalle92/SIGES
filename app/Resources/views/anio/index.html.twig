@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block pageTitle %}Bienvenido a la Administracion de Años
 {% endblock %}
 
@@ -15,7 +16,6 @@
 {% endblock %}
 
 {% block content %}
-
 
     <div class="col-md-10 col-md-offset-1" >
 <div class="box box-primary">
@@ -45,6 +45,7 @@
                 <th>Numero</th>
                 <th>Nivel</th>
                 <th>Descripcion</th>
+
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -64,6 +65,7 @@
                             Editar
                         </a>
                         
+
                 </td>
             </tr>
         {% endfor %}
@@ -75,4 +77,6 @@
         <a class="btn btn-primary" href="{{ path('anio_new') }}">Crear Año</a>
         <a class="btn btn-primary" href="{{ path('curso_index') }}">Ver Cursos</a>
     </div>
+
 {% endblock %}
+

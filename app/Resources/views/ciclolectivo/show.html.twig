@@ -50,8 +50,29 @@
     {% if cicloLectivo.cursos | length == 0 %} 
 
         <center><a class="btn btn-primary" href="{{ path('curso_autogenerar', { 'id': cicloLectivo.id }) }}">Autogenerar Cursos </a></center>
+    {% endif %}
 
-    {% else %} 
+        {% for flash_message in app.session.flashBag.get('mensaje1')  %}
+            <div style="color:coral" class "flash_message">
+            <br>
+              {{flash_message}}
+              <br>
+              <a class="btn btn-primary" href="{{ path('ciclolectivo_index') }}">Ir a Lista de Ciclos Lectivos</a>
+            </div>
+
+                 
+
+      {% endfor %}
+
+         {% for flash_message in app.session.flashBag.get('mensaje2')  %}
+            <div style="color:coral" class "flash_message">
+            <br>
+              {{flash_message}}
+              <br>
+            </div>
+             <a class="btn btn-primary" href="{{ path('curso_new') }}">Crear Curso Manualmente</a>
+             <a class="btn btn-primary" href="{{ path('curso_index') }}">Ir a Listado de Cursos</a>
+      {% endfor %}
         
          <table  class="table table-bordered table-striped table-condensed" >
              <thead>
@@ -62,6 +83,7 @@
                     </tr>
               </thead>
               <tbody>
+            {% if cicloLectivo.cursos == [] %}
             {% for curso in cicloLectivo.cursos %}
                 <tr>
                   <td style="padding: 5px;">{% if curso.id %}{{ curso.anio.numero}}° {{ curso.seccion}} {% endif %}</td>
@@ -69,10 +91,12 @@
                   <td style="padding: 5px;"><a href="{{ path('curso_agregar', { 'id': curso.id }) }}">agregar Alumnos y Materias</a></td>
                 </tr>
             {% endfor %}
+
+            {% endif %}
             </tbody>
             </table>
 
-    {% endif %}
+
 
     </div>
     </div>

@@ -14,6 +14,6 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('ApplicationBundle:Default:index.html.twig');
+        return $this->redirectToRoute('alumno_index');
     }
 }

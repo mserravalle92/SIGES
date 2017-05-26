@@ -93,6 +93,14 @@ class Curso
 
 
     /**
+     * Un Curso puede tener muchos Examenes
+     * @ORM\OneToMany(targetEntity="Examen", mappedBy="curso")
+     */
+    private $examenes;
+
+ 
+    
+    /**
      * Get id
      *
      * @return int
