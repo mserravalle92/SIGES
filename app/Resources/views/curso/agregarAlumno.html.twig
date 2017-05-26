@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block pageTitle %}<br>
+<center>Agregar Nuevo Alumno a Curso</center>
+{% endblock %}
+
+
+{% block css %}
+   <!-- <link rel="stylesheet" href="{{asset('bundles/application/dist/css/cicloLectivo.css')}}"> -->
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-offset-1" >
+   <ul>
+        <li>
+            <a href="{{ path('alumno_index') }}">Ir a Listado de Alumnos</a>
+        </li>
+         <br><br>
+    </ul>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 " >
+    <div class="box box-success">
+    <div class="box-header with-border">
+      <center><h2 class="box-title"><h2>Buscar Alumno</h2></center>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+
+
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
