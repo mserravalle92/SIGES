@@ -24,22 +24,14 @@ class CursoController extends Controller
      * @Route("/", name="curso_index")
      * @Method("GET")
      */
-<<<<<<< HEAD
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $cicloActivo= $em-> getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
 
-        $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
-=======
-        public function indexAction()
-        {
-            $em = $this->getDoctrine()->getManager();
+        $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
 
-            $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
->>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
-
-            return $this->render('curso/index.html.twig', array('cursos' => $cursos));       }
+        return $this->render('curso/index.html.twig', array('cursos' => $cursos));       
+    }
 
     /**
      * Creates a new curso entity.
