@@ -220,23 +220,20 @@ class CursoController extends Controller
      */
     public function agregarMateriaAction(Curso $curso, Materia $idMateria)
     {
-<<<<<<< HEAD
-=======
-       
->>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
-        $em = $this->getDoctrine()->getManager();
-        $db = $em -> getConnection();
 
-        $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria->getId(); 
-        $stmt = $db -> prepare($query);
-        $params = array();
-        $stmt -> execute($params);
-        die(dump($idMateria));
-        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
-        return $response;
+            $em = $this->getDoctrine()->getManager();
+            $db = $em -> getConnection();
+
+            $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria->getId(); 
+            $stmt = $db -> prepare($query);
+            $params = array();
+            $stmt -> execute($params);
+            die(dump($idMateria));
+            $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
+            return $response;
     }
 
-<<<<<<< HEAD
+
      /**
      *
      *
@@ -247,12 +244,11 @@ class CursoController extends Controller
     {
        
         $em = $this->getDoctrine()->getManager();
-=======
+
       /**  $m= $em->getRepository('ApplicationBundle:Materia')->findById($idMateria); 
 
         die(dump($m));*/
 
->>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
 
         $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
         $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);        
