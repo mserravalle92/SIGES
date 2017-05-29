@@ -2,6 +2,8 @@
 
 namespace ApplicationBundle\Controller;
 
+
+use ApplicationBundle\Entity\Alumno;
 use ApplicationBundle\Entity\CicloLectivo;
 use ApplicationBundle\Entity\Curso;
 use ApplicationBundle\Entity\Materia;
@@ -22,11 +24,20 @@ class CursoController extends Controller
      * @Route("/", name="curso_index")
      * @Method("GET")
      */
+<<<<<<< HEAD
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cicloActivo= $em-> getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
+
+        $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
+=======
         public function indexAction()
         {
             $em = $this->getDoctrine()->getManager();
 
             $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
 
             return $this->render('curso/index.html.twig', array('cursos' => $cursos));       }
 
@@ -143,7 +154,7 @@ class CursoController extends Controller
      */ 
     public function agregarAction(Curso $curso)
     {
-
+        
         $em = $this->getDoctrine()->getManager();
 
         $materias = $em->getRepository('ApplicationBundle:Materia')->findAll();
@@ -166,7 +177,7 @@ class CursoController extends Controller
         $alumnosAsignados = $stmt -> fetchAll();
 
 
-        return $this->render('curso/agregarMateria.html.twig', array(
+        return $this->render('curso/agregar.html.twig', array(
             'curso' => $curso,
             'materias' => $materias,
             'alumnos' => $alumnos,
@@ -176,57 +187,151 @@ class CursoController extends Controller
         ));
     }
 
+
+
+     /**
+     *
+     *
+     * @Route("/{id}/buscarMat", name="curso_buscarMat")
+     * @Method("GET")
+     */
+    public function buscarMAction(Curso $curso)
+    {
+        $materia='null';
+        return $this->render('curso/buscarMateria.html.twig' , array('curso' => $curso, 'materia' => $materia));
+    }
+
+
+       /**
+     *
+     *
+     * @Route("/{id}/buscarMateria/", name="curso_buscarMateria")
+     * @Method({"GET", "POST"})
+     */
+    public function buscarMateriaAction(Curso $curso, Request $request)
+    {
+
+        $nombreMateria =$request->get('materia');
+        $em = $this->getDoctrine()->getManager();
+        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneByNombre($nombreMateria);
+        return $this->render('curso/buscarMateria.html.twig', array(
+            'materia' => $materia, 'curso' => $curso)
+        );
+    }
+
+
       /**
      * Finds and displays a curso entity.
      *
      * @Route("/{id}/agregar/{idMateria}", name="curso_agregarMateria")
      * @Method("GET")
      */
-    public function agregarMateriaAction(Curso $curso, $idMateria)
+    public function agregarMateriaAction(Curso $curso, Materia $idMateria)
     {
+<<<<<<< HEAD
+=======
        
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
         $em = $this->getDoctrine()->getManager();
         $db = $em -> getConnection();
 
-        $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria; 
+        $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria->getId(); 
         $stmt = $db -> prepare($query);
         $params = array();
         $stmt -> execute($params);
+        die(dump($idMateria));
+        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
+        return $response;
+    }
 
+<<<<<<< HEAD
+     /**
+     *
+     *
+     * @Route("auto-agregar-materia/{id}", name="curso_autogenerarMateria")
+     * @Method("GET")
+     */
+    public function autogenerarMateriaAction(Curso $curso, Materia $idMateria)
+    {
+       
+        $em = $this->getDoctrine()->getManager();
+=======
       /**  $m= $em->getRepository('ApplicationBundle:Materia')->findById($idMateria); 
 
         die(dump($m));*/
 
+>>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
 
-    /** $materia = $em->getRepository('ApplicationBundle:Materia')->find($idMateria);
-        $materia -> setCurso($curso->getId());
-    */
+        $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
+        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);        
+        $materiaNueva = New Materia();
+        $materiaNueva->setNombre($materia->getNombre());
+        $em->persist($materiaNueva);
+        $em->flush();
 
-        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregarMateria' ,
+        array('curso' => $curso, 'materia' => $materiaNueva));
         return $response;
     }
 
-       /**
+
+ /**
      *
      *
-     * @Route("/{id}/agregarAlumno/{idAlumno}", name="curso_agregarAlumno")
+     * @Route("/{id}/buscar", name="curso_buscar")
      * @Method("GET")
      */
-    public function agregarAlumnoAction(Curso $curso, $idAlumno)
+    public function buscarAction(Curso $curso)
+    {
+        $alumno='null';
+        return $this->render('curso/buscarAlumno.html.twig' , array('curso' => $curso, 'alumno' => $alumno,));
+    }
+
+     /**
+     *
+     *
+     * @Route("/{id}/buscarAlumno/", name="curso_buscarAlumno")
+     * @Method({"GET", "POST"})
+     */
+    public function buscarAlumnoAction(Curso $curso, Request $request)
     {
 
+        $dniAlumno =$request->get('dni');
         $em = $this->getDoctrine()->getManager();
-        $db = $em -> getConnection();
+        $alumno = $em->getRepository('ApplicationBundle:Alumno')->findOneByDni((int)$dniAlumno);
+        return $this->render('curso/buscarAlumno.html.twig', array(
+            'alumno' => $alumno, 'curso' => $curso)
+        );
+    }
 
-        $query = "update alumno set curso_id =" . $curso->getId() . " where alumno.id =" . $idAlumno; 
-        $stmt = $db -> prepare($query);
-        $params = array();
-        $stmt -> execute($params);
 
 
-        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso,));
+     /**
+     *
+     *
+     * @Route("auto-agregar-alumno/{id}", name="curso_autogenerarAlumno")
+     * @Method("GET")
+     */
+    public function autogenerarAlumnoAction(Curso $curso, Alumno $idAlumno)
+    {
+      
+        $em = $this->getDoctrine()->getManager();
+
+        $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
+        $materia = $em->getRepository('ApplicationBundle:Alumno')->findOneById($idAlumno);        
+      
+        
+
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregarMateria' ,
+        array('curso' => $curso, 'materia' => $materiaNueva));
         return $response;
     }
+
+
+
+
 
      /**
      *
@@ -275,8 +380,29 @@ class CursoController extends Controller
 
         $nuevoCicloLectivo = $cicloLectivo;
         $cicloLectivoActivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
-        $cursosAnteriores = $cicloLectivoActivo->getCursos();
 
+
+        /*-----SI NO HAY NINGUN ACTIVO NO SE PUEDE AUTOGENERAR CURSOS*/
+        if($cicloLectivoActivo == NULL ){
+
+            $this->addFlash('mensaje1','NO SE PUDO AUTOGENERAR LOS CURSOS. REVISE QUE HAYA ALGUN CICLO LECTIVO ACTIVO Y QUE EL MISMO TENGA ASIGNADO LOS CURSOS PARA AUTO-GENERAR');
+
+             $response = $this -> forward('ApplicationBundle:CicloLectivo:show',array('cicloLectivo' => $nuevoCicloLectivo));
+        return $response;
+        }
+       
+
+        $cursosAnteriores = $cicloLectivoActivo->getCursos();
+        /*-----SI HAY CICLO ACTIVO PERO NO TIENE CURSOS NO SE PUEDE AUTOGENERAR CURSOS*/
+        if(count($cicloLectivoActivo->getCursos()) == 0){
+            $this->addFlash('mensaje2',"EL CICLO LECTIVO ACTIVO NO POSEE CURSOS. POR FAVOR REVISE REVISE QUE ESTOS EXISTAN");
+             $response = $this -> forward('ApplicationBundle:CicloLectivo:show' , array('cicloLectivo' => $nuevoCicloLectivo));
+        return $response;
+        }
+
+
+        /*-----SI HAY ACTIVO Y TIENE CURSOS ASIGNADOS, SE HACE UNA COPIA DE LOS MISMOS*/
+        else{
 
         foreach ($cursosAnteriores as $cursoAnterior) {
 
@@ -297,24 +423,12 @@ class CursoController extends Controller
             }
             $em->persist($curso);
             $em->flush();
-            
-            //die(dump($curso));
-            
 
-            /*$materiasDeCurso = $curso->getMaterias();
-            foreach ($materiasDeCurso as $m){
-                $m->setCurso($curso);
-                $em->flush();
-                $curso->addMateria($materiaNueva);
-            }*/
+                }
+            }
 
-        }
-        
-        #$cursosNuevoCiclo = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($nuevoCicloLectivo);
-
-        $response = $this -> forward('ApplicationBundle:CicloLectivo:show' , array('cicloLectivo'=> $nuevoCicloLectivo,));
+           $response = $this -> forward('ApplicationBundle:CicloLectivo:show' , array('cicloLectivo' => $nuevoCicloLectivo));
         return $response;
-            #'cursosNuevoCiclo' => $cursosNuevoCiclo,
             
     }
 
