@@ -67,16 +67,19 @@
               {% if materiasAsignadas == [] %}
                   <td style="padding: 5px;">Aun no posee</td>
                   <td style="padding: 5px;"><a href="{{ path('curso_agregar', { 'id': curso.id}) }}">agregar</a></td>
-              {% endif %}
+              
+              {% else %}
 
-            {% for materia in materiasAsignadas %}
-                <tr>
-                  <td style="padding: 5px;">{% if materia.id %}{{ materia["nombre"]}}{% endif %}</td>
-                  <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': materia.id, 'opc': 'false' }) }}">deshacer</a> </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            </table>
+                {% for materia in curso.getMaterias %}
+                     <tr>
+                    <td style="padding: 5px;">{% if materia.id %}{{ materia.nombre}}{% endif %}</td>
+                      <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': materia.id, 'opc': 'false' }) }}">deshacer</a> </td>
+                     </tr>
+               {% endfor %}
+
+              {% endif %}
+              </tbody>
+             </table>
              <a class="col-md-10 col-md-offset-1 btn btn-primary" href="{{path('curso_buscarMat',{ 'id': curso.id})}}">Agregar materia</a>
             </div>
 

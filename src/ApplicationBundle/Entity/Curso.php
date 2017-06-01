@@ -62,13 +62,16 @@ class Curso
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="Materia", mappedBy="curso")
+     * @ORM\ManyToMany(targetEntity="Materia", mappedBy="curso")
+     * @ORM\JoinTable(name="curso_materia")
      */
      private $materias;
 
       /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="Alumno", mappedBy="curso")
+     * @ORM\ManyToMany(targetEntity="Alumno", mappedBy="curso" )
+    * @ORM\JoinTable(name="alumno_curso")
+
      */
      private $alumnos;
 
@@ -257,6 +260,7 @@ class Curso
     public function __construct(){
         $this->fechaAlta = new \DateTime();
         $this->fechaModificacion = new \DateTime();
+        $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -385,5 +389,44 @@ class Curso
     public function getBibliotecasAlumnos()
     {
         return $this->bibliotecasAlumnos;
+    }
+
+
+     public function __toString(){
+      return (string)$this->anio->getNumero() . 'Turno'. $this->turno. ' Seccion '. $this->seccion;
+    }
+
+    /**
+     * Add examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     *
+     * @return Curso
+     */
+    public function addExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes[] = $examene;
+
+        return $this;
+    }
+
+    /**
+     * Remove examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     */
+    public function removeExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes->removeElement($examene);
+    }
+
+    /**
+     * Get examenes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExamenes()
+    {
+        return $this->examenes;
     }
 }

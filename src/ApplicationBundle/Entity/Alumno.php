@@ -149,8 +149,8 @@ class Alumno
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="alumnos")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="alumnos")
+     * 
      */
     private $curso;
 
@@ -633,5 +633,29 @@ class Alumno
     public function getCurso()
     {
         return $this->curso;
+    }
+
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Alumno
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso->removeElement($curso);
     }
 }

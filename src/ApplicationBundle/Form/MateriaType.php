@@ -13,7 +13,7 @@ class MateriaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nombre')->add('fechaAlta')->add('fechaBaja')->add('fechaModificacion')->add('curso')->add('docentes');
+        $builder->add('nombre')->add('curso')->add('docentes');
     }
     
     /**

@@ -57,14 +57,13 @@
         </thead>
         <tbody>
             <tr>
-                {#<td>{{ alumno.id }}</td>#}
                 <td ALIGN=center>{{ materia.nombre }}</td>
-                <td ALIGN=center>{{ materia.id }}</td>
+                                             <!-- el problema es que tiene que mandar los id a la ruta y no lo hace ni siquiera entra a la accions-->
                 <td ALIGN=center> <a class= "btn btn-primary" href="{{path('curso_autogenerarMateria',{'id': curso.id , 'idMateria': materia.id })}}">Agregar a {{curso.anio.numero}}°{{curso.seccion}}</a></td>
     
-     </tr>   
-    </tbody>
-    </table>
+            </tr>   
+         </tbody>
+      </table>
     
     {% endif %}
 

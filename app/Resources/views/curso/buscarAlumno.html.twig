@@ -63,14 +63,18 @@
         </thead>
         <tbody>
             <tr>
-                {#<td>{{ alumno.id }}</td>#}
+                {<td>{{ alumno.id }}</td>}
                 <td ALIGN=center>{{ alumno.legajo }}</td>
                 <td ALIGN=center>{{ alumno.nombre }}</td>
                 <td ALIGN=center>{{ alumno.apellido }}</td>
                 <td ALIGN=center>{{ alumno.dni }}</td>
                 <td ALIGN=center>{% if alumno.fechaNacimiento %}{{ alumno.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
-                <td ALIGN=center>{{ alumno.curso.anio.numero  }}° {{alumno.curso.seccion}}</td>
-                <td ALIGN=center> <a class= "btn btn-primary" href="{{path('curso_agregarAlumno',{'id': curso.id , 'idAlumno': alumno.id })}}">Agregar a {{curso.anio.numero}}°{{curso.seccion}}</a></td>
+                {% if alumno.curso %}
+                <td ALIGN=center>{% for curso in alumno.curso %}
+                curso.anio curso.seccion
+                {% endfor %}</td>
+                {% endif %}
+                <td ALIGN=center> <a class= "btn btn-primary" href="{{ path('curso_agregarAlumno',{'id': curso.id , 'idAlumno':alumno })}}">Agregar a {{curso.anio.numero}}°{{curso.seccion}}</a></td>
     
      </tr>   
     </tbody>

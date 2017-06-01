@@ -59,8 +59,7 @@
               <br>
               <a class="btn btn-primary" href="{{ path('ciclolectivo_index') }}">Ir a Lista de Ciclos Lectivos</a>
             </div>
-
-                 
+   
 
       {% endfor %}
 
@@ -83,16 +82,14 @@
                     </tr>
               </thead>
               <tbody>
-            {% if cicloLectivo.cursos == [] %}
-            {% for curso in cicloLectivo.cursos %}
+
+              {% for curso in cicloLectivo.cursos %}
                 <tr>
                   <td style="padding: 5px;">{% if curso.id %}{{ curso.anio.numero}}° {{ curso.seccion}} {% endif %}</td>
                   <td style="padding: 5px;">{% if curso.id %}{{ curso.anio.Nivel}} {% endif %}</td>
                   <td style="padding: 5px;"><a href="{{ path('curso_agregar', { 'id': curso.id }) }}">agregar Alumnos y Materias</a></td>
                 </tr>
             {% endfor %}
-
-            {% endif %}
             </tbody>
             </table>
 
