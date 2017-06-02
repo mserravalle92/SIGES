@@ -27,11 +27,12 @@ class CursoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $cicloActivo= $em-> getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
 
         $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
 
-            return $this->render('curso/index.html.twig', array('cursos' => $cursos));       }
+
+        return $this->render('curso/index.html.twig', array('cursos' => $cursos));       
+    }
 
     /**
      * Creates a new curso entity.
@@ -224,6 +225,7 @@ class CursoController extends Controller
  
         $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
         return $response;
+
     }
 
 
@@ -238,6 +240,7 @@ class CursoController extends Controller
         #la vista se muestra bien, pero cuando se manda la materia a esta accion se muestra un error y el dump no llega a ejecutarse
         $idMateria= $request->get('idMateria');
         $em = $this->getDoctrine()->getManager();
+
         $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
         $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria); 
 

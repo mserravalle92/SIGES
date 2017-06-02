@@ -1,11 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block contnet %}
-    <h1>Anio</h1>
+{% block pageTitle %} Año Seleccionado
+{% endblock %}
 
-    <table>
-        <tbody>
-            <tr>
+{% block content %}
+    <ul>
+        <li>
+            <a href="{{ path('anio_index') }}">Volver a Lista de Años</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input class="btn-danger" type="submit" value="Eliminar">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    <div class="col-md-10 col-md-offset-1" >
+<div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Año</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body" >
+ <table class="table table-bordered">
+    <tbody>
+        <tr>
+              <th style="width: 170px"></th>
+              <th></th>
+            </tr>
+         <tr>
                 <th>Id</th>
                 <td>{{ anio.id }}</td>
             </tr>
@@ -33,20 +60,19 @@
                 <th>Fechamodificacion</th>
                 <td>{% if anio.fechaModificacion %}{{ anio.fechaModificacion|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
-        </tbody>
-    </table>
+    </tbody>
+</table>
+</table>
 
-    <ul>
-        <li>
-            <a href="{{ path('anio_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('anio_edit', { 'id': anio.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<td>
+
+    <div class="col-md-4">
+
+         <a href="{{ path('anio_edit', { 'id': anio.id }) }}">
+        <button type="button" class="btn-primary">Editar</button>
+    </a>
+
+
+</td>
+
 {% endblock %}
