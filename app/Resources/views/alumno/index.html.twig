@@ -30,6 +30,9 @@
             <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
                     <tr role="row">
+                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" aria-sort="ascending">
+                            Id
+                        </th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Nombre: activate to sort column ascending">
                             Legajo               
                         </th>
@@ -62,6 +65,7 @@
                 <tbody>
                 {% for alumno in alumnos %}
                 <tr role="row" class="odd">
+                    <td class="sorting"><a href="{{ path('alumno_show', { 'id': alumno.id }) }}">{{ alumno.id }}</a></td>
                     <td>{{ alumno.legajo }}</td>
                     <td>{{ alumno.nombre }}</td>
                     <td>{{ alumno.apellido }}</td>
