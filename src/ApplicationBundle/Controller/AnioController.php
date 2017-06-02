@@ -18,17 +18,28 @@ class AnioController extends Controller
      * Lists all anio entities.
      *
      * @Route("/", name="anio_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
+
     {
         $em = $this->getDoctrine()->getManager();
-
+        $anio = new Anio();
         $anios = $em->getRepository('ApplicationBundle:Anio')->findAll();
 
-        return $this->render('anio/index.html.twig', array(
-            'anios' => $anios,
-        ));
+        $form = $this->createForm('ApplicationBundle\Form\AnioType', $anio);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($anio);
+            $em->flush();
+
+            return $this->redirectToRoute('anio/index.html.twig', array('anios' => $anios,
+            'anio' => $anio,
+            'form' => $form->createView()));
+        }
+
+        return $this->render('anio/index.html.twig', array('anios' => $anios,  'form' => $form->createView()));
     }
 
     /**

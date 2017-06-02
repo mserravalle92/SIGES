@@ -30,8 +30,8 @@ class Materia
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="materias")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="materias")
+     * 
      */
     private $curso;
 
@@ -148,6 +148,7 @@ class Materia
         return $this->profesor;
     }
 
+
     /**
      * Set cicloLectivo
      *
@@ -172,7 +173,7 @@ class Materia
         return $this->cicloLectivo;
     }
 
-    /**
+      /**
      * Set curso
      *
      * @param integer $curso
@@ -195,6 +196,7 @@ class Materia
     {
         return $this->curso;
     }
+
 
     /**
      * Set fechaAlta
@@ -342,4 +344,64 @@ class Materia
     {
         return $this->bibliotecasAlumnos;
     }
+
+
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Materia
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso->removeElement($curso);
+    }
+
+    /**
+     * Add examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     *
+     * @return Materia
+     */
+    public function addExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes[] = $examene;
+
+        return $this;
+    }
+
+    /**
+     * Remove examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     */
+    public function removeExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes->removeElement($examene);
+    }
+
+    /**
+     * Get examenes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExamenes()
+    {
+        return $this->examenes;
+    }
+
 }
