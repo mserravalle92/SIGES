@@ -21,33 +21,30 @@ class Asistencia
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idAlumno", type="integer")
-     */
-    private $idAlumno;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idMateria", type="integer")
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Alumno", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="alumno_id", referencedColumnName="id")
      */
-    private $idMateria;
+    private $alumno;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="descripcion", type="string", length=255)
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Materia", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="materia_id", referencedColumnName="id")
      */
-    private $descripcion;
+    private $materia;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="presentismo", type="boolean")
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="TipoAsistencia", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="tipoAsistencia_id", referencedColumnName="id")
      */
-    private $presentismo;
+
+    private $tipoAsistencia;
+
+
 
     /**
      * @var \DateTime
@@ -71,8 +68,9 @@ class Asistencia
     private $fechaBaja;
 
     public function __construct(){
-        $this->$fechaAlta = new \DateTime();
-        $this->$fechaModificacion = new \DateTime();
+
+        $this->setFechaAlta(new \DateTime());
+        $this->setFechaModificacion(new \DateTime());
     }
 
     /**
@@ -133,53 +131,6 @@ class Asistencia
         return $this->idMateria;
     }
 
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     *
-     * @return Asistencia
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Set presentismo
-     *
-     * @param boolean $presentismo
-     *
-     * @return Asistencia
-     */
-    public function setPresentismo($presentismo)
-    {
-        $this->presentismo = $presentismo;
-
-        return $this;
-    }
-
-    /**
-     * Get presentismo
-     *
-     * @return boolean
-     */
-    public function getPresentismo()
-    {
-        return $this->presentismo;
-    }
 
     /**
      * Set fechaAlta
@@ -251,5 +202,77 @@ class Asistencia
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Set alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     *
+     * @return Asistencia
+     */
+    public function setAlumno(\ApplicationBundle\Entity\Alumno $alumno = null)
+    {
+        $this->alumno = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Get alumno
+     *
+     * @return \ApplicationBundle\Entity\Alumno
+     */
+    public function getAlumno()
+    {
+        return $this->alumno;
+    }
+
+    /**
+     * Set materia
+     *
+     * @param \ApplicationBundle\Entity\Materia $materia
+     *
+     * @return Asistencia
+     */
+    public function setMateria(\ApplicationBundle\Entity\Materia $materia = null)
+    {
+        $this->materia = $materia;
+
+        return $this;
+    }
+
+    /**
+     * Get materia
+     *
+     * @return \ApplicationBundle\Entity\Materia
+     */
+    public function getMateria()
+    {
+        return $this->materia;
+    }
+
+    /**
+     * Set tipoAsistencia
+     *
+     * @param \ApplicationBundle\Entity\TipoAsistencia $tipoAsistencia
+     *
+     * @return Asistencia
+     */
+    public function setTipoAsistencia(\ApplicationBundle\Entity\TipoAsistencia $tipoAsistencia = null)
+    {
+        $this->tipoAsistencia = $tipoAsistencia;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoAsistencia
+     *
+     * @return \ApplicationBundle\Entity\TipoAsistencia
+     */
+    public function getTipoAsistencia()
+    {
+        return $this->tipoAsistencia;
     }
 }

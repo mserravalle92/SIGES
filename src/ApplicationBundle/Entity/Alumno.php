@@ -154,6 +154,13 @@ class Alumno
      */
     private $curso;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="materia")
+     */
+
+    private $asistencias;
+
 	public function __construct(){
 		$this->fechaAlta = new \DateTime();
 		$this->fechaModificacion = new \DateTime();
@@ -633,5 +640,39 @@ class Alumno
     public function getCurso()
     {
         return $this->curso;
+    }
+
+    /**
+     * Add asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     *
+     * @return Alumno
+     */
+    public function addAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias[] = $asistencia;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     */
+    public function removeAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias->removeElement($asistencia);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
     }
 }

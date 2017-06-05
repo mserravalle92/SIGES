@@ -76,6 +76,13 @@ class Materia
 
      private $bibliotecasAlumnos;
 
+     /**
+     *
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="materia")
+     */
+
+     private $asistencias;
+
 /**
      * Set id
      *
@@ -346,4 +353,72 @@ class Materia
     }
 
 
+
+    /**
+     * Add examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     *
+     * @return Materia
+     */
+    public function addExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes[] = $examene;
+
+        return $this;
+    }
+
+    /**
+     * Remove examene
+     *
+     * @param \ApplicationBundle\Entity\Examen $examene
+     */
+    public function removeExamene(\ApplicationBundle\Entity\Examen $examene)
+    {
+        $this->examenes->removeElement($examene);
+    }
+
+    /**
+     * Get examenes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExamenes()
+    {
+        return $this->examenes;
+    }
+
+    /**
+     * Add asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     *
+     * @return Materia
+     */
+    public function addAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias[] = $asistencia;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     */
+    public function removeAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias->removeElement($asistencia);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
+    }
 }

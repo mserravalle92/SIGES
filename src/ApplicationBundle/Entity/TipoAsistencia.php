@@ -49,6 +49,14 @@ class TipoAsistencia
      */
     private $fechaBaja;
 
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="tipoAsistencia")
+     */
+
+    private $asistencias;
+
     public function __construct(){
         $this->$fechaAlta = new \DateTime();
         $this->$fechaModificacion = new \DateTime();
@@ -158,5 +166,39 @@ class TipoAsistencia
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Add asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     *
+     * @return TipoAsistencia
+     */
+    public function addAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias[] = $asistencia;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     */
+    public function removeAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias->removeElement($asistencia);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
     }
 }

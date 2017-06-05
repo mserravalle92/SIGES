@@ -64,6 +64,7 @@ class User implements UserInterface, \Serializable
      */
     private $fechaModificacion;
 
+
     /**
      * @var string
      *

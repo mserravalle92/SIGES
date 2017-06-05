@@ -1,3 +1,7 @@
+application_asistencia:
+    resource: "@ApplicationBundle/Controller/AsistenciaController.php"
+    type:     annotation
+
 application_post:
     resource: "@ApplicationBundle/Controller/PostController.php"
     type:     annotation
