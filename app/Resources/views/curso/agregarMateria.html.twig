@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block pageTitle %}<br>
-<center>Agregar Nuevo Alumno a Curso</center>
+{% block pageTitle %}Asignacion de Materias y Alumnos a Curso
 {% endblock %}
 
 
@@ -9,19 +8,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-offset-1" >
+   
+
    <ul>
         <li>
-            <a href="{{ path('curso_index') }}">Ir a Listado de Alumnos</a>
+            <a href="{{ path('curso_index') }}">Volver a Listado de Cursos</a>
+        </li>
+        <li>
+            <a href="{{ path('curso_edit', { 'id': curso.id }) }}">Edit</a>
         </li>
          <br><br>
     </ul>
-    </div>
 
-    <div class="col-md-10 col-md-offset-1 " >
+    <div class="col-md-7 " >
         <div class="box box-success">
     <div class="box-header with-border">
-      <center><h2 class="box-title"><h2>Curso {{ curso.anio.numero }}° {{curso.seccion}}</h2></center>
+      <h3 class="box-title">Curso {{ curso.anio.numero }}° {{curso.seccion}}</h3>
 
       <div class="box-tools pull-right">
         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -32,13 +34,6 @@
     </div>
     <div class="box-body" >
 
-<<<<<<< HEAD
-     
-    </div>
-      </div>
-  </div>
-
-=======
       <div class="row">
         <div class="col-md-2">
         {% if curso.anio %}<p>{{curso.anio.descripcion }} {{curso.seccion}}</p>{% endif %}
@@ -156,6 +151,5 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{{asset('bundles/application/dist/js/cicloLectivo.js')}}"></script>
->>>>>>> 4a38930f05d0d8ae9663cbb0ff9228a626cbb1d0
+   <script src="{{asset('bundles/application/dist/js/cicloLectivo.js')}}"></script>
 {% endblock %}

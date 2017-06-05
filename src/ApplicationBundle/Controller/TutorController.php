@@ -165,4 +165,28 @@ class TutorController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+
+    /**
+     * Lists all tutor entities.
+     *
+     * @Route("/{id}/agregar", name="alumno_agregarTutores")
+     * @Method("GET")
+     */
+    public function agregarTutoresAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tutors = $em->getRepository('ApplicationBundle:Tutor')->findAll();
+
+        /*
+        return $this->render('alumno/agregarTutor.html.twig', array(
+            'tutors' => $tutors,#}*/
+
+        return $this->render('alumno/agregarTutor.html.twig', array(
+            'tutors' => $tutors, 
+        ));
+    }
+
+
 }

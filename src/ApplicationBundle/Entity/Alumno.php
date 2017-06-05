@@ -149,8 +149,8 @@ class Alumno
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="alumnos")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="alumnos")
+     * 
      */
     private $curso;
 
@@ -653,6 +653,7 @@ class Alumno
     {
         $this->asistencias[] = $asistencia;
 
+
         return $this;
     }
 
@@ -674,5 +675,6 @@ class Alumno
     public function getAsistencias()
     {
         return $this->asistencias;
+
     }
 }

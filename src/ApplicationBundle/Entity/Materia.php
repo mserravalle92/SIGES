@@ -30,8 +30,8 @@ class Materia
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="materias")
-     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="materias")
+     * 
      */
     private $curso;
 
@@ -364,6 +364,18 @@ class Materia
     public function addExamene(\ApplicationBundle\Entity\Examen $examene)
     {
         $this->examenes[] = $examene;
+               return $this;
+    }
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Materia
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso[] = $curso;
 
         return $this;
     }
@@ -398,9 +410,19 @@ class Materia
     public function addAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
     {
         $this->asistencias[] = $asistencia;
-
         return $this;
     }
+
+    /*
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso->removeElement($curso);
+    }
+
 
     /**
      * Remove asistencia
@@ -421,4 +443,6 @@ class Materia
     {
         return $this->asistencias;
     }
+
+
 }

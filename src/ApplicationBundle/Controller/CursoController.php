@@ -28,7 +28,10 @@ class CursoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $cursos = $em->getRepository('ApplicationBundle:Curso')->findAll();
+        $cicloActivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneBy(['activo'=>true]);
+
+        $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
+
 
         return $this->render('curso/index.html.twig', array('cursos' => $cursos));       
     }
@@ -154,20 +157,12 @@ class CursoController extends Controller
 
         $db = $em -> getConnection();
 
-        $query = "select * from materia where materia.curso_id =" . $curso->getId(); 
-        $stmt = $db -> prepare($query);
-        $params = array();
-        $stmt -> execute($params);
-        $materiasAsignadas = $stmt -> fetchAll();
-
-
-        $query2 = "select * from alumno where alumno.curso_id =" . $curso->getId(); 
+       /* $query2 = "select * from alumno inner join alumno_curso on(curso_id =" . $curso->getId() .")"; 
         $stmt = $db -> prepare($query2);
         $params = array();
-        $stmt -> execute($params);
-
-        $alumnosAsignados = $stmt -> fetchAll();
-
+        $stmt -> execute($params);*/
+        $alumnosAsignados = $curso->getAlumnos();
+        $materiasAsignadas=$curso->getMaterias();
 
         return $this->render('curso/agregar.html.twig', array(
             'curso' => $curso,
@@ -204,8 +199,10 @@ class CursoController extends Controller
     {
 
         $nombreMateria =$request->get('materia');
+
         $em = $this->getDoctrine()->getManager();
         $materia = $em->getRepository('ApplicationBundle:Materia')->findOneByNombre($nombreMateria);
+        
         return $this->render('curso/buscarMateria.html.twig', array(
             'materia' => $materia, 'curso' => $curso)
         );
@@ -218,45 +215,48 @@ class CursoController extends Controller
      * @Route("/{id}/agregar/{idMateria}", name="curso_agregarMateria")
      * @Method("GET")
      */
-    public function agregarMateriaAction(Curso $curso, Materia $idMateria)
+    public function agregarMateriaAction(Curso $curso, Request $request)
     {
 
-       
+        $idMateria= $request->get('idMateria');
         $em = $this->getDoctrine()->getManager();
         $db = $em -> getConnection();
-
-        $query = "update materia set curso_id =" . $curso->getId() . " where materia.id =" . $idMateria->getId(); 
-        $stmt = $db -> prepare($query);
-        $params = array();
-        $stmt -> execute($params);
-        die(dump($idMateria));
+        $curso->addMateria($idMateria);
+        $em->persist($curso);
+        $em->flush();
+ 
         $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
         return $response;
+
     }
 
      /**
      *
      *
-     * @Route("auto-agregar-materia/{id}", name="curso_autogenerarMateria")
+     * @Route("/auto-agregar-materia/{id}", name="curso_autogenerarMateria")
      * @Method("GET")
      */
-    public function autogenerarMateriaAction(Curso $curso, Materia $idMateria)
+    public function autogenerarMateriaAction(Curso $curso, Request $request)
     {
-       
+        #la vista se muestra bien, pero cuando se manda la materia a esta accion se muestra un error y el dump no llega a ejecutarse
+        $idMateria= $request->get('idMateria');
         $em = $this->getDoctrine()->getManager();
 
         $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);        
-        $materiaNueva = New Materia();
-        $materiaNueva->setNombre($materia->getNombre());
-        $em->persist($materiaNueva);
+        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria); 
+
+        $curso->addMateria($materia);
+        $em->persist($curso);
         $em->flush();
 
 
-        $response = $this -> forward('ApplicationBundle:Curso:agregarMateria' ,
-        array('curso' => $curso, 'materia' => $materiaNueva));
+         $response = $this -> forward('ApplicationBundle:Curso:agregarMateria' ,
+         array('curso' => $curso, 'idMateria' => $materia));
         return $response;
-    }
+
+         } 
+        
+    
 
 
  /**
@@ -283,6 +283,7 @@ class CursoController extends Controller
         $dniAlumno =$request->get('dni');
         $em = $this->getDoctrine()->getManager();
         $alumno = $em->getRepository('ApplicationBundle:Alumno')->findOneByDni((int)$dniAlumno);
+      
         return $this->render('curso/buscarAlumno.html.twig', array(
             'alumno' => $alumno, 'curso' => $curso)
         );
@@ -290,30 +291,25 @@ class CursoController extends Controller
 
 
 
-     /**
+       /**
+     * Finds and displays a curso entity.
      *
-     *
-     * @Route("auto-agregar-alumno/{id}", name="curso_autogenerarAlumno")
+     * @Route("/{id}/agregar/{idAlumno}", name="curso_agregarAlumno")
      * @Method("GET")
      */
-    public function autogenerarAlumnoAction(Curso $curso, Alumno $idAlumno)
+    public function agregarAlumnoAction(Curso $curso, Alumno $idAlumno)
     {
-      
         $em = $this->getDoctrine()->getManager();
+        $db = $em -> getConnection();
 
-        $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($curso);
-        $materia = $em->getRepository('ApplicationBundle:Alumno')->findOneById($idAlumno);        
-      
-        
+        $idAlumno->addCurso($curso);
+        $curso->addAlumno($idAlumno);
 
 
-        $response = $this -> forward('ApplicationBundle:Curso:agregarMateria' ,
-        array('curso' => $curso, 'materia' => $materiaNueva));
+
+        $response = $this -> forward('ApplicationBundle:Curso:agregar' , array('curso' => $curso));
         return $response;
     }
-
-
-
 
 
      /**
@@ -325,6 +321,7 @@ class CursoController extends Controller
     public function deshacerAction(Curso $curso, $id2, $opc)
     {
         
+        //FIXME: Refactorizar el código orientado a objetos no SQL
 
         if ($opc == 'true'){
             $em = $this->getDoctrine()->getManager();

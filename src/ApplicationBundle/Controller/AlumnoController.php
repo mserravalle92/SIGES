@@ -147,13 +147,55 @@ class AlumnoController extends Controller
 
         $tutores = $alumno->getTutores();
         
+        $tutors = $em->getRepository('ApplicationBundle:Tutor')->findAll();
+
         $db = $em -> getConnection();
 
         return $this->render('alumno/agregarTutor.html.twig', array(
             'alumno' => $alumno,
             'tutores' => $tutores,
+            'tutors' => $tutors,
  
         ));
+    }
+
+    /**
+     * Finds and displays a curso entity.
+     *
+     * @Route("/{id}/agregar/{idTutor}", name="alumno_agregarTutor")
+     * @Method("GET")
+     */
+    public function agregarTutorAction(Alumno $alumno, $idTutor)
+    {
+        
+        $sql = 'insert into alumnos_tutores set alumno_id ='.$alumno->getId().',tutor_id ='.(string)$idTutor;
+        $em = $this->getDoctrine()->getManager();
+        $em->getConnection()->exec( $sql );
+
+        $response = $this -> forward('ApplicationBundle:alumno:agregar' , array('alumno' => $alumno,));
+        return $response;
+    }
+
+    /**
+     *
+     *
+     * @Route("/{id}/{opc}/{id2}", name="tutor_deshacer")
+     * @Method("GET")
+     */
+    public function deshacerAction(Alumno $alumno, $id2, $opc)
+    {
+        
+        if ($opc == 'true'){
+            $em = $this->getDoctrine()->getManager();
+            $db = $em -> getConnection();
+            $query = "update alumnos_tutores set tutor_id = NULL, alumno_id = NULL where tutor_id =" . $id2; 
+            $stmt = $db -> prepare($query);
+            $params = array();
+            $stmt -> execute($params);
+        }
+
+        $response = $this -> forward('ApplicationBundle:Alumno:agregar' , array('alumno' => $alumno,));
+        return $response;
     }
 
 }
