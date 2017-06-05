@@ -10,4 +10,19 @@ namespace ApplicationBundle\Repository;
  */
 class AlumnoRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAlumnosByCurso($curso)
+    {
+        $em = $this->getEntityManager();
+
+        $RAW_QUERY = 'SELECT * FROM alumno,alumnoCurso where alumno_id = id and curso_id = '.$curso->getId();
+
+        $statement = $em->getConnection()->prepare($RAW_QUERY);
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+
+    }
 }

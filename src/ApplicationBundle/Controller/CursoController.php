@@ -30,6 +30,7 @@ class CursoController extends Controller
 
         $cicloActivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneBy(['activo'=>true]);
 
+
         $cursos = $em->getRepository('ApplicationBundle:Curso')->findByCiclolectivo($cicloActivo);
 
 

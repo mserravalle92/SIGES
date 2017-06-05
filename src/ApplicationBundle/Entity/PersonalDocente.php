@@ -10,30 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="personal_docente")
  * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\PersonalDocenteRepository")
  */
-class PersonalDocente
+class PersonalDocente extends Persona
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nombre", type="string", length=255)
-     */
-    private $nombre;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="apellido", type="string", length=255)
-     */
-    private $apellido;
 
     /**
      * @var int
@@ -84,12 +62,7 @@ class PersonalDocente
      */
     private $sexo;
 
-    /**
-     * @ORM\OneToOne(targetEntity="AuthBundle\Entity\User", inversedBy="personalDocente")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     * */
 
-    private $usuario;
 
     /**
      * @var \DateTime
@@ -134,66 +107,6 @@ class PersonalDocente
 
 	}
 
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     *
-     * @return PersonalDocente
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set apellido
-     *
-     * @param string $apellido
-     *
-     * @return PersonalDocente
-     */
-    public function setApellido($apellido)
-    {
-        $this->apellido = $apellido;
-
-        return $this;
-    }
-
-    /**
-     * Get apellido
-     *
-     * @return string
-     */
-    public function getApellido()
-    {
-        return $this->apellido;
-    }
 
     /**
      * Set dni
@@ -364,30 +277,6 @@ class PersonalDocente
     }
 
     /**
-     * Set usuario
-     *
-     * @param integer $usuario
-     *
-     * @return PersonalDocente
-     */
-    public function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return integer
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    /**
      * Set fechaAlta
      *
      * @param \DateTime $fechaAlta
@@ -528,10 +417,7 @@ class PersonalDocente
         return $this->bibliotecasAlumnos;
     }
 
-    public function __toString(){
 
-        return (string)$this->nombre . ' '. $this->apellido;
-    }
 
 
 }

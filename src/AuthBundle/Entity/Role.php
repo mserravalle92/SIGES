@@ -36,7 +36,7 @@ class Role
     private $role;
 
      /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="roles")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
      *
      **/
     private $users;
@@ -98,6 +98,11 @@ class Role
     public function getRole()
     {
         return $this->role;
+    }
+
+    public function __toString()
+    {
+       return $this->role;
     }
 
     /**

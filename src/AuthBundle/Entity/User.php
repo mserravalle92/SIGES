@@ -31,8 +31,8 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Role", inversedBy="users")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     * @ORM\JoinTable(name="users_roles")
      * */
     private $roles;
 
@@ -73,11 +73,11 @@ class User implements UserInterface, \Serializable
     private $salt;
 
     /**
-     * @ORM\OneToOne(targetEntity="ApplicationBundle\Entity\PersonalDocente", mappedBy="usuario")
-     *
-     * */
+     * @ORM\OneToOne(targetEntity="ApplicationBundle\Entity\Persona", mappedBy="usuario")
+     */
+    private $persona;
 
-    private $personalDocente;
+
 
 
     /**
@@ -152,26 +152,17 @@ class User implements UserInterface, \Serializable
         return $this->salt;
     }
 
-    /**
-     * Get roles
-     *
-     *
-     */
-    public function getRole()
-    {
-        return array($this->roles);
-    }
-
-    /**
-     * Get roles
-     *
-     *
-     */
     public function getRoles()
     {
-        return array($this->roles->getRole());
-    }
+       $roles = [];
 
+        foreach ($this->roles as $role) {
+            $roles[] = $role->getRole();
+       }
+
+       return $roles;
+
+    }
 
 
     /**
@@ -235,33 +226,9 @@ class User implements UserInterface, \Serializable
     {
     }
 
-    /**
-     * Set roles
-     *
-     * @param \AuthBundle\Entity\Roles $roles
-     *
-     * @return User
-     */
-    public function setRole(\AuthBundle\Entity\Role $roles)
-    {
-        $this->roles = $roles;
 
-        return $this;
-    }
 
-    /**
-     * Set roles
-     *
-     * @param \AuthBundle\Entity\Roles $roles
-     *
-     * @return User
-     */
-    public function setRoles(\AuthBundle\Entity\Role $roles)
-    {
-        $this->roles = $roles;
 
-        return $this;
-    }
 
     public function __construct(){
 
@@ -342,27 +309,54 @@ class User implements UserInterface, \Serializable
         return $this->fechaModificacion;
     }
 
+
+
     /**
-     * Set personalDocente
+     * Add role
      *
-     * @param \ApplicationBundle\PersonalDocente $personalDocente
+     * @param \AuthBundle\Entity\Role $role
      *
      * @return User
      */
-    public function setPersonalDocente( $personalDocente )
+    public function addRole(\AuthBundle\Entity\Role $role)
     {
-        $this->personalDocente = $personalDocente;
+        $this->roles[] = $role;
 
         return $this;
     }
 
     /**
-     * Get personalDocente
+     * Remove role
      *
-     * @return \ApplicationBundle\PersonalDocente
+     * @param \AuthBundle\Entity\Role $role
      */
-    public function getPersonalDocente()
+    public function removeRole(\AuthBundle\Entity\Role $role)
     {
-        return $this->personalDocente;
+        $this->roles->removeElement($role);
+    }
+
+
+    /**
+     * Set persona
+     *
+     * @param \ApplicationBundle\Entity\Persona $persona
+     *
+     * @return User
+     */
+    public function setPersona(\ApplicationBundle\Entity\Persona $persona = null)
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * Get persona
+     *
+     * @return \ApplicationBundle\Entity\Persona
+     */
+    public function getPersona()
+    {
+        return $this->persona;
     }
 }

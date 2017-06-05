@@ -3,6 +3,7 @@
 namespace ApplicationBundle\Controller;
 
 use ApplicationBundle\Entity\Asistencia;
+use ApplicationBundle\Entity\Curso;
 use ApplicationBundle\Entity\Materia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -24,12 +25,18 @@ class AsistenciaController extends Controller
      * @Method("GET")
      */
 
-    public function indexAction(Materia $materia)
+    public function indexAction(Curso $curso,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
+        //FIXME: Sacar el HardCodeo
+        //$idMateria = $request->get('idMateria');
 
-        $alumnos = $em->getRepository("ApplicationBundle:Alumno")->findByCurso($materia->getCurso());
+        $idMateria = 1;
+
+        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);
+
+        $alumnos = $em->getRepository("ApplicationBundle:Alumno")->getAlumnosByCurso($curso);
 
         $tiposAsistencia = $em->getRepository("ApplicationBundle:TipoAsistencia")->findAll();
 

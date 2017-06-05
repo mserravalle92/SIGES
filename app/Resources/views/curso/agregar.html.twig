@@ -102,7 +102,7 @@
 
             {% for alumno in alumnosAsignados %}
                 <tr>
-                 <td style="padding: 5px;">{% if alumno.id %}{{ alumno["nombre"]}}{{ alumno["apellido"]}} - DNI:{{alumno["dni"]}} - Legajo:{{alumno["legajo"]}}{% endif %}</td>
+                 <td style="padding: 5px;">{% if alumno.id %}{{ alumno.nombre}}{{ alumno.apellido}} - DNI:{{alumno.dni}} - Legajo:{{alumno.legajo}}{% endif %}</td>
                   <td style="padding: 5px;"><a href="{{ path('curso_deshacer', { 'id': curso.id , 'id2': alumno.id, 'opc': 'true' }) }}">deshacer</a></td>
                 </tr>
             {% endfor %}

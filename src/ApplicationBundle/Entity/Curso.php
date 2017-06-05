@@ -69,8 +69,8 @@ class Curso
 
       /**
      * One Product has Many Features.
-     * @ORM\ManyToMany(targetEntity="Alumno", mappedBy="curso" )
-    * @ORM\JoinTable(name="alumno_curso")
+     * @ORM\ManyToMany(targetEntity="Alumno", mappedBy="cursos" , cascade={"persist"} )
+    *
 
      */
      private $alumnos;
@@ -261,6 +261,7 @@ class Curso
         $this->fechaAlta = new \DateTime();
         $this->fechaModificacion = new \DateTime();
         $this->materias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->alumnos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -295,40 +296,6 @@ class Curso
     public function getMaterias()
     {
         return $this->materias;
-    }
-
-    /**
-     * Add alumno
-     *
-     * @param \ApplicationBundle\Entity\Alumno $alumno
-     *
-     * @return Curso
-     */
-    public function addAlumno(\ApplicationBundle\Entity\Alumno $alumno)
-    {
-        $this->alumnos[] = $alumno;
-
-        return $this;
-    }
-
-    /**
-     * Remove alumno
-     *
-     * @param \ApplicationBundle\Entity\Alumno $alumno
-     */
-    public function removeAlumno(\ApplicationBundle\Entity\Alumno $alumno)
-    {
-        $this->alumnos->removeElement($alumno);
-    }
-
-    /**
-     * Get alumnos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAlumnos()
-    {
-        return $this->alumnos;
     }
 
     /**
@@ -428,5 +395,39 @@ class Curso
     public function getExamenes()
     {
         return $this->examenes;
+    }
+
+    /**
+     * Add alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     *
+     * @return Curso
+     */
+    public function addAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos[] = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Remove alumno
+     *
+     * @param \ApplicationBundle\Entity\Alumno $alumno
+     */
+    public function removeAlumno(\ApplicationBundle\Entity\Alumno $alumno)
+    {
+        $this->alumnos->removeElement($alumno);
+    }
+
+    /**
+     * Get alumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlumnos()
+    {
+        return $this->alumnos;
     }
 }

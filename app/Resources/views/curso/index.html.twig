@@ -38,7 +38,7 @@
         </thead>
         <tbody>
         {% for curso in cursos %}
-            {% if curso.anio matches '/Primario/' %}
+            {% if curso.anio.id == 1 %}
                 <tr>
                     <td>{{ curso.turno }}</td>
                     <td>{{curso.anio}}</td>
@@ -79,7 +79,7 @@
         </thead>
         <tbody>
         {% for curso in cursos %}
-            {% if curso.anio matches '/Secundario/' %}
+            {% if curso.anio.id == 2 %}
                 <tr>
                     <td>{{ curso.turno }}</td>
                     <td>{{curso.anio}}</td>

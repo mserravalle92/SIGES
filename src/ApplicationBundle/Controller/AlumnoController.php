@@ -23,10 +23,10 @@ class AlumnoController extends Controller
      */
     public function indexAction()
     {
+
         $em = $this->getDoctrine()->getManager();
 
         $alumnos = $em->getRepository('ApplicationBundle:Alumno')->findAll();
-
         return $this->render('alumno/index.html.twig', array(
             'alumnos' => $alumnos,
         ));

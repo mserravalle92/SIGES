@@ -10,30 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="alumno")
  * @ORM\Entity(repositoryClass="ApplicationBundle\Repository\AlumnoRepository")
  */
-class Alumno
+class Alumno extends Persona
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nombre", type="string", length=255)
-     */
-    private $nombre;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="apellido", type="string", length=255)
-     */
-    private $apellido;
 
     /**
      * @var int
@@ -149,14 +127,14 @@ class Alumno
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="alumnos")
-     * 
+     * @ORM\ManyToMany(targetEntity="Curso", inversedBy="alumnos", cascade={"persist"})
+     * @ORM\JoinTable(name="alumnoCurso")
      */
-    private $curso;
+    private $cursos;
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="materia")
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="alumno")
      */
 
     private $asistencias;
@@ -164,65 +142,12 @@ class Alumno
 	public function __construct(){
 		$this->fechaAlta = new \DateTime();
 		$this->fechaModificacion = new \DateTime();
+        $this->curso = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     *
-     * @return Alumno
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
 
-        return $this;
-    }
 
-    /**
-     * Get nombre
-     *
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set apellido
-     *
-     * @param string $apellido
-     *
-     * @return Alumno
-     */
-    public function setApellido($apellido)
-    {
-        $this->apellido = $apellido;
-
-        return $this;
-    }
-
-    /**
-     * Get apellido
-     *
-     * @return string
-     */
-    public function getApellido()
-    {
-        return $this->apellido;
-    }
 
     /**
      * Set dni
@@ -464,29 +389,6 @@ class Alumno
         return $this->fichaMedica;
     }
 
-    /**
-     * Set usuario
-     *
-     * @param integer $usuario
-     *
-     * @return Alumno
-     */
-    public function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return integer
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
 
     /**
      * Set fechaAlta
@@ -618,29 +520,7 @@ class Alumno
         return $this->tutores;
     }
 
-    /**
-     * Set curso
-     *
-     * @param \ApplicationBundle\Entity\Curso $curso
-     *
-     * @return Alumno
-     */
-    public function setCurso(\ApplicationBundle\Entity\Curso $curso = null)
-    {
-        $this->curso = $curso;
 
-        return $this;
-    }
-
-    /**
-     * Get curso
-     *
-     * @return \ApplicationBundle\Entity\Curso
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
 
     /**
      * Add asistencia
@@ -676,5 +556,49 @@ class Alumno
     {
         return $this->asistencias;
 
+    }
+
+    /**
+     * Add curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Alumno
+     */
+    public function addCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso[] = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Remove curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     */
+    public function removeCurso(\ApplicationBundle\Entity\Curso $curso)
+    {
+        $this->curso->removeElement($curso);
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCurso()
+    {
+        return $this->curso;
+    }
+
+    /**
+     * Get cursos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursos()
+    {
+        return $this->cursos;
     }
 }
