@@ -29,7 +29,8 @@ class Examen
     private $contenido;
 
     /**
-     * @ORM\Column(name="fechaExamen", type="integer")
+     * @var \DateTime
+     * @ORM\Column(name="fechaExamen", type="datetime")
      */
     private $fechaExamen;
 
