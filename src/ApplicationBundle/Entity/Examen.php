@@ -29,11 +29,9 @@ class Examen
     private $contenido;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="horarioDiaMateria", type="integer")
+     * @ORM\Column(name="fechaExamen", type="integer")
      */
-    private $horarioDiaMateria;
+    private $fechaExamen;
 
   
 
@@ -77,7 +75,7 @@ class Examen
      * @ORM\ManyToOne(targetEntity="Materia", inversedBy="examenes")
      * @ORM\JoinColumn(name="materia_id", referencedColumnName="id", nullable=true)
      */
-    private $materia;
+    private $materias;
 
     /**
      * un examen tienen un tipoNota.
@@ -278,7 +276,7 @@ class Examen
      */
     public function setMateria(\ApplicationBundle\Entity\Materia $materia)
     {
-        $this->materia = $materia;
+        $this->materias = $materia;
 
         return $this;
     }
@@ -288,9 +286,9 @@ class Examen
      *
      * @return \ApplicationBundle\Entity\Materia
      */
-    public function getMateria()
+    public function getMaterias()
     {
-        return $this->materia;
+        return $this->materias;
     }
 
     /**
@@ -315,5 +313,43 @@ class Examen
     public function getTipoNota()
     {
         return $this->tipoNota;
+    }
+
+    /**
+     * Set fechaExamen
+     *
+     * @param integer $fechaExamen
+     *
+     * @return Examen
+     */
+    public function setFechaExamen($fechaExamen)
+    {
+        $this->fechaExamen = $fechaExamen;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaExamen
+     *
+     * @return integer
+     */
+    public function getFechaExamen()
+    {
+        return $this->fechaExamen;
+    }
+
+    /**
+     * Set materias
+     *
+     * @param \ApplicationBundle\Entity\Materia $materias
+     *
+     * @return Examen
+     */
+    public function setMaterias(\ApplicationBundle\Entity\Materia $materias = null)
+    {
+        $this->materias = $materias;
+
+        return $this;
     }
 }
