@@ -601,4 +601,8 @@ class Alumno extends Persona
     {
         return $this->cursos;
     }
+
+    public function getDiscr(){
+        return 'alumno';
+    }
 }

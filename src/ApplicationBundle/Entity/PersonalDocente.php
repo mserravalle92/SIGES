@@ -417,6 +417,10 @@ class PersonalDocente extends Persona
         return $this->bibliotecasAlumnos;
     }
 
+    public function getDiscr(){
+        return 'personalDocente';
+    }
+
 
 
 

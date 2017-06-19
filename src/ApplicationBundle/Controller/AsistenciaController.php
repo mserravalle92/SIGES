@@ -29,20 +29,21 @@ class AsistenciaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        //FIXME: Sacar el HardCodeo
-        //$idMateria = $request->get('idMateria');
 
-        $idMateria = 1;
+        $alumnosPorCurso = $em->getRepository("ApplicationBundle:Alumno")->getAlumnosByCurso($curso);
 
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);
+        $alumnos = [];
 
-        $alumnos = $em->getRepository("ApplicationBundle:Alumno")->getAlumnosByCurso($curso);
+        foreach ($alumnosPorCurso as $alumno) {
+            $persona = $em->getRepository('ApplicationBundle:Persona')->findOneById($alumno['id']);
+            $alumnos[]=$persona;
+        }
 
         $tiposAsistencia = $em->getRepository("ApplicationBundle:TipoAsistencia")->findAll();
 
         return $this->render('asistencia/index.html.twig', array(
             'alumnos'=> $alumnos,
-            'materia'=> $materia,
+            'curso'=>$curso,
             'tiposAsistencia'=> $tiposAsistencia
         ));
     }
@@ -57,7 +58,7 @@ class AsistenciaController extends Controller
     {
         $asistencium = new Asistencia();
 
-        $materia = $request->get('materia');
+        $curso = $request->get('curso');
         $alumno = $request->get('alumno');
 
         $form = $this->createForm('ApplicationBundle\Form\AsistenciaType', $asistencium);
@@ -165,20 +166,20 @@ class AsistenciaController extends Controller
 
         $idAlumno = $request->get('idAlumno');
         $idTipo = $request->get('idTipo');
-        $idMateria = $request->get('idMateria');
+        $idCurso = $request->get('idCurso');
 
         $em = $this->getDoctrine()->getManager();
 
 
         $alumno = $em->getRepository('ApplicationBundle:Alumno')->findOneById($idAlumno);
         $tipo = $em->getRepository('ApplicationBundle:TipoAsistencia')->findOneById($idTipo);
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);
+        $curso = $em->getRepository('ApplicationBundle:Curso')->findOneById($idCurso);
 
 
         $asistencia = New Asistencia();
         $asistencia->setTipoAsistencia($tipo);
         $asistencia->setAlumno($alumno);
-        $asistencia->setMateria($materia);
+        $asistencia->setCurso($curso);
 
         $em->persist($asistencia);
         $em->flush();
@@ -201,20 +202,16 @@ class AsistenciaController extends Controller
     public function eliminarAsistencia(Request $request){
 
         $idAlumno = $request->get('idAlumno');
-        $idMateria = $request->get('idMateria');
+        $idCurso = $request->get('idCurso');
 
         $em = $this->getDoctrine()->getManager();
 
 
         $alumno = $em->getRepository('ApplicationBundle:Alumno')->findOneById($idAlumno);
-        $materia = $em->getRepository('ApplicationBundle:Materia')->findOneById($idMateria);
-
-
-
-
+        $curso = $em->getRepository('ApplicationBundle:Materia')->findOneById($idCurso);
 
         $asistencias = $em->getRepository('ApplicationBundle:Asistencia')
-            ->findBy(['alumno'=>$alumno, 'materia'=> $materia]);
+            ->findBy(['alumno'=>$alumno, 'curso'=> $curso]);
 
 
         $this->verificarYEliminarAsistencia($asistencias);

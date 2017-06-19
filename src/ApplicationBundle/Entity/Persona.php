@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"persona" = "Persona", "personalDocente" = "PersonalDocente", "alumno" = "Alumno" })
+ * @ORM\DiscriminatorMap({"persona" = "Persona", "personalDocente" = "PersonalDocente", "alumno" = "Alumno", "tutor" = "Tutor" })
  */
 
 class Persona
@@ -16,9 +16,9 @@ class Persona
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 

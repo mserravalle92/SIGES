@@ -18,6 +18,8 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('bundles/application/dist/css/skins/_all-skins.min.css')}}">
 
+  <link rel="stylesheet" href="{{asset('bundles/application/plugins/datepicker/datepicker3.css')}}">
+
   <link rel="stylesheet" href="{{asset('bundles/application/plugins/datatables/jquery.dataTables.min.css')}}">
 
   {% block css %}
@@ -74,25 +76,11 @@
                   <small>Fecha de alta: {{ app.user.fechaAlta | date('d-m-Y') }}</small>
                 </p>
               </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ path('persona_edit' ,{'id': app.user.persona.id}) }}" class="btn btn-default btn-flat">Perfil de usuario</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{path('logout')}}" class="btn btn-default btn-flat">Sign out</a>
@@ -115,50 +103,53 @@
           <img src="{{asset('bundles/application/img/user-default.png')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{ app.user.persona.nombre }}{{ app.user.persona.apellido }}</p>
+          <p>{{ app.user.persona.nombre }} {{ app.user.persona.apellido }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      
+
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        <li>
+            {% if is_granted('ROLE_ALUMNO') %}
+                
+              <a href="{{ path('index') }}">
+            {% else %}
+              <a href="#">
+                {% endif %}
+
+            <i class="fa fa-home"></i> <span>Inicio</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li>
+          {% if is_granted('ROLE_ALUMNO') %}
+              
         <li>
-          <a href="../widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
+          <a href="#">
+            <i class="fa fa-calendar-check-o "></i>
+            <span>Asistencias</span>
           </a>
         </li>
+
+            <li>
+              <a href="#">
+                <i class="fa fa-book "></i>
+                <span>Biblioteca</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <i class="fa fa-edit"></i>
+                <span>Notas</span>
+              </a>
+            </li>
+          {% endif %}
+
 
       </ul>
     </section>
@@ -173,10 +164,8 @@
         {% block pageTitle %}
 
 
-          Título de Página 
 
 
-          (pageTitle)
         {% endblock %}
         <small>
 
@@ -216,6 +205,9 @@
 
 <!-- jQuery 2.2.3 -->
 <script src="{{asset('bundles/application/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+
+
+
 <!-- Bootstrap 3.3.6 -->
 <script src="{{asset('bundles/application/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- FastClick -->
@@ -224,8 +216,12 @@
 <script src="{{asset('bundles/application/dist/js/app.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('bundles/application/dist/js/demo.js')}}"></script>
+<!-- datepicker -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="{{ asset('bundles/application/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <!-- DataTables -->
 <script src="{{asset('bundles/application/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('bundles/application/dist/js/pages/dashboard.js') }}"></script>
 
 {% block js %}
 

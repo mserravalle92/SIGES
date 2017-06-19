@@ -10,4 +10,10 @@ namespace ApplicationBundle\Repository;
  */
 class DiaRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getHorarioByDiaAndMateria($dia,$materia){
+        return ['materia'=>$dia->getHorarioDiaMateria()->getMateria(),
+                'horario'=>$dia->getHorarioDiaMateria()->getHorario()];
+    }
+
 }

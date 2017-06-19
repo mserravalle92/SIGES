@@ -31,10 +31,10 @@ class Asistencia
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Materia", inversedBy="asistencias")
-     * @ORM\JoinColumn(name="materia_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
-    private $materia;
+    private $curso;
 
     /**
      * Many Features have One Product.
@@ -274,5 +274,29 @@ class Asistencia
     public function getTipoAsistencia()
     {
         return $this->tipoAsistencia;
+    }
+
+    /**
+     * Set curso
+     *
+     * @param \ApplicationBundle\Entity\Curso $curso
+     *
+     * @return Asistencia
+     */
+    public function setCurso(\ApplicationBundle\Entity\Curso $curso = null)
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+
+    /**
+     * Get curso
+     *
+     * @return \ApplicationBundle\Entity\Curso
+     */
+    public function getCurso()
+    {
+        return $this->curso;
     }
 }

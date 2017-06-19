@@ -26,6 +26,8 @@
             </tr>
         </thead>
         <tbody>
+        {% if alumnos | length > 0%}
+
             {% for alumno in  alumnos %}
 
                 <tr>
@@ -51,17 +53,21 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 {% for tipo in  tiposAsistencia %}
-                                    <li><a href="#" onclick="cargarAsistencia({{ alumno.id }},{{ tipo.id }},{{ materia.id }})">{{ tipo.descripcion }}</a></li>
+                                    <li><a href="#" onclick="cargarAsistencia({{ alumno.id }},{{ tipo.id }},{{ curso.id }})">{{ tipo.descripcion }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
 
                         <span class="label label-success label-bg" id="bg-{{ alumno.id }}"></span>
                     </td>
-                    <td>   <a href="#" class="btn btn-danger btn-sm label-bg" id="rm-{{ alumno.id }}" onclick="eliminarAsistencia({{ alumno.id }},{{ materia.id }})"><i class="fa fa-remove"></i></a></td>
+                    <td>   <a href="#" class="btn btn-danger btn-sm label-bg" id="rm-{{ alumno.id }}" onclick="eliminarAsistencia({{ alumno.id }},{{ curso.id }})"><i class="fa fa-remove"></i></a></td>
                 </tr>
 
             {% endfor %}
+            {% else %}
+                No se encontraron alumnos en este curso.
+            {% endif %}
+
         </tbody>
     </table>
     <hr>
@@ -75,13 +81,13 @@
 
 $('.label-bg').hide();
 
-function cargarAsistencia(idAlumno,idTipo,idMateria) {
+function cargarAsistencia(idAlumno,idTipo,idCurso) {
 
       $.ajax({
       url: '{{ path('cargar_asistencia') }}',
       type: 'POST',
       dataType: 'json',
-      data: {idAlumno: idAlumno,idTipo:idTipo,idMateria:idMateria},
+      data: {idAlumno: idAlumno,idTipo:idTipo,idCurso:idCurso},
       success:function(d){
           $("#"+d['alumno']).hide();
           $("#bg-"+d['alumno']).html(d['tipo']);
@@ -92,13 +98,13 @@ function cargarAsistencia(idAlumno,idTipo,idMateria) {
     });
 }
 
-function eliminarAsistencia(idAlumno,idMateria) {
+function eliminarAsistencia(idAlumno,idCurso) {
 
     $.ajax({
         url:'{{ path('eliminar_asistencia') }}',
         type: 'POST',
         dataType: 'json',
-        data: {idAlumno: idAlumno, idMateria:idMateria},
+        data: {idAlumno: idAlumno, idCurso:idCurso},
         success:function(d){
            $("#bg-"+d).hide();
            $("#rm-"+d).hide();

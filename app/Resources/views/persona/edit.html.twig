@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block pageTitle %}
+    Perfil de usuario
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="{{asset('bundles/application/img/user-default.png')}}" alt="User profile picture">
+                    {{ form_start(edit_form) }}
+
+                    <h3 class="profile-username text-center">{{ app.user.persona.nombre }} {{ app.user.persona.apellido}}</h3>
+
+                    <p class="text-muted text-center">{% if app.user.persona.legajo %}
+                        Legajo: {{ app.user.persona.legajo }}
+                        {% endif %}
+                    </p>
+                    <hr>
+                    <div class="col-md-6">
+                        {{form_label(edit_form.nombre)}}
+                        {{ form_widget(edit_form.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.nombre) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.apellido)}}
+                        {{ form_widget(edit_form.apellido, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.apellido) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.dni)}}
+                        {{ form_widget(edit_form.dni, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.dni) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.fechaNacimiento)}}
+                        {{ form_widget(edit_form.fechaNacimiento, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.fechaNacimiento) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.mail)}}
+                        {{ form_widget(edit_form.mail, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.mail) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.telefono)}}
+                        {{ form_widget(edit_form.telefono, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.telefono) }}</span>
+                    </div>
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.direccion)}}
+                        {{ form_widget(edit_form.direccion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.direccion) }}</span>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        {{form_label(edit_form.localidad)}}
+                        {{ form_widget(edit_form.localidad, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese la opción...','disabled':'true'}}) }}
+                        <span class="help-block">{{ form_errors(edit_form.localidad) }}</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <a href="{{ path('index') }}" class="btn btn-primary pull-right">Confirmar</a>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+            <!-- /.box -->
+
+    {{ form_end(edit_form) }}
+
+
+{% endblock %}

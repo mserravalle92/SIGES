@@ -46,7 +46,10 @@ class AlumnoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $usuario = $em->getRepository('AuthBundle:User')->findOneById(1);
+            $alumno->setUsuario($usuario);
             $em->persist($alumno);
+
             $em->flush();
 
             return $this->redirectToRoute('alumno_show', array('id' => $alumno->getId()));

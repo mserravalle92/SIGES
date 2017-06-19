@@ -49,6 +49,11 @@ class Dia
      */
     private $fechaModificacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="HorarioDiaMateria", mappedBy="dia")
+     */
+    private $horarioDiaMateria;
+
 
     /**
      * Get id
@@ -160,5 +165,38 @@ class Dia
         $this->fechaAlta = new DateTime();
         $this->fechaModificacion = new DateTime();
     }
-}
 
+    /**
+     * Add horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     *
+     * @return Dia
+     */
+    public function addHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria[] = $horarioDiaMaterium;
+
+        return $this;
+    }
+
+    /**
+     * Remove horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     */
+    public function removeHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria->removeElement($horarioDiaMaterium);
+    }
+
+    /**
+     * Get horarioDiaMateria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHorarioDiaMateria()
+    {
+        return $this->horarioDiaMateria;
+    }
+}

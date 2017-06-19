@@ -76,12 +76,12 @@ class Materia
 
      private $bibliotecasAlumnos;
 
-     /**
-     *
-     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="materia")
-     */
 
-     private $asistencias;
+
+    /**
+     * @ORM\OneToMany(targetEntity="HorarioDiaMateria", mappedBy="materia")
+     */
+    private $horarioDiaMateria;
 
 /**
      * Set id
@@ -445,4 +445,38 @@ class Materia
     }
 
 
+
+    /**
+     * Add horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     *
+     * @return Materia
+     */
+    public function addHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria[] = $horarioDiaMaterium;
+
+        return $this;
+    }
+
+    /**
+     * Remove horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     */
+    public function removeHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria->removeElement($horarioDiaMaterium);
+    }
+
+    /**
+     * Get horarioDiaMateria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHorarioDiaMateria()
+    {
+        return $this->horarioDiaMateria;
+    }
 }

@@ -25,4 +25,8 @@ class AlumnoRepository extends \Doctrine\ORM\EntityRepository
         return $result;
 
     }
+
+    public function getInstance(){
+        return get_class($this);
+    }
 }

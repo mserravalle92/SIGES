@@ -94,12 +94,25 @@ class Curso
      */
     private $bibliotecasAlumnos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="HorarioDiaMateria", mappedBy="curso")
+     */
+
+    private $horarioDiaMateria;
+
 
     /**
      * Un Curso puede tener muchos Examenes
      * @ORM\OneToMany(targetEntity="Examen", mappedBy="curso")
      */
     private $examenes;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="curso")
+     */
+
+    private $asistencias;
 
  
     
@@ -429,5 +442,73 @@ class Curso
     public function getAlumnos()
     {
         return $this->alumnos;
+    }
+
+    /**
+     * Add horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     *
+     * @return Curso
+     */
+    public function addHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria[] = $horarioDiaMaterium;
+
+        return $this;
+    }
+
+    /**
+     * Remove horarioDiaMaterium
+     *
+     * @param \ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium
+     */
+    public function removeHorarioDiaMaterium(\ApplicationBundle\Entity\HorarioDiaMateria $horarioDiaMaterium)
+    {
+        $this->horarioDiaMateria->removeElement($horarioDiaMaterium);
+    }
+
+    /**
+     * Get horarioDiaMateria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHorarioDiaMateria()
+    {
+        return $this->horarioDiaMateria;
+    }
+
+    /**
+     * Add asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     *
+     * @return Curso
+     */
+    public function addAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias[] = $asistencia;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencia
+     *
+     * @param \ApplicationBundle\Entity\Asistencia $asistencia
+     */
+    public function removeAsistencia(\ApplicationBundle\Entity\Asistencia $asistencia)
+    {
+        $this->asistencias->removeElement($asistencia);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
     }
 }

@@ -1,3 +1,11 @@
+application_persona:
+    resource: "@ApplicationBundle/Controller/PersonaController.php"
+    type:     annotation
+
+auth_user:
+    resource: "@AuthBundle/Controller/UserController.php"
+    type:     annotation
+
 application_asistencia:
     resource: "@ApplicationBundle/Controller/AsistenciaController.php"
     type:     annotation

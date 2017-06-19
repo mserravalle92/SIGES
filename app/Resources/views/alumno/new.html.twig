@@ -91,13 +91,6 @@
 
         <div class="row">
             <div class="form-group col-md-4">
-              {{ form_widget(form.usuario, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Usuario'}}) }}
-              <span class="help-block">{{ form_errors(form.usuario) }}</span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4">
             <label for="fechaNacimiento">Fecha de nacimiento</label>
               {{ form_widget(form.fechaNacimiento, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
               <span class="help-block">{{ form_errors(form.fechaNacimiento) }}</span>

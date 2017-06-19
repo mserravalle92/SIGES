@@ -49,6 +49,13 @@ class TipoAsistencia
      */
     private $fechaBaja;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="valorNumerico", type="float")
+     */
+    private $valorNumerico;
+
 
     /**
      *
@@ -200,5 +207,29 @@ class TipoAsistencia
     public function getAsistencias()
     {
         return $this->asistencias;
+    }
+
+    /**
+     * Set valorNumerico
+     *
+     * @param integer $valorNumerico
+     *
+     * @return TipoAsistencia
+     */
+    public function setValorNumerico($valorNumerico)
+    {
+        $this->valorNumerico = $valorNumerico;
+
+        return $this;
+    }
+
+    /**
+     * Get valorNumerico
+     *
+     * @return integer
+     */
+    public function getValorNumerico()
+    {
+        return $this->valorNumerico;
     }
 }

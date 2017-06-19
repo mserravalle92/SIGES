@@ -541,4 +541,8 @@ class Tutor
     {
         return $this->alumnos;
     }
+
+    public function getDiscr(){
+        return 'tutor';
+    }
 }

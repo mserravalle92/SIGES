@@ -67,7 +67,7 @@ class Anio
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Curso", mappedBy="anio")
      */
-     private $curso;
+     private $cursos;
 
 
     /**
@@ -263,15 +263,7 @@ class Anio
         return $this->cursos;
     }
 
-    /**
-     * Get curso
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCurso()
-    {
-        return $this->curso;
-    }
+
     public function __toString(){
 
         return (string)$this->numero . '° año de '. $this->nivel;
