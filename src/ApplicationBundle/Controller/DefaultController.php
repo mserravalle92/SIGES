@@ -16,19 +16,15 @@ class DefaultController extends Controller
 
         $anioActivo = $em->getRepository('ApplicationBundle:CicloLectivo')->findOneByActivo(true);
 
-        $cursosPersona = $this->getUser()->getPersona()->getCursos();
+        $persona = $this->getUser()->getPersona();
 
         $cursoActivo = null;
 
         $dia = $em->getRepository('ApplicationBundle:Dia')->findOneById($this->diaActual());
 
+        $cursoService = $this->container->get('curso');
 
-
-        foreach ($cursosPersona as $curso){
-            if ($curso->getCicloLectivo()->getActivo()){
-                $cursoActivo = $curso;
-            }
-        }
+        $cursoActivo = $cursoService->getCursoActivo($persona);
 
         $examenesCercanos = $this->getExamenesCercanos($cursoActivo);
 

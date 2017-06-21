@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% block pageTitle %}Detalles de Asistencias{% endblock %}
+
+{% block content %}
+
+    <div class="col-md-6">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">Tomar Asistencia</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body" >
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo Asistencia</th>
+                        <th>Valor numérico(Faltas)</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        {% set totalAsistencias = 0 %}
+                        {% set totalInasistencias = 0 %}
+
+                        {% for asistencia in asistencias %}
+                            {% if asistencia.tipoAsistencia.valorNumerico == 0 %}
+                                {% set totalAsistencias = totalAsistencias + 1 %}
+                            {% else %}
+                                {% set totalInasistencias =totalInasistencias +  asistencia.tipoAsistencia.valorNumerico %}
+                            {% endif %}
+                            <tr>
+                                <td>{{ asistencia.fechaAlta | date('d/m/Y ','America/Argentina/Buenos_Aires')}}</td>
+                                <td>{{ asistencia.tipoAsistencia.descripcion }}</td>
+                                <td>{{ asistencia.tipoAsistencia.valorNumerico }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                        <tr class="success">
+                            <td>
+                                Total Asistencias
+                            </td>
+                            <td>
+                                {{ totalAsistencias }}
+                            </td>
+                        </tr>
+                        <tr class="danger">
+                            <td>
+                                Total Inasistencias
+                            </td>
+                            <td>
+                                {{ totalInasistencias }}
+                            </td>
+                        </tr>
+                    <tr class="info">
+                        <td>Total de días de clase</td>
+                        <td>{{ asistencias | length }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="box box-solid bg-light-blue-gradient">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+
+                <h3 class="box-title">Calendario</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <!--The calendar -->
+                <div id="calendar" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/application/plugins/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
+    <script>
+        $("#calendar").datepicker( {
+            language:'es'
+        });
+    </script>
+{% endblock %}

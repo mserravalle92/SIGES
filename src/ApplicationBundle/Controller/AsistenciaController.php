@@ -95,6 +95,34 @@ class AsistenciaController extends Controller
     }
 
     /**
+     * Finds and displays a asistencium entity.
+     *
+     * @Route("/alumno/detalle", name="detalle_asistencia_alumno")
+     * @Method("GET")
+     */
+
+    public function detalleAsistenciasAlumno(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $persona = $this->getUser()->getPersona();
+
+        $cursoService = $this->container->get('curso');
+
+        $cursoActivo = $cursoService->getCursoActivo($persona);
+
+        $asistencias = $em->getRepository('ApplicationBundle:Asistencia')
+                         ->findBy([
+                             'alumno'=>$persona,
+                             'curso' => $cursoActivo,
+                         ]);
+
+        return $this->render('asistencia/vistaAlumno.html.twig',['asistencias'=>$asistencias]);
+
+
+    }
+
+    /**
      * Displays a form to edit an existing asistencium entity.
      *
      * @Route("/{id}/edit", name="asistencia_edit")
@@ -191,6 +219,8 @@ class AsistenciaController extends Controller
 
         return $response;
     }
+
+
 
     /**
      *

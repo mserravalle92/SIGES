@@ -10,3 +10,6 @@ services:
 
      bibliotecaAlumno:
          class: ApplicationBundle\services\BibliotecaAlumnoService
+
+     curso:
+         class: ApplicationBundle\services\CursoService
